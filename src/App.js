@@ -11,7 +11,7 @@ import HowIactWorks from "./components/HowIactWorks";
 import Faq from "./components/Faq";
 import SocialProof from "./components/SocialProof";
 import ContactUs from "./components/ContactUs";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
 import Home from "./components/Pages/Home";
 import UtmanaNAT from "./components/Pages/UtmanaNat";
 import Verktyg from "./components/Pages/Verktyg";
@@ -103,7 +103,7 @@ const theme = createTheme({
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App">
         <ThemeProvider theme={theme}>
           <CssBaseline>
@@ -119,7 +119,7 @@ function App() {
           </CssBaseline>
         </ThemeProvider>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
