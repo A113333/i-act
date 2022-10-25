@@ -1,0 +1,22 @@
+.body {
+    font-size: 16px;
+}
+
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root {
+    box-shadow: none;
+}
+
+.contained {
+    
+    background-color: #212529;
+    color: #eeeeee;
+    border-radius: 3px;
+
+}
+
+.outlined {
+    border: 1px solid #212529;
+    border-radius: 3px;
+    color: #737578;
+  
+}
