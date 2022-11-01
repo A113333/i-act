@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Box, Tab, Tabs, Chip, Typography } from "@mui/material";
 
 function Feelings({ setIsDone, setFormData, formData, feelings }) {
+  const mql = window.matchMedia("(max-width: 550px)");
+  const smallScreen = mql.matches;
+
   const allFeelings = [
     { lable: "Kritisk", id: 0, type: "ilska" },
     { lable: "Förödmjukad", id: 1, type: "ilska" },
@@ -82,7 +85,9 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
     { lable: "Rådlös", id: 71, type: "skam" },
   ];
 
-  const [selected, setSelected] = React.useState(new Set());
+  const [selected, setSelected] = React.useState(
+    formData.selectedFeelings ? formData.selectedFeelings : new Set()
+  );
   const userFeelings = [];
   function handleSelectionChanged(id) {
     // treat state as immutable
@@ -101,26 +106,32 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
   };
 
   useEffect(() => {
-    console.log(selected.size);
-
-    selected.forEach((item, index) => {
-      if (item === 0) {
-        console.log("item");
-        userFeelings.push(allFeelings[0]);
-      }
-      if (item) {
-        console.log(item);
-        userFeelings.push(allFeelings[index]);
-      }
-    });
-    console.log("userFeels");
+    console.log("userFeelings");
     console.log(userFeelings);
+    selected.forEach((id) => {
+      const isFound = userFeelings.some((element) => {
+        if (element.id === id) {
+          return true;
+        }
+        return false;
+      });
+
+      console.log(isFound);
+
+      if (id === 0 && !isFound) {
+        userFeelings.push(allFeelings[id]);
+      }
+      if (id && !isFound) {
+        userFeelings.push(allFeelings[id]);
+      }
+      //  console.log("userFeelings");
+      // console.log(userFeelings);
+    });
     setFormData({
       ...formData,
       kanslorUnder: userFeelings,
+      selectedFeelings: selected,
     });
-    console.log("fromData");
-    console.log(formData);
 
     if (selected.size > 0) {
       setIsDone(true);
@@ -168,20 +179,39 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
 
           backgroundColor: "#f7f7f7",
           position: "fixed",
-          top: 150,
+          top: 170,
           left: 0,
           zIndex: 1000,
           width: "100%",
         }}
       >
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box
+          sx={{
+            borderBottom: 1,
+            borderColor: "divider",
+            width: { smallScreen } ? "90%" : "100%",
+            m: "auto",
+          }}
+        >
           <Tabs
             value={value}
             onChange={handleChange}
             aria-label="basic tabs example"
-            centered
+            variant={smallScreen ? "scrollable" : "standard"}
+            centered={!smallScreen}
+            TabIndicatorProps={{ sx: { display: "none" } }}
             sx={{
               textAlign: "center",
+              fontSize: "0.2rem",
+              "& .Mui-selected": {
+                color: "#247ba0",
+                fontWeight: 700,
+                textDecoration: "underline",
+              },
+              "& .MuiTabs-flexContainer": {
+                flexWrap: "wrap",
+              },
+              m: "auto",
             }}
           >
             <Tab label="Sorg" {...a11yProps(0)} />
@@ -195,9 +225,7 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
 
         <TabPanel value={value} index={0}>
           {allFeelings.map((data) => {
-            console.log(data.type);
             if (data.type === "sorg") {
-              console.log("sorg");
               return (
                 <Chip
                   color="primary"

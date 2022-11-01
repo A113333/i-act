@@ -17,6 +17,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
+import Step4Part2 from "../QuestionNATs.js/Step4Part2";
 
 function UtmanaNat() {
   //const smallscreen = useMediaQuery("(min-width:600px)");
@@ -24,10 +25,11 @@ function UtmanaNat() {
   const [isDone, setIsDone] = useState(false);
 
   const [formData, setFormData] = useState({
-    tanke: "",
-    troPaTanke: "",
+    tanke: "testtanke",
+    troPaTanke: 44,
     kanslorUnder: [],
     kanslorUnderIntensitet: [],
+    selectedFeelings: new Set(),
     bevisForTanke: "",
     bevisMotTanke: "",
     tankeFallor: [],
@@ -70,9 +72,10 @@ function UtmanaNat() {
             setIsDone={setIsDone}
           />
         );
+
       case 4:
         return (
-          <Step5
+          <Step4Part2
             formData={formData}
             setFormData={setFormData}
             setIsDone={setIsDone}
@@ -81,7 +84,7 @@ function UtmanaNat() {
 
       case 5:
         return (
-          <Step6
+          <Step5
             formData={formData}
             setFormData={setFormData}
             setIsDone={setIsDone}
@@ -90,13 +93,22 @@ function UtmanaNat() {
 
       case 6:
         return (
+          <Step6
+            formData={formData}
+            setFormData={setFormData}
+            setIsDone={setIsDone}
+          />
+        );
+
+      case 7:
+        return (
           <Step7
             formData={formData}
             setFormData={setFormData}
             setIsDone={setIsDone}
           />
         );
-      case 7:
+      case 8:
         return (
           <Step8
             formData={formData}
@@ -105,7 +117,7 @@ function UtmanaNat() {
           />
         );
 
-      case 8:
+      case 9:
         return (
           <UtamanaNatResults
             formData={formData}
@@ -136,6 +148,7 @@ function UtmanaNat() {
   const goBack = () => {
     setPage(page - 1);
     console.log("tillbaka");
+    console.log(formData);
   };
 
   const close = () => {
@@ -144,7 +157,7 @@ function UtmanaNat() {
 
   return (
     <>
-      <Stepper numberOfSteps={7} step={page + 1} isDone={false} />
+      <Stepper numberOfSteps={8} step={page + 1} isDone={false} />
 
       <Box
         sx={{
@@ -180,11 +193,13 @@ function UtmanaNat() {
               fontSize: "0.7rem",
             }}
           >
-            {page === 8 ? "Bra jobbat!" : page + 1 + "/ 8"}
+            {page === 9 ? "Bra jobbat!" : page + 1 + "/ 8"}
           </Typography>
 
           <IconButton aria-label="tillbaka" onClick={() => close()}>
-            <CloseIcon color="primary" fontSize="small" />
+            <Link to="/verktyg">
+              <CloseIcon color="primary" fontSize="small" />
+            </Link>
           </IconButton>
         </Stack>
       </Box>
@@ -209,16 +224,16 @@ function UtmanaNat() {
             minHeight: "85vh",
           }}
         >
-          <Box sx={{ pt: 1, pb: 7 }}>
-            {page > 0 && page != 8 ? (
-              <Typography sx={{ fontSize: "0.8rem" }}>
-                {" "}
-                " {formData.tanke} "
+          <Box sx={{ pb: 3 }}>
+            {page > 0 && page !== 9 ? (
+              <Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
+                "{formData.tanke}"
               </Typography>
             ) : null}
-            {conditionalComponent()}
 
-            {page === 8 ? (
+            <Box>{conditionalComponent()}</Box>
+
+            {page === 9 ? (
               <Button
                 variant="contained"
                 fullWidth
@@ -237,7 +252,7 @@ function UtmanaNat() {
                 sx={{ position: "absolute", right: "0", bottom: "0" }}
               >
                 {" "}
-                {page === 7 ? "Visa resultat" : "Nästa"}
+                {page === 8 ? "Visa resultat" : "Nästa"}
               </Button>
             )}
           </Box>

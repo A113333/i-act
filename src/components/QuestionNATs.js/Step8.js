@@ -32,7 +32,7 @@ function Step8({ setFormData, setIsDone, formData }) {
           alignItems="center"
           justifyContent={"center"}
         >
-          <Typography> 0 </Typography>
+          <Typography> Inte alls </Typography>
           <Slider
             defaultValue={50}
             valueLabelDisplay="auto"
@@ -47,7 +47,7 @@ function Step8({ setFormData, setIsDone, formData }) {
               });
             }}
           />
-          <Typography> 100 </Typography>
+          <Typography> Fullt ut </Typography>
         </Stack>
       </Box>
     </>

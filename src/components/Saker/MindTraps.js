@@ -130,8 +130,9 @@ function MindTraps({ formData, setFormData, setIsDone }) {
                 raised={false}
                 // class={selected.has(data.id) ? "contained" : "outlined"}
                 sx={{
-                  width: { xs: "100%", sm: "75%" },
+                  width: { xs: "100%", sm: "48%" },
                   mb: 2,
+                  mr: 2,
                   backgroundColor: selected.has(data.id)
                     ? theme.palette.primary.main
                     : theme.palette.customWhite.main,
@@ -152,11 +153,13 @@ function MindTraps({ formData, setFormData, setIsDone }) {
                       gutterBottom
                       variant="h6"
                       component="div"
-                      sx={{ fontWeight: 1000, fontSize: "1.2rem" }}
+                      sx={{ fontWeight: 600, fontSize: "0.9rem" }}
                     >
                       {data.name}
                     </Typography>
-                    <Typography variant="body2">{data.desc}</Typography>
+                    <Typography variant="body2" sx={{ fontSize: "0.7rem" }}>
+                      {data.desc}
+                    </Typography>
                   </CardContent>
                 </CardActionArea>
               </Card>

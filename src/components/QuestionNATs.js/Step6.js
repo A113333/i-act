@@ -13,7 +13,7 @@ function Step6({ setFormData, setIsDone, formData }) {
     <>
       <Box sx={{ mb: 5 }}>
         <Typography variant="h6" sx={{ mb: 2 }}>
-          Finns det någon alternativ mer balanserad/realistisk tanke?
+          Vad skulle kunna vara en alternativ mer balanserad/realistisk tanke?
         </Typography>
 
         <TextField
@@ -32,8 +32,11 @@ function Step6({ setFormData, setIsDone, formData }) {
       </Box>
 
       <Typography variant="h6">
-        Då din tanke innehöll tankefällan {formData.tankeFallor[0].name} kanske
-        du hade varit hjälpt av tankestrategien "heeh"
+        {formData.tankeFallor
+          ? ""
+          : "Då din tanke innehöll tankefällan" +
+            formData.tankeFallor[0].name +
+            "kanske du hade varit hjälpt av tankestrategien heeh"}
       </Typography>
     </>
   );

@@ -11,7 +11,7 @@ function Stepper({ numberOfSteps, step, isItDone }) {
         color="primary"
         sx={{
           position: "fixed",
-          top: "45px",
+          top: "51px",
           left: "0px",
           width: "100%",
           padding: "0px",

@@ -5,6 +5,7 @@ import { Slider, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { useNavigate } from "react-router-dom";
 import Slide from "@mui/material/Slide";
+import MySlider from "../Saker/MySlider";
 
 function Step1({ formData, setFormData, setIsDone }) {
   useEffect(() => {
@@ -12,6 +13,13 @@ function Step1({ formData, setFormData, setIsDone }) {
       setIsDone(true);
     }
   }, [formData, setIsDone]);
+
+  const setFunction = (event) => {
+    setFormData({
+      ...formData,
+      troPaTanke: event.target.value,
+    });
+  };
 
   return (
     <>
@@ -23,6 +31,7 @@ function Step1({ formData, setFormData, setIsDone }) {
           variant="outlined"
           id="MinTanke"
           label="Jag tänkte..."
+          value={formData.tanke ? formData.tanke : null}
           sx={{ width: { xs: "100%", sm: "75%" } }}
           autoComplete="off"
           onChange={(e) => {
@@ -31,46 +40,17 @@ function Step1({ formData, setFormData, setIsDone }) {
               tanke: e.target.value,
             });
           }}
-          value={formData.tanke}
         />
       </Box>
 
-      <Box sx={{ mb: 5 }}>
-        <Typography variant="h6" sx={{ mb: 2 }}>
-          {" "}
-          Hur mycket tror du på tanken?{" "}
-        </Typography>
-        <Typography sx={{ opacity: "50%" }}>
-          {" "}
-          {!formData.troPaTanke ? "-/100" : formData.troPaTanke + "/100"}
-        </Typography>
-
-        <Stack
-          spacing={2}
-          direction="row"
-          sx={{ mb: 1 }}
-          v
-          alignItems="center"
-          justifyContent={"center"}
-        >
-          <Typography> 0 </Typography>
-          <Slider
-            defaultValue={50}
-            valueLabelDisplay="auto"
-            step={1}
-            min={0}
-            max={100}
-            sx={{ width: { xs: "100%", sm: "50%" } }}
-            onChange={(e) => {
-              setFormData({
-                ...formData,
-                troPaTanke: e.target.value,
-              });
-            }}
-          />
-          <Typography> 100 </Typography>
-        </Stack>
-      </Box>
+      <MySlider
+        question={"Hur mycket tror du på tanken?"}
+        setFormData={setFormData}
+        forLabel={formData.troPaTanke}
+        setFunction={setFunction}
+        valueLabels={["Inte alls", "Fullt ut"]}
+        value={formData.troPaTanke ? formData.troPaTanke : 50}
+      />
     </>
   );
 }

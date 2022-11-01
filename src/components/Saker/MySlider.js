@@ -2,48 +2,42 @@ import React, { useState } from "react";
 import { Slider, Typography, Box } from "@mui/material";
 import Stack from "@mui/material/Stack";
 
-function MySlider({ userInput, setUserInput, data }) {
-  const addUserInput = (data) => {
-    const updatedkansloIntensitet = [...userInput];
-    updatedkansloIntensitet[data.index] = { id: data.index, value: data.value };
-    setUserInput(updatedkansloIntensitet);
-  };
-
+function MySlider({ forLabel, question, setFunction, id, valueLabels, value }) {
   return (
-    <Box id={`custom-box-${data.id}`}>
-      {" "}
-      <Typography> {data.lable} </Typography>{" "}
+    <>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        {" "}
+        {question}
+      </Typography>
       <Typography sx={{ opacity: "50%" }}>
         {" "}
-        {!userInput[data.id].value
-          ? "-/100"
-          : userInput[data.id].value + "/100"}
-      </Typography>{" "}
+        {!forLabel ? "-/100" : forLabel + "/100"}
+      </Typography>
+
       <Stack
         spacing={2}
         direction="row"
         sx={{ mb: 1 }}
+        v
         alignItems="center"
         justifyContent={"center"}
       >
-        <Typography> 0 </Typography>
+        <Typography> {valueLabels ? valueLabels[0] : "0"} </Typography>
         <Slider
           defaultValue={50}
+          value={value ? value : 50}
           valueLabelDisplay="auto"
           step={1}
           min={0}
           max={100}
-          sx={{ width: { xs: "100%", sm: "50%" }, margin: "auto" }}
-          onChange={(e) =>
-            addKansloIntensite({
-              value: e.target.value,
-              index: data.id,
-            })
-          }
+          sx={{ width: { xs: "100%", sm: "50%" } }}
+          onChange={(e) => {
+            setFunction(e);
+          }}
         />
-        <Typography> 100 </Typography>
+        <Typography> {valueLabels ? valueLabels[1] : "100"} </Typography>
       </Stack>
-    </Box>
+    </>
   );
 }
 

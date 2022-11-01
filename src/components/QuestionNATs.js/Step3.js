@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Slider, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import MySlider from "../Saker/MySlider";
 
 function Step3({ setFormData, setIsDone, formData }) {
   const [kansloIntensitet, setkansloIntensitet] = useState([]);
@@ -15,8 +16,6 @@ function Step3({ setFormData, setIsDone, formData }) {
     };
     setkansloIntensitet(updatedkansloIntensitet);
   };
-
-  // console.log(kansloIntensitet);
 
   const userFeelingsIntensiti = [];
 
@@ -40,13 +39,6 @@ function Step3({ setFormData, setIsDone, formData }) {
     });
     //  console.log("fromData");
     // console.log(formData);
-
-    console.log("kanslorUnder");
-    console.log(formData.kanslorUnder.length);
-    console.log(formData.kanslorUnder);
-    console.log("kanslorUnderIntensitet.length");
-    console.log(formData.kanslorUnderIntensitet.length);
-    console.log(formData.kanslorUnderIntensitet);
   }, [kansloIntensitet]);
 
   useEffect(() => {
@@ -65,46 +57,87 @@ function Step3({ setFormData, setIsDone, formData }) {
           Hur intensiva var dina känslor?{" "}
         </Typography>
 
-        {formData.kanslorUnder.map((data) => {
-          return (
-            <Box key={`custom-box-${data.id}`} id={`custom-box-${data.id}`}>
-              {" "}
-              <Typography> {data.lable} </Typography>{" "}
-              <Typography sx={{ opacity: "50%" }}>
-                {" "}
-                {!kansloIntensitet[data.id]
-                  ? "-/100"
-                  : kansloIntensitet[data.id].value + "/100"}
-              </Typography>{" "}
-              <Stack
-                spacing={2}
-                direction="row"
-                sx={{ mb: 1 }}
-                alignItems="center"
-                justifyContent={"center"}
-              >
-                <Typography> 0 </Typography>
-                <Slider
-                  defaultValue={50}
-                  valueLabelDisplay="auto"
-                  step={1}
-                  min={0}
-                  max={100}
-                  key={data.id}
-                  sx={{ width: { xs: "100%", sm: "50%" }, margin: "auto" }}
-                  onChange={(e) =>
-                    addKansloIntensite({
-                      value: e.target.value,
-                      index: data.id,
-                      lable: data.lable,
-                    })
-                  }
-                />
-                <Typography> 100 </Typography>
-              </Stack>
-            </Box>
-          );
-        })}
+        {formData.kansloIntensitet !== 0
+          ? formData.kanslorUnder.map((data, index) => {
+              return (
+                <Box key={`custom-box-${data.id}`} id={`custom-box-${data.id}`}>
+                  {" "}
+                  <Typography> {data.lable} </Typography>{" "}
+                  <Typography sx={{ opacity: "50%" }}>
+                    {" "}
+                    {!kansloIntensitet[data.id]
+                      ? "-/100"
+                      : kansloIntensitet[data.id].value + "/100"}
+                  </Typography>{" "}
+                  <Stack
+                    spacing={2}
+                    direction="row"
+                    sx={{ mb: 1 }}
+                    alignItems="center"
+                    justifyContent={"center"}
+                  >
+                    <Typography> Knappt märkbar </Typography>
+                    <Slider
+                      defaultValue={50}
+                      valueLabelDisplay="auto"
+                      step={1}
+                      min={0}
+                      max={100}
+                      key={data.id}
+                      sx={{ width: { xs: "100%", sm: "50%" }, margin: "auto" }}
+                      onChange={(e) =>
+                        addKansloIntensite({
+                          value: e.target.value,
+                          index: data.id,
+                          lable: data.lable,
+                        })
+                      }
+                    />
+                    <Typography> Väldigt stark </Typography>
+                  </Stack>
+                </Box>
+              );
+            })
+          : formData.kanslorUnderIntensitet.map((data, index) => {
+              return (
+                <Box key={`custom-box-${data.id}`} id={`custom-box-${data.id}`}>
+                  {" "}
+                  <Typography> {data.lable} </Typography>{" "}
+                  <Typography sx={{ opacity: "50%" }}>
+                    {" "}
+                    {!kansloIntensitet[data.id]
+                      ? data.value + "-/100"
+                      : kansloIntensitet[data.id].value + "/100"}
+                  </Typography>{" "}
+                  <Stack
+                    spacing={2}
+                    direction="row"
+                    sx={{ mb: 1 }}
+                    alignItems="center"
+                    justifyContent={"center"}
+                  >
+                    <Typography> Knappt märkbar </Typography>
+                    <Slider
+                      defaultValue={50}
+                      valueLabelDisplay="auto"
+                      step={1}
+                      min={0}
+                      max={100}
+                      key={data.id}
+                      sx={{ width: { xs: "100%", sm: "50%" }, margin: "auto" }}
+                      onChange={(e) =>
+                        addKansloIntensite({
+                          value: e.target.value,
+                          index: data.id,
+                          lable: data.lable,
+                        })
+                      }
+                    />
+                    <Typography> Väldigt stark </Typography>
+                  </Stack>
+                </Box>
+              );
+            })}
       </Box>
     </>
   );

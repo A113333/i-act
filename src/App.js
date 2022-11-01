@@ -85,12 +85,17 @@ const theme = createTheme({
     h6: {
       fontFamily: "Comfortaa",
       fontSize: "1rem",
+      fontWeight: "700",
     },
 
     body1: {
       fontFamily: "Comfortaa",
       fontWeight: 200,
       color: "#212529",
+    },
+    body1: {
+      fontFamily: "Comfortaa",
+      fontWeight: 200,
     },
 
     button: {

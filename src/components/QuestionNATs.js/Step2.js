@@ -7,7 +7,6 @@ import Feelings from "../Saker/Feelings";
 
 function Step2({ formData, setFormData, setIsDone }) {
   useEffect(() => {
-    console.log(formData.kanslorUnder.length);
     if (formData.kanslorUnder.length !== 0) {
       setIsDone(true);
     }
@@ -15,21 +14,19 @@ function Step2({ formData, setFormData, setIsDone }) {
 
   return (
     <>
-      <Box sx={{ mb: 10 }}>
-        <Box sx={{ mb: 2 }}>
-          <Typography variant="h6">
-            {" "}
-            Vilka känslor hade du i situationen?{" "}
-          </Typography>
-          <Typography variant="body1">Välj en eller fler känslor</Typography>
-        </Box>
-
-        <Feelings
-          setFormData={setFormData}
-          formData={formData}
-          setIsDone={setIsDone}
-        />
+      <Box sx={{ pt: 1 }}>
+        <Typography variant="h6">
+          {" "}
+          Vilka känslor hade du i situationen?{" "}
+        </Typography>
+        <Typography variant="body1"> Välj en eller flera känslor </Typography>
       </Box>
+
+      <Feelings
+        setFormData={setFormData}
+        formData={formData}
+        setIsDone={setIsDone}
+      />
     </>
   );
 }

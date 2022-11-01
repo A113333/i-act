@@ -1,23 +1,19 @@
 import React from "react";
-import { Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 import { Box } from "@mui/system";
+import BlackBoxWithText from "../Saker/BlackBoxWithText";
+import { json } from "react-router-dom";
 
 function UtamanaNatResults({ setFormData, setIsDone, formData }) {
   const arr = {
-    tanke: "",
-    troPaTanke: "",
-    kanslorUnder: [],
-    kanslorUnderIntensitet: [],
-    bevisForTanke: "",
-    bevisMotTanke: "",
     tankeFallor: [],
-    balanseradTanke: "",
-    kanslorEfter: [],
-    troPaTankeEfter: "",
   };
 
+  const customPb = 5;
+
   console.log(formData);
+
   const kanslorUnder = [];
   const feelingsBeforAndAfter = formData.kanslorUnder.map((data) => {
     formData.kanslorUnderIntensitet.forEach((element) => {
@@ -32,71 +28,118 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
 
   return (
     <>
-      <Box
-        sx={{
-          backgroundColor: "primary.main",
-          color: "#F8F9FA",
-          p: 1,
-          borderRadius: 1,
-          width: { xs: "100%", sm: "75%" },
-          m: "auto",
-        }}
-      >
+      <Typography variant="h6" sx={{ pb: 3 }}>
         {" "}
-        <Typography variant="body2">Din tanke ursprungliga tanke:</Typography>
-      </Box>
-
-      <Typography sx={{ width: { xs: "100%", sm: "75%" }, m: "auto" }}>
-        {" "}
-        Jag tänkte: {formData.tanke}
-      </Typography>
-      <Typography>
-        {" "}
-        Innan övningen trodde du på din tanken till {formData.troPaTanke} %
-      </Typography>
-      <Typography>
-        {" "}
-        Efter övningen trodde du på din tanken till {formData.troPaTankeEfter} %
+        Resultat{" "}
       </Typography>
 
+      <Divider></Divider>
       <Box
         sx={{
-          backgroundColor: "primary.main",
-          color: "#F8F9FA",
-          p: 1,
-          borderRadius: 1,
-          width: { xs: "100%", sm: "75%" },
+          textAlign: "left",
+          width: "70%",
           m: "auto",
+          pt: customPb,
+          width: { xs: "100%", sm: "55%" },
         }}
       >
-        {" "}
-        <Typography variant="body2">Din mer balanseradetanke:</Typography>
-      </Box>
-
-      <Typography>{formData.balanseradTanke}</Typography>
-
-      <Box
-        sx={{
-          backgroundColor: "primary.main",
-          color: "#F8F9FA",
-          p: 1,
-          borderRadius: 1,
-          width: { xs: "100%", sm: "75%" },
-          m: "auto",
-        }}
-      >
-        {" "}
-        <Typography variant="body2">
-          Dina känslor innan och efter övningen:
+        <BlackBoxWithText text={"Din ursprungliga tanke:"} />
+        <Typography
+          sx={{
+            pb: customPb,
+          }}
+        >
+          "{formData.tanke}"
         </Typography>
+        <Typography
+          sx={{
+            opacity: "50%",
+          }}
+        >
+          Innan övningen trodde du på din tanken till:{" "}
+        </Typography>{" "}
+        <Typography
+          sx={{
+            pb: customPb,
+          }}
+        >
+          {" "}
+          {formData.troPaTanke} %
+        </Typography>
+        <Typography
+          sx={{
+            opacity: "50%",
+          }}
+        >
+          Efter övningen trodde du på din tanken till
+        </Typography>{" "}
+        <Typography
+          sx={{
+            pb: customPb,
+          }}
+        >
+          {formData.troPaTankeEfter} %
+        </Typography>
+        <Box sx={{ pb: customPb }}>
+          <BlackBoxWithText text={"Dina bevis för din tanke:"} />
+          {formData.bevisForTanke.map((item, index) => (
+            <>
+              <Box sx={{ width: "100%", pb: 1 }}>
+                <Typography
+                  sx={{
+                    opacity: "50%",
+                  }}
+                  display="inline"
+                >
+                  {" "}
+                  {index + 1}. {"  "}
+                </Typography>
+
+                <Typography display="inline">{item}</Typography>
+              </Box>
+            </>
+          ))}
+        </Box>
+        <Box sx={{ pb: customPb }}>
+          <BlackBoxWithText text={"Dina bevis emot din tanke:"} />
+          {formData.bevisMotTanke.map((item, index) => (
+            <Typography sx={{ pb: 1 }}> {item}</Typography>
+          ))}
+        </Box>
+        <Box sx={{ pb: customPb }}>
+          {formData.tankeFallor ? (
+            <BlackBoxWithText text={"Du använde följande tankefällor"} />
+          ) : null}
+          {formData.tankeFallor.map((item, index) => (
+            <Typography>{item.name}</Typography>
+          ))}
+        </Box>
+        <Box sx={{ pb: customPb }}>
+          <BlackBoxWithText text="Din mer balanseradetanke:" />
+          <Typography>{formData.balanseradTanke}</Typography>
+        </Box>
+        <Box sx={{ pb: customPb, width: "49%" }}>
+          <BlackBoxWithText text="Dina känslor i situationen:" />
+          {formData.kanslorUnderIntensitet.map((data) => {
+            return (
+              <Typography>
+                {data.lable} : {data.value}%
+              </Typography>
+            );
+          })}
+        </Box>
+        <Box sx={{ pb: customPb, width: "49%" }}>
+          <BlackBoxWithText text="Dina känslor efter övningen:" />
+          {formData.kanslorEfter.map((data, index) => {
+            console.log(data);
+            return (
+              <Typography>
+                {data.label}: {data.value} %
+              </Typography>
+            );
+          })}
+        </Box>
       </Box>
-      {kanslorUnder.map((data) => {
-        return (
-          <Typography>
-            {data.lable} intensitet under: {data.kanslorUnderIntensitet}
-          </Typography>
-        );
-      })}
     </>
   );
 }
