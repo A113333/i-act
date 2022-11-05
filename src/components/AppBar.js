@@ -11,6 +11,7 @@ import { ReactComponent as SmallIcon } from "../img/icon.svg";
 import { Link } from "react-router-dom";
 import Drawer from "./Drawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import ConstructionIcon from "@mui/icons-material/Construction";
 
 let SmallIconImg = SmallIcon;
 
@@ -26,11 +27,15 @@ export default function ButtonAppBar() {
     <>
       {" "}
       <Drawer isOpen={isOpen} setClose={closeDrawer} />
-      <Box sx={{ flexGrow: 1 }}>
+      <Box
+        sx={{
+          flexGrow: 1,
+        }}
+      >
         <AppBar
           position="fixed"
           color=""
-          elevation={0}
+          elevation={3}
           sx={{ height: "60px", top: !smallscreen ? `calc(100vh - 60px)` : 0 }}
         >
           <Toolbar>
@@ -38,11 +43,22 @@ export default function ButtonAppBar() {
               size="large"
               edge="start"
               color="inherit"
+              aria-label="menu"
+              sx={{ mr: !smallscreen ? 0.5 : 2 }}
+              onClick={() => setIsOpen(true)}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            {/*       <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
               aria-label="login"
               sx={{ mr: 2 }}
             >
               <PersonOutlineRoundedIcon />
-            </IconButton>
+            </IconButton> */}
 
             <Box sx={{ margin: "auto", mt: "15px" }}>
               <Link to="/">
@@ -54,11 +70,12 @@ export default function ButtonAppBar() {
               size="large"
               edge="start"
               color="inherit"
-              aria-label="menu"
-              sx={{ ml: 2 }}
-              onClick={() => setIsOpen(true)}
+              aria-label="login"
+              component={Link}
+              to="/verktyg"
+              sx={{ mr: !smallscreen ? 0.5 : 2 }}
             >
-              <MenuIcon />
+              <ConstructionIcon />
             </IconButton>
           </Toolbar>
         </AppBar>

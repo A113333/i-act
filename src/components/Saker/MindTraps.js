@@ -135,10 +135,10 @@ function MindTraps({ formData, setFormData, setIsDone }) {
                   mr: 2,
                   backgroundColor: selected.has(data.id)
                     ? theme.palette.primary.main
-                    : theme.palette.customWhite.main,
+                    : theme.palette.customGrey.main,
 
                   color: selected.has(data.id)
-                    ? theme.palette.customWhite.main
+                    ? theme.palette.customGrey.main
                     : theme.palette.primary.main,
                 }}
                 id={`custom-card-${data.id}`}

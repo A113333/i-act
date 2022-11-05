@@ -1,16 +1,14 @@
-import logo from "./logo.svg";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-
-import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Route, Routes, HashRouter } from "react-router-dom";
 import Home from "./components/Pages/Home";
 import UtmanaNAT from "./components/Pages/UtmanaNat";
 import Verktyg from "./components/Pages/Verktyg";
-
 import ViewNatsResults from "./components/QuestionNATs.js/ViewNatsResults";
 import NotFound from "./components/Pages/NotFound";
 import Skattningar from "./components/Saker/Skattningar";
+import { ScrollRestoration } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -53,7 +51,7 @@ const theme = createTheme({
 
     customGrey: {
       light: "#f8f9fa",
-      main: "#e1e5ea",
+      main: "#f5f7f9",
       dark: "#657a8e",
       contrastText: "#F8F9FA",
     },
@@ -74,9 +72,11 @@ const theme = createTheme({
     },
     h4: {
       fontFamily: "Comfortaa",
+      fontSize: "2.0rem",
     },
     h5: {
       fontFamily: "Comfortaa",
+      fontSize: "1.2rem",
     },
     h6: {
       fontFamily: "Comfortaa",
@@ -84,11 +84,6 @@ const theme = createTheme({
       fontWeight: "700",
     },
 
-    body1: {
-      fontFamily: "Comfortaa",
-      fontWeight: 200,
-      color: "#212529",
-    },
     body1: {
       fontFamily: "Comfortaa",
       fontWeight: 200,
@@ -135,11 +130,55 @@ function App() {
           "Nästan varje dag",
         ],
       },
+
+      {
+        question: "Haft svårt att slappna av",
+        svarsalternativ: [
+          "Inte alls",
+          "Flera dagar",
+          "Mer än hälften av dagarna",
+          "Nästan varje dag",
+        ],
+      },
+
+      {
+        question: "Varit så rastlös att du har haft svårt att sitta still",
+        svarsalternativ: [
+          "Inte alls",
+          "Flera dagar",
+          "Mer än hälften av dagarna",
+          "Nästan varje dag",
+        ],
+      },
+
+      {
+        question: "Blivit lätt irriterad eller retlig",
+        svarsalternativ: [
+          "Inte alls",
+          "Flera dagar",
+          "Mer än hälften av dagarna",
+          "Nästan varje dag",
+        ],
+      },
+
+      {
+        question: "Känt dig rädd för att något hemskt skulle hända",
+        svarsalternativ: [
+          "Inte alls",
+          "Flera dagar",
+          "Mer än hälften av dagarna",
+          "Nästan varje dag",
+        ],
+      },
     ],
     startZero: true,
     infoText:
       "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
-    scoring: [{ mild: 5 }, { medel: 10 }, { allvarlig: 15 }],
+    scoring: [
+      { name: "milda ångestproblem", score: 5 },
+      { name: "medel ångestproblem", score: 10 },
+      { name: "allvarliga ångestproblem", score: 15 },
+    ],
   };
   return (
     <HashRouter>
@@ -161,6 +200,10 @@ function App() {
               />
               <Route
                 path="/verktyg/skattningar"
+                element={<Skattningar {...skattning} />}
+              />
+              <Route
+                path="/verktyg/skattning/gad7"
                 element={<Skattningar {...skattning} />}
               />
 

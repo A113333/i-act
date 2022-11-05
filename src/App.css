@@ -20,3 +20,24 @@
     color: #737578;
   
 }
+
+::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  .container {
+    display: flex;
+    overflow-x: scroll;
+    width: 100%;
+  }
+  
+  .card {
+    flex-shrink: 0;
+    width: 60vw;
+    height: 200px;
+    border-radius: 10px;
+    margin-left: 10px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }

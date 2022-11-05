@@ -71,7 +71,7 @@ function heroSection() {
         <Grid xs={12} sm={2}></Grid>
       </Grid>
 
-      <Box sx={{ pt: 4, width: "80%", margin: "auto", maxWidth: "1200px" }}>
+      <Box sx={{ pt: 6, width: "80%", margin: "auto", maxWidth: "1100px" }}>
         <Typography variant="h5">Vad vi erbjuder</Typography>
         <Typography variant="body">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

@@ -10,6 +10,7 @@ import ToolsContainer from "./SmattOchGott/ToolsContainer";
 import ToolsAppBar from "./ToolsAppBar";
 import useArray from "../hooks/useArray.js";
 import VerktygKnapp from "./SmattOchGott/VerktygKnapp";
+import { Box } from "@mui/system";
 
 function Skattningar({ instruktioner, questionArr, startZero, scoring }) {
   const [page, setpage] = useState(0);
@@ -44,6 +45,20 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring }) {
     return prev + +Number(current.anwser);
   }, 0);
 
+  const getScoreInName = (score) => {
+    let scoreInName;
+    if (scoring[0].score >= score) {
+      return "Inga bekymmer";
+    } else
+      scoring.forEach((item, index) => {
+        if (item.score <= score) {
+          console.log("resultat " + item.name);
+          scoreInName = item.name;
+        } else console.log(item.name);
+      });
+    return scoreInName;
+  };
+
   const getResults = () => {
     return sumResults.toString();
   };
@@ -72,35 +87,49 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring }) {
               onChange={handleChange}
             >
               {questionArr[page].svarsalternativ.map((item, index) => (
-                <>
-                  <FormControlLabel
-                    label={item}
-                    key={index.toString()}
-                    labelPlacement="start"
-                    value={startZero ? index : index + 1}
-                    checked={Number(selectedValue) === index}
-                    sx={{
-                      "& .MuiFormControlLabel-label": {
-                        textAlign: "left",
-                        width: "100%",
-                      },
-                    }}
-                    control={
-                      <Radio
-                        key={(index + 1).toString()}
-                        sx={{
-                          "& .MuiSvgIcon-root": { fontSize: 28 },
-                        }}
-                        value={startZero ? index : index + 1}
-                      />
-                    }
-                  />
-                </>
+                <FormControlLabel
+                  label={item}
+                  key={index.toString()}
+                  labelPlacement="start"
+                  value={startZero ? index : index + 1}
+                  checked={Number(selectedValue) === index}
+                  sx={{
+                    "& .MuiFormControlLabel-label": {
+                      textAlign: "left",
+                      width: "100%",
+                    },
+                  }}
+                  control={
+                    <Radio
+                      key={(index + "a").toString()}
+                      sx={{
+                        "& .MuiSvgIcon-root": { fontSize: 28 },
+                      }}
+                      value={startZero ? index : index + 1}
+                    />
+                  }
+                />
               ))}
             </RadioGroup>
           </FormControl>
         ) : (
-          <Typography> Din total score blev: {sumResults} </Typography>
+          <>
+            {" "}
+            <Typography>
+              {" "}
+              Din total score blev: {sumResults} vilket indikerar{" "}
+              {getScoreInName(sumResults)}
+            </Typography>
+            {scoring.map((item, index) => (
+              <>
+                <Box sx={{ width: "100%" }} kex={"b" + index}>
+                  <Typography display="inline"> {item.name}: </Typography>
+                  <Typography display="inline"> {item.score} </Typography>
+                  <Typography display="inline"></Typography>
+                </Box>
+              </>
+            ))}
+          </>
         )}
 
         <VerktygKnapp

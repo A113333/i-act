@@ -8,7 +8,10 @@ function BlackBoxWithText({ text }) {
         opacity: "60%",
       }}
     >
-      <Typography variant="body1"> {text}</Typography>
+      <Typography sx={{ mb: 1 }} variant="body1">
+        {" "}
+        {text}
+      </Typography>
     </Box>
   );
 }

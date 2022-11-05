@@ -18,21 +18,20 @@ function SocialProof() {
   const steps = [
     {
       label: "Alexander Frank, Kalmar",
-      description: `For each ad campaign that you create, you can control how much
-                you're willing to spend on clicks and conversions, which networks
-                and geographical locations you want your ads to show on, and more.`,
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+      ad minim veniam. `,
     },
     {
       label: "Alexander Nilsson, Kalmar",
       description:
-        "An ad group contains one or more ads which target a shared set of keywords.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
     },
     {
       label: "Alexander Karl-Frank, Kalmar",
-      description: `Try out different ad text to see what brings in the most customers,
-                and learn how to enhance your ads using features like ad extensions.
-                If you run into any problems with your ads, find out how to tell if
-                they're running and how to resolve approval issues.`,
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+      ad minim veniam.`,
     },
   ];
 
@@ -97,7 +96,7 @@ function SocialProof() {
               textAlign: "center",
               opacity: "50%",
 
-              mt: smallScreen ? 0 : 30,
+              mt: smallScreen ? 0 : 8,
             }}
           >
             {steps[activeStep].label}
@@ -113,7 +112,7 @@ function SocialProof() {
           maxWidth: 800,
           flexGrow: 1,
           margin: "auto",
-          mt: smallScreen ? 0 : 6,
+          mt: smallScreen ? 0 : 3,
         }}
         nextButton={
           <Button size="small" onClick={handleNext} disabled={activeStep === 5}>

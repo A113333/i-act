@@ -10,10 +10,18 @@ import { Link } from "react-router-dom";
 import React from "react";
 
 function Drawer({ isOpen, setClose }) {
+  const onOpen = () => {
+    setClose(true);
+  };
   return (
     <>
       {" "}
-      <SwipeableDrawer anchor="right" open={isOpen} onClose={setClose}>
+      <SwipeableDrawer
+        anchor="left"
+        open={isOpen}
+        onClose={setClose}
+        onOpen={onOpen}
+      >
         <Box role="presentation" sx={{ width: "200px", textAlign: "center" }}>
           <List>
             <ListItem>

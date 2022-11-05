@@ -9,7 +9,7 @@ import { Box } from "@mui/system";
 function Faq() {
   return (
     <div>
-      <Box sx={{ width: "80%", margin: "auto", mt: 10 }}>
+      <Box sx={{ width: "80%", margin: "auto", mt: 10, mb: 15 }}>
         <Typography variant="h5" sx={{ paddingLeft: 2 }}>
           Vanliga frågor
         </Typography>

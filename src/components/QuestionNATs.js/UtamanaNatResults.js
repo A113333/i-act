@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Divider, Typography } from "@mui/material";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 import { Box } from "@mui/system";
-import BlackBoxWithText from "../Saker/BlackBoxWithText";
+import BlackBoxWithText from "../Saker/SmattOchGott/BlackBoxWithText";
 import { json } from "react-router-dom";
 
 function UtamanaNatResults({ setFormData, setIsDone, formData }) {
@@ -10,7 +10,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
     tankeFallor: [],
   };
 
-  const customPb = 5;
+  const customPb = 3;
 
   console.log(formData);
 
@@ -19,10 +19,11 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
     : { utmanaNat: [] };
 
   useEffect(() => {
-    console.log("LocalUtmanaNatArray");
-    //   console.log(localStorage.getItem("utmanaNat"));
-    LocalUtmanaNatArray.utmanaNat.push(formData);
-    localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
+    console.log("LocalUtmanaNatsArray");
+    console.log(LocalUtmanaNatArray.lenght);
+    //console.log(localStorage.getItem(LocalUtmanaNatArray));
+    // LocalUtmanaNatArray.utmanaNat.push(formData);
+    //  localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
     console.log("i fire once");
   }, []);
 
@@ -65,6 +66,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
         <Typography
           sx={{
             opacity: "50%",
+            mb: 1,
           }}
         >
           Innan övningen trodde du på din tanken till:{" "}
@@ -80,6 +82,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
         <Typography
           sx={{
             opacity: "50%",
+            mb: 1,
           }}
         >
           Efter övningen trodde du på din tanken till
@@ -112,33 +115,36 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
               </li>
             ))}
           </ul>
-        </Box>
-        <Box sx={{ pb: customPb }}>
-          {" "}
-          {formData.tankeFallor ? (
+        </Box>{" "}
+        {formData.tankeFallor.lenght > 0 ? (
+          <Box sx={{ pb: customPb }}>
             <BlackBoxWithText text={"Du använde följande tankefällor"} />
-          ) : null}
-          <ul>
-            {formData.tankeFallor.map((item, index) => (
-              <li>
-                <Typography>{item.name}</Typography>
-              </li>
-            ))}
-          </ul>
-        </Box>
+            <ul>
+              {formData.tankeFallor.map((item, index) => (
+                <li>
+                  <Typography>{item.name}</Typography>
+                </li>
+              ))}
+            </ul>
+          </Box>
+        ) : null}
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Din mer balanseradetanke:" />
           <Typography>{formData.balanseradTanke}</Typography>
         </Box>
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Dina känslor i situationen:" />
-          {formData.kanslorUnderIntensitet.map((data) => {
-            return (
-              <Typography>
-                {data.lable} : {data.value}%
-              </Typography>
-            );
-          })}
+          <ul>
+            {formData.kanslorUnderIntensitet.map((data) => {
+              return (
+                <li>
+                  <Typography>
+                    {data.lable} : {data.value}%
+                  </Typography>
+                </li>
+              );
+            })}
+          </ul>
         </Box>
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Dina känslor efter övningen:" />
