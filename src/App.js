@@ -2,19 +2,15 @@ import logo from "./logo.svg";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import HeroSection from "./components/HeroSection";
-import AppBar from "./components/AppBar";
-import ThereBoxes from "./components/ThereBoxes";
-import { Container } from "@mui/material";
-import FreeTrial from "./components/FreeTrial";
-import HowIactWorks from "./components/HowIactWorks";
-import Faq from "./components/Faq";
-import SocialProof from "./components/SocialProof";
-import ContactUs from "./components/ContactUs";
+
 import { BrowserRouter, Route, Routes, HashRouter } from "react-router-dom";
 import Home from "./components/Pages/Home";
 import UtmanaNAT from "./components/Pages/UtmanaNat";
 import Verktyg from "./components/Pages/Verktyg";
+
+import ViewNatsResults from "./components/QuestionNATs.js/ViewNatsResults";
+import NotFound from "./components/Pages/NotFound";
+import Skattningar from "./components/Saker/Skattningar";
 
 const theme = createTheme({
   palette: {
@@ -107,6 +103,44 @@ const theme = createTheme({
 });
 
 function App() {
+  let skattning = {
+    name: "GAD7",
+    instruktioner:
+      "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
+    questionArr: [
+      {
+        question: "Känt dig nervös, ängslig eller väldigt stressad",
+        svarsalternativ: [
+          "Inte alls",
+          "Flera dagar",
+          "Mer än hälften av dagarna",
+          "Nästan varje dag",
+        ],
+      },
+      {
+        question: "Inte kunnat sluta oroa dig eller kontrollera din oro",
+        svarsalternativ: [
+          "Inte alls",
+          "Flera dagar",
+          "Mer än hälften av dagarna",
+          "Nästan varje dag",
+        ],
+      },
+      {
+        question: "Oroat dig för mycket för olika saker",
+        svarsalternativ: [
+          "Inte alls",
+          "Flera dagar",
+          "Mer än hälften av dagarna",
+          "Nästan varje dag",
+        ],
+      },
+    ],
+    startZero: true,
+    infoText:
+      "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
+    scoring: [{ mild: 5 }, { medel: 10 }, { allvarlig: 15 }],
+  };
   return (
     <HashRouter>
       <div className="App">
@@ -115,10 +149,22 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/verktyg" element={<Verktyg />} />
+
               <Route
-                path="/verktyg/UtmanaNegativaAutomatiskaTankar"
+                path="/verktyg/UtmanaNegativaAutomatiskaTankar/:sida"
                 element={<UtmanaNAT />}
               />
+
+              <Route
+                path="/verktyg/UtmanaNegativaAutomatiskaTankar/visa"
+                element={<ViewNatsResults />}
+              />
+              <Route
+                path="/verktyg/skattningar"
+                element={<Skattningar {...skattning} />}
+              />
+
+              <Route path="*" element={<NotFound />} />
               <Route />
             </Routes>
           </CssBaseline>

@@ -6,7 +6,7 @@ import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 function HowIactWorks() {
   return (
     <>
-      <Box sx={{ textAlign: "left", mt: 15 }}>
+      <Box sx={{ textAlign: "left", mt: 15, px: 3 }}>
         <Grid2 container>
           <Grid2 xs={12} sm={3}></Grid2>
 

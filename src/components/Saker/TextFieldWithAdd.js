@@ -49,6 +49,8 @@ function TextFieldWithAdd({
 
   let addFormFields = (e) => {
     setUserResponse([...userResponse, ""]);
+
+    console.log(userResponse.length);
   };
 
   let removeFormFields = (i, e) => {
@@ -72,6 +74,7 @@ function TextFieldWithAdd({
               variant="outlined"
               id="MinaBevis"
               value={element}
+              autoFocus={index + 1 === userResponse.length ? true : false}
               label={
                 index >= 2
                   ? `Mitt ${index + 1}:e ${label}`

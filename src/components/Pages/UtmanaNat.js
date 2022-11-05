@@ -18,15 +18,72 @@ import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import { Link } from "react-router-dom";
 import Step4Part2 from "../QuestionNATs.js/Step4Part2";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useCallback } from "react";
 
 function UtmanaNat() {
   //const smallscreen = useMediaQuery("(min-width:600px)");
+  const params = useParams();
+  const { sida } = params;
+  const sidaParams = Number(sida);
+
   const [page, setPage] = useState(0);
   const [isDone, setIsDone] = useState(false);
+  console.log("pageParms");
+  console.log(sidaParams);
+
+  console.log("page");
+  console.log(page);
+
+  const Next = () => {
+    navigate(
+      `/verktyg/UtmanaNegativaAutomatiskaTankar/${(page + 1).toString()}`
+    );
+    setPage(sidaParams + 1);
+    console.log(formData);
+
+    setIsDone(false);
+  };
+  // #f8f9fa8c
+  const onPopState = (event) => {
+    console.log("on pop");
+    console.log(page);
+    setPage(sidaParams);
+    console.log("on pop");
+    console.log(sidaParams);
+  };
+  useEffect(() => {
+    window.addEventListener("popstate", () => {
+      onPopState();
+    });
+  }, []);
+
+  const exsit = () => {};
+
+  const goBack = () => {
+    setPage(page - 1);
+    console.log("tillbaka");
+    console.log(formData);
+  };
+
+  const close = () => {
+    console.log("stänger");
+  };
+
+  useEffect(() => {
+    const { sida } = params;
+    const sidaParams = Number(sida);
+    setPage(sidaParams);
+  }, [page]);
+
+  let LocalUtmanaNatArray = localStorage.getItem("utmanaNat")
+    ? JSON.parse(localStorage.getItem("utmanaNat"))
+    : { utmanaNat: [] };
 
   const [formData, setFormData] = useState({
-    tanke: "testtanke",
-    troPaTanke: 44,
+    tanke: "",
+    troPaTanke: "",
     kanslorUnder: [],
     kanslorUnderIntensitet: [],
     selectedFeelings: new Set(),
@@ -36,7 +93,107 @@ function UtmanaNat() {
     balanseradTanke: "",
     kanslorEfter: [],
     troPaTankeEfter: "",
+    date: new Date().toLocaleDateString(),
   });
+
+  /* 
+  tanke: "testtanke",
+  troPaTanke: 44,
+  kanslorUnder: [],
+  kanslorUnderIntensitet: [],
+  selectedFeelings: new Set(),
+  bevisForTanke: "",
+  bevisMotTanke: "",
+  tankeFallor: [],
+  balanseradTanke: "",
+  kanslorEfter: [],
+  troPaTankeEfter: "",
+
+
+{
+    tanke: "Julia är vackrast i världen",
+    troPaTanke: 76,
+    selectedFeelings: new Set(),
+    kanslorUnder: [],
+    date: new Date(),
+    kanslorUnderIntensitet: [
+      {
+        id: 39,
+        value: 100,
+        lable: "Lycklig",
+      },
+      {
+        id: 41,
+        value: 100,
+        lable: "Kärleksfull",
+      },
+      {
+        id: 43,
+        value: 100,
+        lable: "Upprymd",
+      },
+      {
+        id: 47,
+        value: 100,
+        lable: "Intim",
+      },
+    ],
+    selectedFeelings: new Set(),
+    bevisForTanke: [
+      "Hon har det finast håret",
+      "Dom längsta mest välformade benen",
+      'Läppar "to die for"',
+      "Osv osv osv",
+    ],
+    bevisMotTanke: [
+      "Tror inte jag kan komma på något",
+      "Skulle kanske vara att hon är för snygg för att det ska vara autentiskt? Är hon opererad?",
+      "Nej det tror jag verkligen inte så ta bort det beviset",
+    ],
+    tankeFallor: [
+      {
+        name: "Allt eller inget tänkande",
+        desc: "Alla händelser delas in i ytterligheter, man har antingen lyckats eller misslyckats, man ser inte nyanser eller gråskalor.",
+        exampel: "Om jag inte är perfekt så är jag misslyckad",
+        id: "0",
+      },
+      {
+        name: "Etikettering",
+        desc: "Att döma och sätta etiketter på sig själv och andra människor.",
+        exampel: "“Jag är en förlorare. De är idioter”",
+        id: "5",
+      },
+    ],
+    balanseradTanke:
+      "Hon är den absolut finaste och vackraste människan jag träffat.",
+    kanslorEfter: [
+      {
+        id: 39,
+        value: 100,
+        label: "Lycklig",
+      },
+      {
+        id: 41,
+        value: 100,
+        label: "Kärleksfull",
+      },
+      {
+        id: 43,
+        value: 100,
+        label: "Upprymd",
+      },
+      {
+        id: 47,
+        value: 100,
+        label: "Intim",
+      },
+    ],
+    troPaTankeEfter: 100,
+  }
+
+
+   */
+  const navigate = useNavigate();
 
   const conditionalComponent = () => {
     switch (page) {
@@ -137,91 +294,75 @@ function UtmanaNat() {
     }
   };
 
-  const goToNext = () => {
-    console.log(formData);
-    setPage(page + 1);
-    setIsDone(false);
-  };
-
-  const exsit = () => {};
-
-  const goBack = () => {
-    setPage(page - 1);
-    console.log("tillbaka");
-    console.log(formData);
-  };
-
-  const close = () => {
-    console.log("stänger");
-  };
-
   return (
     <>
-      <Stepper numberOfSteps={8} step={page + 1} isDone={false} />
-
       <Box
         sx={{
-          pt: 1,
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-          bgcolor: "white",
+          backgroundColor: "#fefefe",
         }}
       >
-        {/*  <Typography variant="h6" sx={{ textAlign: "center", color: "#247ba0" }}>
+        <Stepper numberOfSteps={10} step={page + 1} isDone={false} />
+        <Box
+          sx={{
+            pt: 1,
+            position: "sticky",
+            top: 0,
+            zIndex: 100,
+            bgcolor: "white",
+          }}
+        >
+          {/*  <Typography variant="h6" sx={{ textAlign: "center", color: "#247ba0" }}>
           {" "}
           Utmana dina tankar{" "}
         </Typography>
     */}
 
-        <Stack alignItems="center" direction="row">
-          {page > 0 ? (
-            <IconButton aria-label="tillbaka" onClick={() => goBack()}>
-              <ArrowBackIcon color="primary" fontSize="small" />
+          <Stack alignItems="center" direction="row">
+            {page === 9 || page === 0 ? (
+              <IconButton
+                aria-label="tillbaka"
+                sx={{ opacity: "25%" }}
+                disabled
+              >
+                <ArrowBackIcon color="primary" fontSize="small" />
+              </IconButton>
+            ) : (
+              <IconButton aria-label="tillbaka" onClick={() => goBack()}>
+                <ArrowBackIcon color="primary" fontSize="small" />
+              </IconButton>
+            )}
+
+            <Typography
+              sx={{
+                minWidth: "30px",
+                flex: 1,
+                textAlign: "center",
+                fontSize: "0.7rem",
+              }}
+            >
+              {page === 9 ? "Bra jobbat!" : page + 1 + "/ 10"}
+            </Typography>
+
+            <IconButton aria-label="tillbaka" onClick={() => close()}>
+              <Link to="/verktyg">
+                <CloseIcon color="primary" fontSize="small" />
+              </Link>
             </IconButton>
-          ) : (
-            <IconButton aria-label="tillbaka" sx={{ opacity: "50%" }} disabled>
-              <ArrowBackIcon color="primary" fontSize="small" />
-            </IconButton>
-          )}
+          </Stack>
+        </Box>
 
-          <Typography
-            sx={{
-              minWidth: "30px",
-              flex: 1,
-              textAlign: "center",
-              fontSize: "0.7rem",
-            }}
-          >
-            {page === 9 ? "Bra jobbat!" : page + 1 + "/ 8"}
-          </Typography>
-
-          <IconButton aria-label="tillbaka" onClick={() => close()}>
-            <Link to="/verktyg">
-              <CloseIcon color="primary" fontSize="small" />
-            </Link>
-          </IconButton>
-        </Stack>
-      </Box>
-
-      <Box
-        sx={{
-          backgroundColor: "#f7f7f7",
-          mt: 0,
-          p: 2,
-          pt: 1,
-        }}
-      >
         <Box
           sx={{
-            backgroundColor: "#f7f7f7",
-
-            padding: 1,
+            backgroundColor: "#fefefe",
+            px: { xs: 2, sm: 5 },
+            pt: 7,
             borderRadius: 3,
             mt: 1,
             position: "relative",
             textAlign: "center",
-            minHeight: "85vh",
+            maxWidth: "1200px",
+            m: "auto",
+            minHeight: `calc(100vh - 65px)`,
           }}
         >
           <Box sx={{ pb: 3 }}>
@@ -230,9 +371,7 @@ function UtmanaNat() {
                 "{formData.tanke}"
               </Typography>
             ) : null}
-
-            <Box>{conditionalComponent()}</Box>
-
+            {conditionalComponent()}
             {page === 9 ? (
               <Button
                 variant="contained"
@@ -248,11 +387,11 @@ function UtmanaNat() {
                 variant="contained"
                 disabled={!isDone}
                 fullWidth
-                onClick={() => goToNext()}
-                sx={{ position: "absolute", right: "0", bottom: "0" }}
+                onClick={() => Next()}
+                sx={{ position: "absolute", right: "0", bottom: "0", mt: 5 }}
               >
                 {" "}
-                {page === 8 ? "Visa resultat" : "Nästa"}
+                {page === 9 ? "Visa resultat" : "Nästa"}
               </Button>
             )}
           </Box>

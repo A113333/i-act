@@ -124,14 +124,14 @@ function MindTraps({ formData, setFormData, setIsDone }) {
         }}
       >
         <Grid container justifyContent="center">
-          {mindTrapsArray.map((data) => {
+          {mindTrapsArray.map((data, index) => {
             return (
               <Card
                 raised={false}
                 // class={selected.has(data.id) ? "contained" : "outlined"}
                 sx={{
-                  width: { xs: "100%", sm: "48%" },
-                  mb: 2,
+                  width: { xs: "100%", sm: "60%" },
+                  mb: index + 1 === mindTrapsArray.length ? 7 : 2,
                   mr: 2,
                   backgroundColor: selected.has(data.id)
                     ? theme.palette.primary.main

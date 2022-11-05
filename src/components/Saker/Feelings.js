@@ -177,9 +177,8 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
         sx={{
           width: "100%",
 
-          backgroundColor: "#f7f7f7",
           position: "fixed",
-          top: 170,
+          top: "30vh",
           left: 0,
           zIndex: 1000,
           width: "100%",
@@ -189,8 +188,8 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
           sx={{
             borderBottom: 1,
             borderColor: "divider",
-            width: { smallScreen } ? "90%" : "100%",
             m: "auto",
+            width: { smallScreen } ? "90%" : "100%",
           }}
         >
           <Tabs
@@ -211,7 +210,6 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
               "& .MuiTabs-flexContainer": {
                 flexWrap: "wrap",
               },
-              m: "auto",
             }}
           >
             <Tab label="Sorg" {...a11yProps(0)} />

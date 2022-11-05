@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Divider, Typography } from "@mui/material";
 import { StayPrimaryLandscape } from "@mui/icons-material";
 import { Box } from "@mui/system";
@@ -13,6 +13,18 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
   const customPb = 5;
 
   console.log(formData);
+
+  let LocalUtmanaNatArray = localStorage.getItem("utmanaNat")
+    ? JSON.parse(localStorage.getItem("utmanaNat"))
+    : { utmanaNat: [] };
+
+  useEffect(() => {
+    console.log("LocalUtmanaNatArray");
+    //   console.log(localStorage.getItem("utmanaNat"));
+    LocalUtmanaNatArray.utmanaNat.push(formData);
+    localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
+    console.log("i fire once");
+  }, []);
 
   const kanslorUnder = [];
   const feelingsBeforAndAfter = formData.kanslorUnder.map((data) => {
@@ -29,8 +41,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
   return (
     <>
       <Typography variant="h6" sx={{ pb: 3 }}>
-        {" "}
-        Resultat{" "}
+        Samanställning av övningen
       </Typography>
 
       <Divider></Divider>
@@ -82,43 +93,44 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
         </Typography>
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text={"Dina bevis för din tanke:"} />
-          {formData.bevisForTanke.map((item, index) => (
-            <>
-              <Box sx={{ width: "100%", pb: 1 }}>
-                <Typography
-                  sx={{
-                    opacity: "50%",
-                  }}
-                  display="inline"
-                >
-                  {" "}
-                  {index + 1}. {"  "}
-                </Typography>
-
+          <ul>
+            {" "}
+            {formData.bevisForTanke.map((item, index) => (
+              <li>
                 <Typography display="inline">{item}</Typography>
-              </Box>
-            </>
-          ))}
+              </li>
+            ))}
+          </ul>
         </Box>
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text={"Dina bevis emot din tanke:"} />
-          {formData.bevisMotTanke.map((item, index) => (
-            <Typography sx={{ pb: 1 }}> {item}</Typography>
-          ))}
+          <ul>
+            {" "}
+            {formData.bevisMotTanke.map((item, index) => (
+              <li>
+                <Typography sx={{ pb: 1 }}> {item}</Typography>
+              </li>
+            ))}
+          </ul>
         </Box>
         <Box sx={{ pb: customPb }}>
+          {" "}
           {formData.tankeFallor ? (
             <BlackBoxWithText text={"Du använde följande tankefällor"} />
           ) : null}
-          {formData.tankeFallor.map((item, index) => (
-            <Typography>{item.name}</Typography>
-          ))}
+          <ul>
+            {formData.tankeFallor.map((item, index) => (
+              <li>
+                <Typography>{item.name}</Typography>
+              </li>
+            ))}
+          </ul>
         </Box>
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Din mer balanseradetanke:" />
           <Typography>{formData.balanseradTanke}</Typography>
         </Box>
-        <Box sx={{ pb: customPb, width: "49%" }}>
+        <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Dina känslor i situationen:" />
           {formData.kanslorUnderIntensitet.map((data) => {
             return (
@@ -128,16 +140,21 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
             );
           })}
         </Box>
-        <Box sx={{ pb: customPb, width: "49%" }}>
+        <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Dina känslor efter övningen:" />
-          {formData.kanslorEfter.map((data, index) => {
-            console.log(data);
-            return (
-              <Typography>
-                {data.label}: {data.value} %
-              </Typography>
-            );
-          })}
+          <ul>
+            {formData.kanslorEfter.map((data, index) => {
+              console.log(data);
+              return (
+                <li>
+                  {" "}
+                  <Typography>
+                    {data.label}: {data.value}%
+                  </Typography>
+                </li>
+              );
+            })}
+          </ul>
         </Box>
       </Box>
     </>

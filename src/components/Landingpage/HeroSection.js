@@ -1,12 +1,11 @@
 import React from "react";
-import { ReactComponent as BlueGreenBrain } from "../img/blueGreenBrain.svg";
-
+//import { ReactComponent as BlueGreenBrain } from "../img/blueGreenBrain.svg";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import { Button } from "@mui/material";
 
-let BrainImg = BlueGreenBrain;
+// let BrainImg = BlueGreenBrain;
 
 function heroSection() {
   return (
@@ -72,7 +71,7 @@ function heroSection() {
         <Grid xs={12} sm={2}></Grid>
       </Grid>
 
-      <Box sx={{ pt: 4, width: "80%", margin: "auto" }}>
+      <Box sx={{ pt: 4, width: "80%", margin: "auto", maxWidth: "1200px" }}>
         <Typography variant="h5">Vad vi erbjuder</Typography>
         <Typography variant="body">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

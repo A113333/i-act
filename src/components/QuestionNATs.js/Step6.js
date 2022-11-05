@@ -22,6 +22,8 @@ function Step6({ setFormData, setIsDone, formData }) {
           label="Min alternativa tanke"
           sx={{ width: { xs: "100%", sm: "75%" } }}
           autoComplete="off"
+          autoFocus
+          value={formData.balanseradTanke ? formData.balanseradTanke : null}
           onChange={(e) => {
             setFormData({
               ...formData,

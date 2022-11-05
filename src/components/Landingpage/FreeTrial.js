@@ -5,7 +5,7 @@ function FreeTrial() {
   return (
     <Box
       color="primary"
-      sx={{ backgroundColor: "primary.main", width: "80%", margin: "auto" }}
+      sx={{ backgroundColor: "primary.main", width: "100%", margin: "auto" }}
     >
       <Box sx={{ width: "80%", m: "auto", pt: 5, pb: 6, pb: 10 }}>
         <Typography color="customWhite.main" variant="h5">

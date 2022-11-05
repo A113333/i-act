@@ -1,18 +1,14 @@
 import React from "react";
 
 import CssBaseline from "@mui/material/CssBaseline";
-// import "././App.css";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-import HeroSection from "../HeroSection";
+import HeroSection from "../Landingpage/HeroSection";
 import AppBar from "../AppBar";
-import ThereBoxes from "../ThereBoxes";
+import ThereBoxes from "../Landingpage/ThereBoxes";
 import { Container } from "@mui/material";
-import FreeTrial from "../FreeTrial";
-import HowIactWorks from "../HowIactWorks";
-import Faq from "../Faq";
-import SocialProof from "../SocialProof";
-import ContactUs from "../ContactUs";
-import { BrowserRouter } from "react-router-dom";
+import FreeTrial from "../Landingpage/FreeTrial";
+import HowIactWorks from "../Landingpage/HowIactWorks";
+import Faq from "../Landingpage/Faq";
+import SocialProof from "../Landingpage/SocialProof";
 
 function Home() {
   return (
@@ -20,8 +16,15 @@ function Home() {
       {" "}
       <CssBaseline />
       <AppBar />
-      <Container>
-        <HeroSection />
+      <HeroSection />
+      <Container
+        sx={{
+          px: { xs: 0, sm: 5 },
+          mx: { xs: 0, sm: "auto" },
+          maxWidth: "1200px",
+          m: "auto",
+        }}
+      >
         <ThereBoxes />
         <FreeTrial />
 
@@ -30,8 +33,6 @@ function Home() {
         <SocialProof />
 
         <Faq />
-
-        <ContactUs />
       </Container>
     </>
   );

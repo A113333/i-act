@@ -5,7 +5,7 @@ function BlackBoxWithText({ text }) {
   return (
     <Box
       sx={{
-        opacity: "50%",
+        opacity: "60%",
       }}
     >
       <Typography variant="body1"> {text}</Typography>

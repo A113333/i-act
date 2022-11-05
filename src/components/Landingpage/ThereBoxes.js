@@ -5,11 +5,20 @@ import { Typography } from "@mui/material";
 
 function ThereBoxes() {
   return (
-    <Grid container spacing={0} sx={{ margin: "auto", mt: 10, width: "80%" }}>
+    <Grid
+      container
+      spacing={0}
+      sx={{
+        margin: "auto",
+        mt: 10,
+        width: "100%",
+        px: 0,
+        mx: 0,
+      }}
+    >
       <Grid xs={12} sm={4}>
         <Box sx={{ backgroundColor: "customGrey.light", p: 3 }}>
           <Typography variant="h5">Anpassat till dig</Typography>
-
           <Typography variant="body1">
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -20,7 +29,7 @@ function ThereBoxes() {
       </Grid>
 
       <Grid xs={12} sm={4}>
-        <Box sx={{ backgroundColor: "customWhite.main", p: 3 }}>
+        <Box sx={{ backgroundColor: "primary.main", color: "#fefefe", p: 3 }}>
           <Typography variant="h5">Modern terapi</Typography>
           <Typography variant="body1">
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

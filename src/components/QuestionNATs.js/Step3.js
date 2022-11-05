@@ -76,7 +76,10 @@ function Step3({ setFormData, setIsDone, formData }) {
                     alignItems="center"
                     justifyContent={"center"}
                   >
-                    <Typography> Knappt märkbar </Typography>
+                    <Typography sx={{ fontSize: "0.7rem" }}>
+                      {" "}
+                      Knappt märkbar{" "}
+                    </Typography>
                     <Slider
                       defaultValue={50}
                       valueLabelDisplay="auto"
@@ -93,7 +96,10 @@ function Step3({ setFormData, setIsDone, formData }) {
                         })
                       }
                     />
-                    <Typography> Väldigt stark </Typography>
+                    <Typography sx={{ fontSize: "0.7rem" }}>
+                      {" "}
+                      Väldigt stark{" "}
+                    </Typography>
                   </Stack>
                 </Box>
               );
@@ -116,7 +122,10 @@ function Step3({ setFormData, setIsDone, formData }) {
                     alignItems="center"
                     justifyContent={"center"}
                   >
-                    <Typography> Knappt märkbar </Typography>
+                    <Typography sx={{ fontSize: "0.7rem" }}>
+                      {" "}
+                      Knappt märkbar{" "}
+                    </Typography>
                     <Slider
                       defaultValue={50}
                       valueLabelDisplay="auto"
@@ -133,7 +142,10 @@ function Step3({ setFormData, setIsDone, formData }) {
                         })
                       }
                     />
-                    <Typography> Väldigt stark </Typography>
+                    <Typography sx={{ fontSize: "0.7rem" }}>
+                      {" "}
+                      Väldigt stark{" "}
+                    </Typography>
                   </Stack>
                 </Box>
               );

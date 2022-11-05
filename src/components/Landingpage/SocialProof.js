@@ -7,10 +7,13 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import { Box } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 function SocialProof() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const smallScreen = useMediaQuery("(min-width:332px)");
 
   const steps = [
     {
@@ -20,12 +23,12 @@ function SocialProof() {
                 and geographical locations you want your ads to show on, and more.`,
     },
     {
-      label: "Alexander Frank, Kalmar",
+      label: "Alexander Nilsson, Kalmar",
       description:
         "An ad group contains one or more ads which target a shared set of keywords.",
     },
     {
-      label: "Alexander Frank, Kalmar",
+      label: "Alexander Karl-Frank, Kalmar",
       description: `Try out different ad text to see what brings in the most customers,
                 and learn how to enhance your ads using features like ad extensions.
                 If you run into any problems with your ads, find out how to tell if
@@ -85,12 +88,18 @@ function SocialProof() {
             alignItems: "center",
             height: 50,
             pl: 2,
-
             textAlign: "center",
             justifyContent: "center",
           }}
         >
-          <Typography sx={{ textAlign: "center", opacity: "50%" }}>
+          <Typography
+            sx={{
+              textAlign: "center",
+              opacity: "50%",
+
+              mt: smallScreen ? 0 : 30,
+            }}
+          >
             {steps[activeStep].label}
           </Typography>
         </Paper>
@@ -100,10 +109,15 @@ function SocialProof() {
         steps={6}
         position="static"
         activeStep={activeStep}
-        sx={{ maxWidth: 800, flexGrow: 1, margin: "auto" }}
+        sx={{
+          maxWidth: 800,
+          flexGrow: 1,
+          margin: "auto",
+          mt: smallScreen ? 0 : 6,
+        }}
         nextButton={
           <Button size="small" onClick={handleNext} disabled={activeStep === 5}>
-            Nästa
+            {smallScreen ? "Nästa" : ""}
             {theme.direction === "rtl" ? (
               <KeyboardArrowLeft />
             ) : (
@@ -118,7 +132,7 @@ function SocialProof() {
             ) : (
               <KeyboardArrowLeft />
             )}
-            Tillbaka
+            {smallScreen ? "Tillbaka" : ""}
           </Button>
         }
       />
