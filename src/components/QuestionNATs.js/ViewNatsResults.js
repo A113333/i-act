@@ -24,9 +24,13 @@ function ViewNatsResults() {
   const customPb = 5;
 
   const removeItem = (item) => {
-    console.log("item");
-    console.log(item);
-    setUtmanaNat(utmanaNat.filter((item) => item.tanke !== item));
+    let resultArr = [...utmanaNat];
+    console.log("resultArr");
+    console.log(resultArr);
+    // setUtmanaNat(resultArr.splice(item, 1));
+    resultArr.splice(item, 1);
+
+    setUtmanaNat(resultArr);
     //console.log(item);
   };
 
@@ -39,7 +43,7 @@ function ViewNatsResults() {
           Dina sparade tankeutmaningar{" "}
         </HeadlineWithDivider>
 
-        {utmanaNat.lenght === 0 ? (
+        {utmanaNat.lenght === 0 && utmanaNat === undefined ? (
           <Typography> Inga övningar sparade :( </Typography>
         ) : (
           utmanaNat.map((item, index) => {
@@ -52,7 +56,7 @@ function ViewNatsResults() {
                     aria-controls="panel1a-content"
                     id="panel1a-header"
                   >
-                    <RemoveButton onClick={() => removeItem(item.tanke)} />
+                    <RemoveButton onClick={() => removeItem(index)} />
                     <Typography sx={{ pt: 0.7 }}>
                       Datum:{" "}
                       {item.date ? item.date : new Date().toLocaleDateString()}{" "}

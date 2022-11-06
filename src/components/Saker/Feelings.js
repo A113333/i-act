@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Box, Tab, Tabs, Chip, Typography } from "@mui/material";
+import useTheme from "@mui/material/styles/useTheme";
 
 function Feelings({ setIsDone, setFormData, formData, feelings }) {
   const mql = window.matchMedia("(max-width: 550px)");
   const smallScreen = mql.matches;
+  const theme = useTheme();
 
   const allFeelings = [
     { lable: "Kritisk", id: 0, type: "ilska" },
@@ -203,7 +205,7 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
               textAlign: "center",
               fontSize: "0.2rem",
               "& .Mui-selected": {
-                color: "#247ba0",
+                color: theme.palette.primary.main,
                 fontWeight: 700,
                 textDecoration: "underline",
               },

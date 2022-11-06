@@ -20,10 +20,10 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
 
   useEffect(() => {
     console.log("LocalUtmanaNatsArray");
-    console.log(LocalUtmanaNatArray.lenght);
-    //console.log(localStorage.getItem(LocalUtmanaNatArray));
-    // LocalUtmanaNatArray.utmanaNat.push(formData);
-    //  localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
+    console.log(LocalUtmanaNatArray);
+    //console.log(localStorage.getItem(utmanaNat));
+    LocalUtmanaNatArray.push(formData);
+    localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
     console.log("i fire once");
   }, []);
 

@@ -20,13 +20,14 @@ import { Link } from "react-router-dom";
 import Step4Part2 from "../QuestionNATs.js/Step4Part2";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { useCallback } from "react";
+import useTheme from "@mui/material/styles/useTheme";
 
 function UtmanaNat() {
   //const smallscreen = useMediaQuery("(min-width:600px)");
   const params = useParams();
   const { sida } = params;
   const sidaParams = Number(sida);
+  const theme = useTheme();
 
   const [page, setPage] = useState(0);
   const [isDone, setIsDone] = useState(false);
@@ -87,8 +88,8 @@ function UtmanaNat() {
     kanslorUnder: [],
     kanslorUnderIntensitet: [],
     selectedFeelings: new Set(),
-    bevisForTanke: "",
-    bevisMotTanke: "",
+    bevisForTanke: [],
+    bevisMotTanke: [],
     tankeFallor: [],
     balanseradTanke: "",
     kanslorEfter: [],
@@ -296,11 +297,7 @@ function UtmanaNat() {
 
   return (
     <>
-      <Box
-        sx={{
-          backgroundColor: "#fefefe",
-        }}
-      >
+      <Box>
         <Stepper numberOfSteps={10} step={page + 1} isDone={false} />
         <Box
           sx={{
@@ -353,7 +350,7 @@ function UtmanaNat() {
 
         <Box
           sx={{
-            backgroundColor: "#fefefe",
+            backgroundColor: theme.palette.customGrey.main,
             px: { xs: 2, sm: 5 },
             pt: 7,
             borderRadius: 3,

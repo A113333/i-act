@@ -40,6 +40,20 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring }) {
 
     setselectedValue();
   }, [page]);
+  /* 
+  let localGAD7 = localStorage.getItem("GAD7")
+  ? JSON.parse(localStorage.getItem("GAD7"))
+  : { GAD7: [] };
+
+useEffect(() => {
+  console.log("GAD7");
+  console.log(localGAD7);
+  //console.log(localStorage.getItem(utmanaNat));
+  LocalUtmanaNatArray.push(formData);
+  localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
+  console.log("i fire once");
+}, []);
+ */
 
   let sumResults = anwserArr.reduce(function (prev, current) {
     return prev + +Number(current.anwser);
