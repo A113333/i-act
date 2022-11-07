@@ -9,9 +9,13 @@ import ViewNatsResults from "./components/QuestionNATs.js/ViewNatsResults";
 import NotFound from "./components/Pages/NotFound";
 import Skattningar from "./components/Saker/Skattningar";
 import { ScrollRestoration } from "react-router-dom";
+import SkattningarResultat from "./components/SkattningarResultat";
 
 const theme = createTheme({
   palette: {
+    background: {
+      default: "#f5f7f9",
+    },
     primary: {
       // light: will be calculated from palette.primary.main,
       main: "#212529",
@@ -36,23 +40,23 @@ const theme = createTheme({
     },
 
     customBlack: {
-      light: "#707d8b",
-      main: "#212529",
-      dark: "#070808",
-      contrastText: "#F8F9FA",
+      light: "#444c54",
+      main: "#32393f",
+      dark: "#212529",
+      contrastText: "#fdfdfd",
     },
 
     customBlue: {
-      light: "#707d8b",
-      main: "#212529",
-      dark: "#070808",
+      light: "#2b94c0",
+      main: "#247ba0",
+      dark: "#1d6280",
       contrastText: "#F8F9FA",
     },
 
     customGrey: {
       light: "#f8f9fa",
       main: "#f5f7f9",
-      dark: "#657a8e",
+      dark: "#dce3ea",
       contrastText: "#F8F9FA",
     },
   },
@@ -100,6 +104,7 @@ const theme = createTheme({
 function App() {
   let skattning = {
     name: "GAD7",
+
     instruktioner:
       "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
     questionArr: [
@@ -180,6 +185,7 @@ function App() {
       { name: "allvarliga ångestproblem", score: 15 },
     ],
   };
+
   return (
     <HashRouter>
       <div className="App">
@@ -202,9 +208,19 @@ function App() {
                 path="/verktyg/skattningar"
                 element={<Skattningar {...skattning} />}
               />
+
               <Route
                 path="/verktyg/skattning/gad7"
                 element={<Skattningar {...skattning} />}
+              />
+              <Route
+                path="/verktyg/skattning/gad7/resultat"
+                element={
+                  <SkattningarResultat
+                    titel={"Dina skattningar för ångestsymptom"}
+                    name={"GAD7"}
+                  />
+                }
               />
 
               <Route path="*" element={<NotFound />} />

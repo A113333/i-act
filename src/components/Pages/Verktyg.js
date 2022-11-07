@@ -60,23 +60,25 @@ function Verktyg() {
           minHeight: "100vh",
         }}
       >
-        <Typography variant="h6" sx={{ mt: 5, opacity: "50%" }}>
+        <Typography variant="h6" sx={{ mt: bigScreen ? 5 : 3, opacity: "50%" }}>
           Verktyg
         </Typography>
         <Divider sx={{ mb: 1 }}></Divider>
 
         <Grid container>
-          <ToolsCard
-            title={"Utmana dina tankar"}
-            desc={"En övning där du får träna på att nyansera ditt tänkande."}
-            startLink="/verktyg/UtmanaNegativaAutomatiskaTankar/0"
-          />
+          <Grid item>
+            <ToolsCard
+              title={"Utmana dina tankar"}
+              desc={"En övning där du får träna på att nyansera ditt tänkande."}
+              startLink="/verktyg/UtmanaNegativaAutomatiskaTankar/0"
+            />
+          </Grid>
         </Grid>
+
         <Typography variant="h6" sx={{ mt: 5, opacity: "50%" }}>
           Skattningar
         </Typography>
         <Divider sx={{ mb: 1 }}></Divider>
-
         {bigScreen ? (
           <>
             <Grid container spacing={1}>
@@ -86,15 +88,6 @@ function Verktyg() {
                 startLink="/verktyg/skattning/gad7"
               />
             </Grid>
-            <Button
-              variant="outlined"
-              sx={{ mt: 10, mb: 10 }}
-              component={Link}
-              to="/verktyg/UtmanaNegativaAutomatiskaTankar/visa"
-            >
-              {" "}
-              Se genomförda övningar{" "}
-            </Button>
           </>
         ) : (
           <>
@@ -111,6 +104,36 @@ function Verktyg() {
             </Box>
           </>
         )}
+
+        <Box sx={{ mt: 10, mb: 10, ml: 2 }}>
+          <Button
+            sx={{ ml: 1, mt: 1 }}
+            variant="outlined"
+            component={Link}
+            to="/verktyg/UtmanaNegativaAutomatiskaTankar/visa"
+          >
+            Se genomförda övningar
+          </Button>
+          <Button
+            sx={{ ml: 1, mt: 1 }}
+            variant="outlined"
+            onClick={() => {
+              localStorage.removeItem("GAD7");
+              console.log(localStorage.getItem("GAD7"));
+            }}
+          >
+            Ta bort alla gad7
+          </Button>
+          <Button
+            sx={{ ml: 1, mt: 1 }}
+            variant="outlined"
+            onClick={() => {
+              localStorage.removeItem("utmanaNat");
+            }}
+          >
+            Ta bort alla NAT
+          </Button>
+        </Box>
       </Container>
     </>
   );

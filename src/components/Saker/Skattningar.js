@@ -11,17 +11,20 @@ import ToolsAppBar from "./ToolsAppBar";
 import useArray from "../hooks/useArray.js";
 import VerktygKnapp from "./SmattOchGott/VerktygKnapp";
 import { Box } from "@mui/system";
+import useTheme from "@mui/material/styles/useTheme";
 
-function Skattningar({ instruktioner, questionArr, startZero, scoring }) {
+function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
   const [page, setpage] = useState(0);
   const [isDone, setIsDone] = useState(false);
   const [anwserArr, setanwserArr] = useState([]);
   const [selectedValue, setselectedValue] = useState();
 
+  const theme = useTheme();
+
   const handleChange = (e) => {
     let anwser = {
-      question: 1,
-      anwser: e.target.value,
+      question: Number(page),
+      anwser: Number(e.target.value),
     };
 
     const updatedanwserArr = [...anwserArr];
@@ -40,20 +43,10 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring }) {
 
     setselectedValue();
   }, [page]);
-  /* 
-  let localGAD7 = localStorage.getItem("GAD7")
-  ? JSON.parse(localStorage.getItem("GAD7"))
-  : { GAD7: [] };
 
-useEffect(() => {
-  console.log("GAD7");
-  console.log(localGAD7);
-  //console.log(localStorage.getItem(utmanaNat));
-  LocalUtmanaNatArray.push(formData);
-  localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
-  console.log("i fire once");
-}, []);
- */
+  let localSave = localStorage.getItem(name)
+    ? JSON.parse(localStorage.getItem(name))
+    : [];
 
   let sumResults = anwserArr.reduce(function (prev, current) {
     return prev + +Number(current.anwser);
@@ -66,9 +59,9 @@ useEffect(() => {
     } else
       scoring.forEach((item, index) => {
         if (item.score <= score) {
-          console.log("resultat " + item.name);
+          // console.log("resultat " + item.name);
           scoreInName = item.name;
-        } else console.log(item.name);
+        } else console.log("hej");
       });
     return scoreInName;
   };
@@ -76,6 +69,31 @@ useEffect(() => {
   const getResults = () => {
     return sumResults.toString();
   };
+
+  useEffect(() => {
+    if (page === questionArr.length) {
+      let svar = [...anwserArr];
+      let resultat = getResults();
+      let resultName = getScoreInName(sumResults);
+
+      let item = {
+        svar: svar,
+        resultat: Number(resultat),
+        resultatName: resultName,
+        date: new Date().toLocaleDateString(),
+      };
+
+      localSave.push(item);
+      console.log("localSsaaave");
+      console.log(JSON.parse(localStorage.getItem(name)));
+      console.log("resultName");
+      console.log(resultName);
+
+      // sparar resultatet till skattnintens NAME
+      localStorage.setItem(name, JSON.stringify(localSave));
+      console.log("i fire once");
+    }
+  }, [page]);
 
   return (
     <>
@@ -93,6 +111,7 @@ useEffect(() => {
           {page !== questionArr.length ? questionArr[page].question : "Klart"}
         </Typography>
 
+        {/* om vi inte är på sista sida: visa fråga, annars visa resultat */}
         {page !== questionArr.length ? (
           <FormControl>
             <RadioGroup

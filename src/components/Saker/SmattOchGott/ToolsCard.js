@@ -14,7 +14,7 @@ import { useTheme } from "@emotion/react";
 function ToolsCard({ title, desc, readMoreLink, startLink }) {
   const theme = useTheme();
   const readMoreClick = () => {
-    console.log("read more");
+    console.log(readMoreLink);
   };
   return (
     <Grid sx={12} sm={5} lg={4} item>
@@ -37,8 +37,9 @@ function ToolsCard({ title, desc, readMoreLink, startLink }) {
             fontWeight: 500,
             textAlign: "left",
             display: "inline-block",
+            pl: 0,
           }}
-          onClick={() => readMoreClick("utmanaNat")}
+          onClick={() => readMoreClick(readMoreLink)}
         >
           Läs mer
         </Button>

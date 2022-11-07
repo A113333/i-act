@@ -49,8 +49,20 @@ function SocialProof() {
   };
 
   return (
-    <Box sx={{ width: "80%", margin: "auto", mt: 10 }}>
-      <Box sx={{ textAlign: "center" }}>
+    <Box
+      sx={{
+        width: "80%",
+        margin: "auto",
+        mt: 10,
+        backgroundColor: "#fff",
+        p: 3,
+      }}
+    >
+      <Box
+        sx={{
+          textAlign: "center",
+        }}
+      >
         <Typography
           variant="body1"
           sx={{
@@ -89,6 +101,10 @@ function SocialProof() {
             pl: 2,
             textAlign: "center",
             justifyContent: "center",
+
+            "&.MuiPaper-root-MuiMobileStepper-root": {
+              backgroundColor: "#fff",
+            },
           }}
         >
           <Typography

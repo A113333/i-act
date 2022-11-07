@@ -1,11 +1,13 @@
 import { Box } from "@mui/system";
 import React from "react";
+import useTheme from "@mui/material/styles/useTheme";
 
 function ToolsContainer(props) {
+  const theme = useTheme();
   return (
     <Box
       sx={{
-        backgroundColor: "#fefefe",
+        backgroundColor: theme.palette.customGrey.main,
         px: { xs: 2, sm: 5 },
         pt: 7,
         borderRadius: 3,

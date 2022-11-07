@@ -37,7 +37,7 @@ function Drawer({ isOpen, setClose }) {
             </ListItem>
 
             <ListItem>
-              <Link> Test1</Link>
+              <Link to="/verktyg/skattning/gad7/resultat"> Resultat GAD7</Link>
             </ListItem>
           </List>
         </Box>
