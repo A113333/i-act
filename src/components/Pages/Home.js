@@ -1,21 +1,21 @@
 import React from "react";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import HeroSection from "../Landingpage/HeroSection";
-import AppBar from "../AppBar";
+import AppBar from "../IactAppBar";
 import ThereBoxes from "../Landingpage/ThereBoxes";
 import { Container } from "@mui/material";
 import FreeTrial from "../Landingpage/FreeTrial";
 import HowIactWorks from "../Landingpage/HowIactWorks";
 import Faq from "../Landingpage/Faq";
 import SocialProof from "../Landingpage/SocialProof";
+import AppBarLandingPage from "../Landingpage/AppBarLandingPage";
 
 function Home() {
   return (
     <>
       {" "}
       <CssBaseline />
-      <AppBar />
+      <AppBarLandingPage />
       <HeroSection />
       <Container
         sx={{
@@ -26,7 +26,6 @@ function Home() {
         }}
       >
         <ThereBoxes />
-        <FreeTrial />
 
         <HowIactWorks />
 

@@ -1,52 +1,48 @@
-import {
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Typography,
-} from "@mui/material";
-import React, { useState, useEffect } from "react";
-import ToolsContainer from "./SmattOchGott/ToolsContainer";
-import ToolsAppBar from "./ToolsAppBar";
-import useArray from "../hooks/useArray.js";
+import { Button, Typography } from "@mui/material";
+import React, { useState } from "react";
+import ToolsAppBar from "./VerktygAppBar";
 import VerktygKnapp from "./SmattOchGott/VerktygKnapp";
-import { Box } from "@mui/system";
 import useTheme from "@mui/material/styles/useTheme";
+import VerktygContainer from "./SmattOchGott/VerktygContainer";
+import { Link } from "react-router-dom";
+import RadioButtonFromArray from "../inputs/RadioButtonFromArray";
 
 function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
-  const [page, setpage] = useState(0);
-  const [isDone, setIsDone] = useState(false);
+  const [page, setPage] = useState(0);
+  const [isDone, setGotAnwser] = useState(false);
   const [anwserArr, setanwserArr] = useState([]);
   const [selectedValue, setselectedValue] = useState();
+  const [isLastPage, setisLastPage] = useState(false);
 
   const theme = useTheme();
-
-  const handleChange = (e) => {
-    let anwser = {
-      question: Number(page),
-      anwser: Number(e.target.value),
-    };
-
-    const updatedanwserArr = [...anwserArr];
-    updatedanwserArr[page] = anwser;
-    setanwserArr(updatedanwserArr);
-    setselectedValue(e.target.value);
-
-    setIsDone(true);
-
-    console.log("selectedValue");
-    console.log(typeof selectedValue);
-  };
-
-  useEffect(() => {
-    // page + 1 === questionArr.length ? console.log("true") : console.log("false");
-
-    setselectedValue();
-  }, [page]);
-
+  const nrOfPages = questionArr.length;
   let localSave = localStorage.getItem(name)
     ? JSON.parse(localStorage.getItem(name))
     : [];
+
+  const onClickForward = () => {
+    // om man clickar på knappen för "visa resultat", dvs på sista frågan
+    if (page + 1 === nrOfPages) {
+      setisLastPage(true);
+      // skapar ett svarsobject och sprarar det till localstorage
+      let svar = [...anwserArr];
+      let resultat = getResults();
+      let resultName = getScoreInName(sumResults);
+      let item = {
+        svar: svar,
+        resultat: Number(resultat),
+        resultatName: resultName,
+        date: new Date().toLocaleDateString(),
+      };
+      localSave.push(item);
+      localStorage.setItem(name, JSON.stringify(localSave));
+    }
+    //   setselectedValue(); renasar radio buttons så ingen är förvald till nästa
+    setselectedValue();
+    setPage(page + 1);
+    window.scrollTo(0, 0);
+    setGotAnwser(false);
+  };
 
   let sumResults = anwserArr.reduce(function (prev, current) {
     return prev + +Number(current.anwser);
@@ -61,7 +57,7 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
         if (item.score <= score) {
           // console.log("resultat " + item.name);
           scoreInName = item.name;
-        } else console.log("hej");
+        } else console.log("hittade ditt resultat!");
       });
     return scoreInName;
   };
@@ -70,107 +66,63 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
     return sumResults.toString();
   };
 
-  useEffect(() => {
-    if (page === questionArr.length) {
-      let svar = [...anwserArr];
-      let resultat = getResults();
-      let resultName = getScoreInName(sumResults);
-
-      let item = {
-        svar: svar,
-        resultat: Number(resultat),
-        resultatName: resultName,
-        date: new Date().toLocaleDateString(),
-      };
-
-      localSave.push(item);
-      console.log("localSsaaave");
-      console.log(JSON.parse(localStorage.getItem(name)));
-      console.log("resultName");
-      console.log(resultName);
-
-      // sparar resultatet till skattnintens NAME
-      localStorage.setItem(name, JSON.stringify(localSave));
-      console.log("i fire once");
-    }
-  }, [page]);
-
   return (
     <>
       <ToolsAppBar step={page + 1} numberOfSteps={questionArr.length + 1} />
-      <ToolsContainer>
-        <Typography variant="h6" sx={{ opacity: "50%" }}>
+      <VerktygContainer>
+        {page !== nrOfPages ? (
+          <Typography variant="h6" sx={{ textAlign: "left" }}>
+            Fråga {page + 1}
+          </Typography>
+        ) : null}
+
+        {/*  Kollar om man är på sista steget, och byter ut frågan mot "klart" om färdigt */}
+        <Typography variant="body1" sx={{ pt: 2, pb: 2, textAlign: "left" }}>
+          {page !== questionArr.length ? questionArr[page].question : ""}
+        </Typography>
+
+        <Typography variant="body1" sx={{ opacity: "50%", fontSize: "0.8rem" }}>
           {/*  Kollar om man är på sista steget, och byter titel därefter */}
           {page !== questionArr.length
             ? instruktioner
             : "Här nedan kan du se ditt resultat"}
         </Typography>
-        {/*  Kollar om man är på sista steget, och byter ut frågan mot "klart" om färdigt */}
-        <Typography variant="h6" sx={{ pt: 2, pb: 2 }}>
-          {" "}
-          {page !== questionArr.length ? questionArr[page].question : "Klart"}
-        </Typography>
-
         {/* om vi inte är på sista sida: visa fråga, annars visa resultat */}
         {page !== questionArr.length ? (
-          <FormControl>
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              name="radio-buttons-group"
-              onChange={handleChange}
-            >
-              {questionArr[page].svarsalternativ.map((item, index) => (
-                <FormControlLabel
-                  label={item}
-                  key={index.toString()}
-                  labelPlacement="start"
-                  value={startZero ? index : index + 1}
-                  checked={Number(selectedValue) === index}
-                  sx={{
-                    "& .MuiFormControlLabel-label": {
-                      textAlign: "left",
-                      width: "100%",
-                    },
-                  }}
-                  control={
-                    <Radio
-                      key={(index + "a").toString()}
-                      sx={{
-                        "& .MuiSvgIcon-root": { fontSize: 28 },
-                      }}
-                      value={startZero ? index : index + 1}
-                    />
-                  }
-                />
-              ))}
-            </RadioGroup>
-          </FormControl>
+          <RadioButtonFromArray
+            setanwserArr={setanwserArr}
+            setselectedValue={setselectedValue}
+            setGotAnwser={setGotAnwser}
+            questionArr={questionArr}
+            page={page}
+            startZero={startZero}
+            anwserArr={anwserArr}
+            selectedValue={selectedValue}
+          />
         ) : (
           <>
-            {" "}
+            {/* Det som visas om man är på resultatsidan */}
             <Typography>
-              {" "}
-              Din total score blev: {sumResults} vilket indikerar{" "}
+              Du fick {sumResults} poäng, vilket indikerar{" "}
               {getScoreInName(sumResults)}
             </Typography>
-            {scoring.map((item, index) => (
-              <>
-                <Box sx={{ width: "100%" }} kex={"b" + index}>
-                  <Typography display="inline"> {item.name}: </Typography>
-                  <Typography display="inline"> {item.score} </Typography>
-                  <Typography display="inline"></Typography>
-                </Box>
-              </>
-            ))}
+            <Typography sx={{ pt: 10 }}>
+              Vill du se hur ditt mående har förändrats över tid?
+            </Typography>
+            <Button component={Link} to="resultat" variant="outlined">
+              Klicka här
+            </Button>
           </>
         )}
 
         <VerktygKnapp
           page={page}
-          setPage={setpage}
-          lastPage={questionArr.length}
+          setPage={setPage}
+          onClickForward={onClickForward}
+          lastPage={isLastPage}
+          isDone={isDone}
         />
-      </ToolsContainer>
+      </VerktygContainer>
     </>
   );
 }

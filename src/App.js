@@ -8,8 +8,11 @@ import Verktyg from "./components/Pages/Verktyg";
 import ViewNatsResults from "./components/QuestionNATs.js/ViewNatsResults";
 import NotFound from "./components/Pages/NotFound";
 import Skattningar from "./components/Saker/Skattningar";
-import { ScrollRestoration } from "react-router-dom";
 import SkattningarResultat from "./components/SkattningarResultat";
+import MADRAS from "./components/SkattningarData/Madras-s";
+import GAD7 from "./components/SkattningarData/GAD7";
+import UserPage from "./components/Pages/UserPage";
+import Sorkk from "./components/Övningar/SORKK/Sorkk";
 
 const theme = createTheme({
   palette: {
@@ -23,10 +26,8 @@ const theme = createTheme({
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: "#0066ff",
-      main: "#247ba0",
+      main: "#F8F9FA",
       // dark: will be calculated from palette.secondary.main,
-      contrastText: "#F8F9FA",
     },
     // Provide every color token (light, main, dark, and contrastText) when using
     // custom colors for props in Material UI's components.
@@ -56,7 +57,7 @@ const theme = createTheme({
     customGrey: {
       light: "#f8f9fa",
       main: "#f5f7f9",
-      dark: "#dce3ea",
+      dark: "#e9edf2",
       contrastText: "#F8F9FA",
     },
   },
@@ -102,90 +103,6 @@ const theme = createTheme({
 });
 
 function App() {
-  let skattning = {
-    name: "GAD7",
-
-    instruktioner:
-      "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
-    questionArr: [
-      {
-        question: "Känt dig nervös, ängslig eller väldigt stressad",
-        svarsalternativ: [
-          "Inte alls",
-          "Flera dagar",
-          "Mer än hälften av dagarna",
-          "Nästan varje dag",
-        ],
-      },
-      {
-        question: "Inte kunnat sluta oroa dig eller kontrollera din oro",
-        svarsalternativ: [
-          "Inte alls",
-          "Flera dagar",
-          "Mer än hälften av dagarna",
-          "Nästan varje dag",
-        ],
-      },
-      {
-        question: "Oroat dig för mycket för olika saker",
-        svarsalternativ: [
-          "Inte alls",
-          "Flera dagar",
-          "Mer än hälften av dagarna",
-          "Nästan varje dag",
-        ],
-      },
-
-      {
-        question: "Haft svårt att slappna av",
-        svarsalternativ: [
-          "Inte alls",
-          "Flera dagar",
-          "Mer än hälften av dagarna",
-          "Nästan varje dag",
-        ],
-      },
-
-      {
-        question: "Varit så rastlös att du har haft svårt att sitta still",
-        svarsalternativ: [
-          "Inte alls",
-          "Flera dagar",
-          "Mer än hälften av dagarna",
-          "Nästan varje dag",
-        ],
-      },
-
-      {
-        question: "Blivit lätt irriterad eller retlig",
-        svarsalternativ: [
-          "Inte alls",
-          "Flera dagar",
-          "Mer än hälften av dagarna",
-          "Nästan varje dag",
-        ],
-      },
-
-      {
-        question: "Känt dig rädd för att något hemskt skulle hända",
-        svarsalternativ: [
-          "Inte alls",
-          "Flera dagar",
-          "Mer än hälften av dagarna",
-          "Nästan varje dag",
-        ],
-      },
-    ],
-    startZero: true,
-    infoText:
-      "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
-    scoring: [
-      { name: "milda ångestproblem", score: 5 },
-      { name: "medel ångestproblem", score: 10 },
-      { name: "allvarliga ångestproblem", score: 15 },
-    ],
-  };
-
   return (
     <HashRouter>
       <div className="App">
@@ -194,24 +111,31 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/verktyg" element={<Verktyg />} />
+              <Route path="/anvandare" element={<UserPage />} />
 
+              {/*  ROUTES FÖR NAT ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
               <Route
                 path="/verktyg/UtmanaNegativaAutomatiskaTankar/:sida"
                 element={<UtmanaNAT />}
               />
-
+              <Route
+                path="/verktyg/UtmanaNegativaAutomatiskaTankar/lasmer"
+                element={<UtmanaNAT />}
+              />
               <Route
                 path="/verktyg/UtmanaNegativaAutomatiskaTankar/visa"
                 element={<ViewNatsResults />}
               />
-              <Route
-                path="/verktyg/skattningar"
-                element={<Skattningar {...skattning} />}
-              />
 
+              {/*  ROUTES FÖR SORKK ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
+              <Route path="/verktyg/sorkk/:sida" element={<Sorkk />} />
+              <Route path="/verktyg/sork/lasmer" element={<Sorkk />} />
+              <Route path="/verktyg/sorkk/visa" element={<Sorkk />} />
+
+              {/* GAD/ resultat och fylla i */}
               <Route
                 path="/verktyg/skattning/gad7"
-                element={<Skattningar {...skattning} />}
+                element={<Skattningar {...GAD7} />}
               />
               <Route
                 path="/verktyg/skattning/gad7/resultat"
@@ -219,6 +143,25 @@ function App() {
                   <SkattningarResultat
                     titel={"Dina skattningar för ångestsymptom"}
                     name={"GAD7"}
+                    max={21}
+                    label={"Ångestsymptom"}
+                  />
+                }
+              />
+
+              {/* Madras resultat och fylla i */}
+              <Route
+                path="/verktyg/skattning/madras-s"
+                element={<Skattningar {...MADRAS} />}
+              />
+              <Route
+                path="/verktyg/skattning/madras-s/resultat"
+                element={
+                  <SkattningarResultat
+                    titel={"Dina skattningar för depressionssymptom"}
+                    name={"MADRAS-S"}
+                    max={54}
+                    label={"Depressionssymptom"}
                   />
                 }
               />

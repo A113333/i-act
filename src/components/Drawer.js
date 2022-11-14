@@ -4,6 +4,7 @@ import {
   List,
   ListItem,
   Typography,
+  Button,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
@@ -29,15 +30,35 @@ function Drawer({ isOpen, setClose }) {
             </ListItem>
 
             <ListItem>
-              <Link to="/verktyg"> Verktyg </Link>
+              <Button component={Link} size="large" to="/verktyg">
+                Hemuppgifter
+              </Button>
             </ListItem>
 
             <ListItem>
-              <Link to="/verktyg/skattningar"> Skattningar </Link>
+              <Button component={Link} size="large" to="/verktyg/skattningar">
+                Skattningar
+              </Button>
             </ListItem>
 
             <ListItem>
-              <Link to="/verktyg/skattning/gad7/resultat"> Resultat GAD7</Link>
+              <Button
+                component={Link}
+                size="large"
+                to="/verktyg/skattning/gad7/resultat"
+              >
+                Resultat GAD7
+              </Button>
+            </ListItem>
+
+            <ListItem>
+              <Button
+                component={Link}
+                size="large"
+                to="/verktyg/skattning/madras-s/resultat"
+              >
+                Resultat MADRAS
+              </Button>
             </ListItem>
           </List>
         </Box>

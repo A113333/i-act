@@ -5,7 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import BlackBoxWithText from "../Saker/SmattOchGott/BlackBoxWithText";
-import AppBar from "../AppBar";
+import AppBar from "../IactAppBar";
 
 import useLocalStorageState from "use-local-storage-state";
 import { Box } from "@mui/system";
@@ -13,6 +13,7 @@ import { Button } from "@mui/material";
 import VerktygContainer from "../Saker/SmattOchGott/VerktygContainer";
 import RemoveButton from "../Saker/SmattOchGott/RemoveButton";
 import HeadlineWithDivider from "../Saker/HeadlineWithDivider";
+import BackToVerktygButton from "../Saker/SmattOchGott/BackToVerktygButton";
 
 function ViewNatsResults() {
   const [utmanaNat, setUtmanaNat] = useLocalStorageState("utmanaNat", {
@@ -40,10 +41,12 @@ function ViewNatsResults() {
       <VerktygContainer>
         <HeadlineWithDivider>
           {" "}
-          Dina sparade tankeutmaningar{" "}
+          {utmanaNat.lenght === 0
+            ? "Dina sparade tankeutmaningar"
+            : "Du verkar inte ha genomfört några övningar"}
         </HeadlineWithDivider>
 
-        {utmanaNat.lenght === 0 && utmanaNat === undefined ? (
+        {utmanaNat.lenght === 0 || utmanaNat === undefined ? (
           <Typography> Inga övningar sparade :( </Typography>
         ) : (
           utmanaNat.map((item, index) => {
@@ -196,6 +199,8 @@ function ViewNatsResults() {
             );
           })
         )}
+
+        <BackToVerktygButton />
       </VerktygContainer>
     </>
   );

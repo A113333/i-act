@@ -98,7 +98,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
           <BlackBoxWithText text={"Dina bevis för din tanke:"} />
           <ul>
             {" "}
-            {formData.bevisForTanke.map((item, index) => (
+            {formData.bevisForTanke?.map((item, index) => (
               <li>
                 <Typography display="inline">{item}</Typography>
               </li>
@@ -109,7 +109,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
           <BlackBoxWithText text={"Dina bevis emot din tanke:"} />
           <ul>
             {" "}
-            {formData.bevisMotTanke.map((item, index) => (
+            {formData.bevisMotTanke?.map((item, index) => (
               <li>
                 <Typography sx={{ pb: 1 }}> {item}</Typography>
               </li>
@@ -135,7 +135,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Dina känslor i situationen:" />
           <ul>
-            {formData.kanslorUnderIntensitet.map((data) => {
+            {formData.kanslorUnderIntensitet?.map((data) => {
               return (
                 <li>
                   <Typography>
@@ -149,7 +149,7 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Dina känslor efter övningen:" />
           <ul>
-            {formData.kanslorEfter.map((data, index) => {
+            {formData.kanslorEfter?.map((data, index) => {
               console.log(data);
               return (
                 <li>

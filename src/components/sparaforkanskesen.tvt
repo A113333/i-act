@@ -1,0 +1,75 @@
+ <Box
+        sx={{
+          borderTop: "2px solid #b0b8c0",
+          position: "absolute",
+          top: "90px",
+          left: "25px",
+          width: "55px",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          borderLeft: "2px solid #b0b8c0",
+          position: "absolute",
+          top: "90px",
+          left: "25px",
+          height: "55px",
+        }}
+      ></Box>
+
+      <Box
+        sx={{
+          borderTop: "2px solid #b0b8c0",
+          position: "absolute",
+          top: "90px",
+          right: "25px",
+          width: "55px",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          borderLeft: "2px solid #b0b8c0",
+          position: "absolute",
+          top: "90px",
+          right: "25px",
+          height: "55px",
+        }}
+      ></Box>
+
+      <Box
+        sx={{
+          borderTop: "2px solid #b0b8c0",
+          position: "absolute",
+          bottom: "25px",
+          right: "25px",
+          width: "55px",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          borderLeft: "2px solid #b0b8c0",
+          position: "absolute",
+          bottom: "25px",
+          right: "25px",
+          height: "55px",
+        }}
+      ></Box>
+
+      <Box
+        sx={{
+          borderTop: "2px solid #b0b8c0",
+          position: "absolute",
+          bottom: "25px",
+          left: "25px",
+          width: "55px",
+        }}
+      ></Box>
+      <Box
+        sx={{
+          borderLeft: "2px solid #b0b8c0",
+          position: "absolute",
+          bottom: "25px",
+          left: "25px",
+          height: "55px",
+        }}
+      ></Box>

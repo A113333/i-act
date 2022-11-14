@@ -8,14 +8,13 @@ function VerktygContainer(props) {
       sx={{
         backgroundColor: theme.palette.customGrey.main,
         px: { xs: 2, sm: 5 },
-        pt: 12,
-        pb: 5,
+        paddingBottom: 8,
         borderRadius: 3,
-        mt: 1,
         position: "relative",
-        textAlign: "center",
-        maxWidth: "1200px",
+        textAlign: "left",
+        maxWidth: "800px",
         m: "auto",
+        mt: 3,
         minHeight: `calc(100vh - 65px)`,
       }}
     >

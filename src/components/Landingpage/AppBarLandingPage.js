@@ -4,16 +4,15 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { ReactComponent as SmallIcon } from "../img/icon.svg";
 import { Link } from "react-router-dom";
-import Drawer from "./Drawer";
+import Drawer from "../Drawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ConstructionIcon from "@mui/icons-material/Construction";
 import useTheme from "@mui/material/styles/useTheme";
-let SmallIconImg = SmallIcon;
+import { Button } from "@mui/material";
+import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 
 export default function ButtonAppBar() {
-  const smallscreen = useMediaQuery("(min-width:500px)");
+  const smallscreen = useMediaQuery("(min-width:600px)");
   const theme = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -30,35 +29,13 @@ export default function ButtonAppBar() {
           flexGrow: 1,
         }}
       >
-        <AppBar
-          position="fixed"
-          color=""
-          elevation={0}
-          sx={{
-            height: "60px",
-            top: !smallscreen ? `calc(100vh - 60px)` : 0,
-            borderBottom: smallscreen
-              ? `1px solid ${theme.palette.customGrey.dark}`
-              : null,
-            borderTop: smallscreen
-              ? null
-              : `1px solid ${theme.palette.customGrey.dark} `,
-            /*            maxWidth: "1200px",
-            width: smallscreen ? "90%" : "100%",
-            left: "50%",
-            transform: "translate(-50%, 0)", */
-          }}
-        >
+        <AppBar position="sticky" elevation={0}>
           <Toolbar>
             <IconButton
               size="large"
               edge="start"
               color="inherit"
               aria-label="menu"
-              sx={{
-                mr: !smallscreen ? 0.5 : 2,
-                color: theme.palette.customBlack.main,
-              }}
               onClick={() => setIsOpen(true)}
             >
               <MenuIcon />
@@ -74,26 +51,40 @@ export default function ButtonAppBar() {
               <PersonOutlineRoundedIcon />
             </IconButton> */}
 
-            <Box sx={{ margin: "auto", mt: "15px" }}>
-              <Link to="/">
-                <SmallIconImg height={"38px"} />
-              </Link>
+            <Box sx={{ margin: "auto" }}>
+              <Button
+                component={Link}
+                size="large"
+                to="/"
+                sx={{
+                  fontSize: "1.5rem",
+                }}
+              ></Button>
             </Box>
 
-            <IconButton
+            <Button
               size="large"
               edge="start"
               color="inherit"
-              aria-label="login"
+              aria-label="användarsida"
               component={Link}
-              to="/verktyg"
-              sx={{
-                mr: !smallscreen ? 0.5 : 2,
-                color: theme.palette.customBlack.main,
-              }}
+              to="/anvandare"
+              sx={{ fontWeight: "400" }}
             >
-              <ConstructionIcon />
-            </IconButton>
+              om oss
+            </Button>
+
+            <Button
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="användarsida"
+              component={Link}
+              to="/anvandare"
+              sx={{ fontWeight: "400" }}
+            >
+              kontakt
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>

@@ -4,11 +4,13 @@ import { CategoryScale } from "chart.js";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import useTheme from "@mui/material/styles/useTheme";
-import { Typography } from "@mui/material";
-import AppBar from "./AppBar";
+import { Button, Typography } from "@mui/material";
+import AppBar from "./IactAppBar";
 import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
+import BackToVerktygButton from "./Saker/SmattOchGott/BackToVerktygButton";
 
-function SkattningarResultat({ titel, name }) {
+function SkattningarResultat({ titel, name, max, label }) {
   let resultsArr = localStorage.getItem(name);
   const theme = useTheme();
   const results = resultsArr ? JSON.parse(resultsArr) : [];
@@ -27,43 +29,41 @@ function SkattningarResultat({ titel, name }) {
     <>
       <AppBar />
       <VerktygContainer>
-        <Typography>{titel}</Typography>
+        <Typography>
+          {results.lenght !== 0
+            ? titel
+            : "Det verkar inte finnas några sparade resultat"}{" "}
+        </Typography>
         <Box sx={{ height: `calc(70vh - 65px)` }}>
-          {results ? (
-            <Line
-              options={{
-                maintainAspectRatio: false,
-                scales: {
-                  yAxis: {
-                    min: 0,
-                    max: 21,
-                  },
+          <Line
+            options={{
+              maintainAspectRatio: false,
+              scales: {
+                yAxis: {
+                  min: 0,
+                  max: max,
                 },
-              }}
-              data={{
-                // x-axis label values
-                labels: lableArr,
-                datasets: [
-                  {
-                    label: "Ångestsymptom",
-                    // y-axis data plotting values
-                    data: resultsForChart,
-                    fill: false,
-                    borderWidth: 1,
-                    backgroundColor: theme.palette.primary.main,
-                    borderColor: theme.palette.primary.main,
-                    responsive: true,
-                  },
-                ],
-              }}
-            />
-          ) : (
-            <Typography>
-              {" "}
-              Det verkar inte finnas några sparade resultat
-            </Typography>
-          )}
+              },
+            }}
+            data={{
+              // x-axis label values
+              labels: lableArr,
+              datasets: [
+                {
+                  label: label,
+                  // y-axis data plotting values
+                  data: resultsForChart,
+                  fill: false,
+                  borderWidth: 1,
+                  backgroundColor: theme.palette.primary.main,
+                  borderColor: theme.palette.primary.main,
+                  responsive: true,
+                },
+              ],
+            }}
+          />
         </Box>
+        <BackToVerktygButton />
       </VerktygContainer>
     </>
   );

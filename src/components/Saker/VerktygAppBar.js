@@ -5,13 +5,15 @@ import Stepper from "./Stepper";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
+import useTheme from "@mui/material/styles/useTheme";
 
-function ToolsAppBar({ step, setStep, numberOfSteps }) {
-  let goBack = () => {
+function ToolsAppBar({ step, setStep, numberOfSteps, closeLink }) {
+  const theme = useTheme();
+  const goBack = () => {
     console.log("going back");
   };
 
-  let close = () => {
+  const close = () => {
     console.log("close");
   };
 
@@ -20,11 +22,11 @@ function ToolsAppBar({ step, setStep, numberOfSteps }) {
       <Stepper numberOfSteps={numberOfSteps} step={step} isDone={false} />
       <Box
         sx={{
-          pt: 1,
           position: "sticky",
           top: 0,
           zIndex: 100,
-          bgcolor: "white",
+          bgcolor: theme.palette.primary.dark,
+          color: theme.palette.customWhite.main,
         }}
       >
         {/*  <Typography variant="h6" sx={{ textAlign: "center", color: "#247ba0" }}>
@@ -34,30 +36,26 @@ function ToolsAppBar({ step, setStep, numberOfSteps }) {
 */}
 
         <Stack alignItems="center" direction="row">
-          {step === numberOfSteps || step === 0 ? (
-            <IconButton aria-label="tillbaka" sx={{ opacity: "25%" }} disabled>
-              <ArrowBackIcon color="primary" fontSize="small" />
-            </IconButton>
-          ) : (
-            <IconButton aria-label="tillbaka" onClick={() => goBack()}>
-              <ArrowBackIcon color="primary" fontSize="small" />
-            </IconButton>
-          )}
-
           <Typography
             sx={{
+              pl: "44px",
               minWidth: "30px",
               flex: 1,
               textAlign: "center",
               fontSize: "0.7rem",
             }}
           >
-            {step === 9 ? "Bra jobbat!" : step + "/ " + numberOfSteps}
+            {step === 9
+              ? "Bra jobbat!"
+              : "Steg " + step + " av " + numberOfSteps}
           </Typography>
 
           <IconButton aria-label="tillbaka" onClick={() => close()}>
-            <Link to="/verktyg">
-              <CloseIcon color="primary" fontSize="small" />
+            <Link to={closeLink ? closeLink : "/verktyg"}>
+              <CloseIcon
+                sx={{ color: theme.palette.customWhite.main }}
+                fontSize="small"
+              />
             </Link>
           </IconButton>
         </Stack>
