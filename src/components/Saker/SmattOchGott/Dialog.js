@@ -1,14 +1,15 @@
-import React from 'react'
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import React from "react";
 
-export default function ScrollDialog() {
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+
+function Dialog(text) {
   const [open, setOpen] = useState(false);
-  const [scroll, setScroll] = useState('paper');
+  const [scroll, setScroll] = useState("paper");
 
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);
@@ -19,11 +20,10 @@ export default function ScrollDialog() {
     setOpen(false);
   };
 
-
-
+  return (
     <div>
-      <Button onClick={handleClickOpen('paper')}>scroll=paper</Button>
-      <Button onClick={handleClickOpen('body')}>scroll=body</Button>
+      <Button onClick={handleClickOpen("paper")}>scroll=paper</Button>
+      <Button onClick={handleClickOpen("body")}>scroll=body</Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -32,20 +32,9 @@ export default function ScrollDialog() {
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle id="scroll-dialog-title">Subscribe</DialogTitle>
-        <DialogContent dividers={scroll === 'paper'}>
-          <DialogContentText
-            id="scroll-dialog-description"
-            ref={descriptionElementRef}
-            tabIndex={-1}
-          >
-            {[...new Array(50)]
-              .map(
-                () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
-              )
-              .join('\n')}
+        <DialogContent dividers={scroll === "paper"}>
+          <DialogContentText id="scroll-dialog-description" tabIndex={-1}>
+            {text}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -54,12 +43,7 @@ Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`,
         </DialogActions>
       </Dialog>
     </div>
-
-
-
-
-
-  )
+  );
 }
 
-export default Dialog
+export default Dialog;

@@ -30,10 +30,12 @@
     overflow-x: scroll;
     width: 100%;
   }
+
+
   
   .card {
     flex-shrink: 0;
-    width: 60vw;
+    width: 75vw;
     height: 200px;
     border-radius: 10px;
     margin-left: 10px;
@@ -41,19 +43,16 @@
     background-repeat: no-repeat;
     background-position: center center;
   }
-
-
-
-
-  .arrow-right {
-    width: 0; 
-    height: 0; 
-    border-top: 25vw solid transparent;
-
-    border-bottom: 25vw solid transparent;
-    
-    border-left: 25vh solid #eaeaeabe;
-    position: fixed;
-    top: 45vh;
-    
+  .card :first-child {
+    margin-left: 0px;
   }
+
+
+
+  .panels { 
+    position:relative;
+    height:100%;
+    min-height:100%;
+    width:100%;
+    z-index:1000;
+}

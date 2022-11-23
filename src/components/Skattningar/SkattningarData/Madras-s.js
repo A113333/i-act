@@ -7,6 +7,7 @@ const madras = {
   credits:
     "© Svanborg, P. & Åsberg, M. (1994). A new self-rating scale for depression and anxiety states based om the comprehensive psyckopathological rating scale. ACTA Psychiatrica Scandinavia, 89(1), 21–28",
   startZero: true,
+  maxScore: 54,
   questionArr: [
     {
       question:

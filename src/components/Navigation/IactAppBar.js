@@ -36,22 +36,16 @@ export default function ButtonAppBar() {
           elevation={0}
           sx={{
             backgroundColor: theme.palette.primary.main,
-            height: "50px",
+
             top: 0,
-            borderBottom: smallscreen
-              ? `1px solid ${theme.palette.customGrey.dark}`
-              : null,
-            borderTop: smallscreen
-              ? null
-              : `1px solid ${theme.palette.customGrey.dark} `,
+
             /*            maxWidth: "1200px",
             width: smallscreen ? "90%" : "100%",
             left: "50%",
             transform: "translate(-50%, 0)", */
-            pb: 3,
           }}
         >
-          <Toolbar>
+          <Toolbar variant="dense">
             <IconButton
               size="large"
               edge="start"
@@ -121,7 +115,7 @@ export default function ButtonAppBar() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Toolbar />
+        <Toolbar variant="dense" />
       </Box>
     </>
   );

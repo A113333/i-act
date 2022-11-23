@@ -2,12 +2,11 @@ import { IconButton, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import React from "react";
 import Stepper from "./Stepper";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 import useTheme from "@mui/material/styles/useTheme";
 
-function ToolsAppBar({ step, setStep, numberOfSteps, closeLink }) {
+function ToolsAppBar({ step, numberOfSteps, closeLink, isResultsPage }) {
   const theme = useTheme();
   const goBack = () => {
     console.log("going back");
@@ -45,7 +44,7 @@ function ToolsAppBar({ step, setStep, numberOfSteps, closeLink }) {
               fontSize: "0.7rem",
             }}
           >
-            {step === 9
+            {isResultsPage
               ? "Bra jobbat!"
               : "Steg " + step + " av " + numberOfSteps}
           </Typography>

@@ -1,14 +1,13 @@
 import React from "react";
-import VerktygContainer from "./Saker/SmattOchGott/VerktygContainer";
+import VerktygContainer from "../Verktyg/VerktygContainer";
 import { CategoryScale } from "chart.js";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import useTheme from "@mui/material/styles/useTheme";
 import { Button, Typography } from "@mui/material";
-import AppBar from "./IactAppBar";
+import AppBar from "../Navigation/IactAppBar";
 import { Box } from "@mui/system";
-import { Link } from "react-router-dom";
-import BackToVerktygButton from "./Saker/SmattOchGott/BackToVerktygButton";
+import BackToVerktygButton from "../Buttons/BackToVerktygButton";
 
 function SkattningarResultat({ titel, name, max, label }) {
   let resultsArr = localStorage.getItem(name);

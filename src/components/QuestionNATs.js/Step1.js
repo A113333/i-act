@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
-import MySlider from "../Saker/MySlider";
+import MySlider from "../inputs/MySlider";
 
 function Step1({ formData, setFormData, setIsDone }) {
   useEffect(() => {

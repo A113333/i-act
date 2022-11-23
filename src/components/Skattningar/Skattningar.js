@@ -1,13 +1,21 @@
-import { Button, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import React, { useState } from "react";
-import ToolsAppBar from "./VerktygAppBar";
-import VerktygKnapp from "./SmattOchGott/VerktygKnapp";
+import ToolsAppBar from "../Navigation/VerktygAppBar";
+import VerktygKnapp from "../Buttons/VerktygKnapp";
 import useTheme from "@mui/material/styles/useTheme";
-import VerktygContainer from "./SmattOchGott/VerktygContainer";
+import VerktygContainer from "../Verktyg/VerktygContainer";
 import { Link } from "react-router-dom";
 import RadioButtonFromArray from "../inputs/RadioButtonFromArray";
+import BackToVerktygButton from "../Buttons/BackToVerktygButton";
 
-function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
+function Skattningar({
+  instruktioner,
+  questionArr,
+  startZero,
+  scoring,
+  name,
+  maxScore,
+}) {
   const [page, setPage] = useState(0);
   const [isDone, setGotAnwser] = useState(false);
   const [anwserArr, setanwserArr] = useState([]);
@@ -19,6 +27,8 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
   let localSave = localStorage.getItem(name)
     ? JSON.parse(localStorage.getItem(name))
     : [];
+
+  console.log(questionArr);
 
   const onClickForward = () => {
     // om man clickar på knappen för "visa resultat", dvs på sista frågan
@@ -83,9 +93,7 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
 
         <Typography variant="body1" sx={{ opacity: "50%", fontSize: "0.8rem" }}>
           {/*  Kollar om man är på sista steget, och byter titel därefter */}
-          {page !== questionArr.length
-            ? instruktioner
-            : "Här nedan kan du se ditt resultat"}
+          {page !== questionArr.length ? instruktioner : "Ditt resultat blev"}
         </Typography>
         {/* om vi inte är på sista sida: visa fråga, annars visa resultat */}
         {page !== questionArr.length ? (
@@ -102,9 +110,11 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
         ) : (
           <>
             {/* Det som visas om man är på resultatsidan */}
+            <Typography variant="h5">
+              {sumResults} av {maxScore}
+            </Typography>
             <Typography>
-              Du fick {sumResults} poäng, vilket indikerar{" "}
-              {getScoreInName(sumResults)}
+              Det pekar mot att du kan ha {getScoreInName(sumResults)}
             </Typography>
             <Typography sx={{ pt: 10 }}>
               Vill du se hur ditt mående har förändrats över tid?
@@ -112,9 +122,15 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
             <Button component={Link} to="resultat" variant="outlined">
               Klicka här
             </Button>
+
+            <Box>
+              <Typography sx={{ pt: 10 }}>
+                Eller återvänd till din sida
+              </Typography>
+              <BackToVerktygButton />
+            </Box>
           </>
         )}
-
         <VerktygKnapp
           page={page}
           setPage={setPage}
@@ -126,5 +142,4 @@ function Skattningar({ instruktioner, questionArr, startZero, scoring, name }) {
     </>
   );
 }
-
 export default Skattningar;

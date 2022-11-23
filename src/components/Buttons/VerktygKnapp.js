@@ -3,7 +3,14 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 
-function VerktygKnapp({ page, setPage, lastPage, isDone, onClickForward }) {
+function VerktygKnapp({
+  page,
+  setPage,
+  lastPage,
+  isDone,
+  onClickForward,
+  isResultsPage,
+}) {
   const navigate = useNavigate();
   const onClickBack = () => {
     page === 0 ? navigate("/verktyg") : setPage(page - 1);
@@ -15,6 +22,7 @@ function VerktygKnapp({ page, setPage, lastPage, isDone, onClickForward }) {
     window.scrollTo(0, 0);
     console.log("default");
   };
+
   return (
     <>
       <IconButton
@@ -30,7 +38,7 @@ function VerktygKnapp({ page, setPage, lastPage, isDone, onClickForward }) {
         <ArrowBackIosIcon />
       </IconButton>
 
-      {page === lastPage ? (
+      {isResultsPage ? (
         <Button
           variant="contained"
           component={Link}
@@ -48,7 +56,6 @@ function VerktygKnapp({ page, setPage, lastPage, isDone, onClickForward }) {
           sx={{ position: "absolute", right: 25, bottom: 10, mt: 5 }}
           disabled={!isDone}
         >
-          {" "}
           {page === lastPage - 1 ? "Visa resultat" : "Nästa"}
         </Button>
       )}

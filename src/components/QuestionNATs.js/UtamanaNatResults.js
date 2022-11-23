@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { Divider, Typography } from "@mui/material";
-import { StayPrimaryLandscape } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import BlackBoxWithText from "../Saker/SmattOchGott/BlackBoxWithText";
-import { json } from "react-router-dom";
 
 function UtamanaNatResults({ setFormData, setIsDone, formData }) {
   const arr = {
@@ -16,15 +14,11 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
 
   let LocalUtmanaNatArray = localStorage.getItem("utmanaNat")
     ? JSON.parse(localStorage.getItem("utmanaNat"))
-    : { utmanaNat: [] };
+    : [];
 
   useEffect(() => {
-    console.log("LocalUtmanaNatsArray");
-    console.log(LocalUtmanaNatArray);
-    //console.log(localStorage.getItem(utmanaNat));
     LocalUtmanaNatArray.push(formData);
     localStorage.setItem("utmanaNat", JSON.stringify(LocalUtmanaNatArray));
-    console.log("i fire once");
   }, []);
 
   const kanslorUnder = [];
@@ -38,6 +32,8 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
       }
     });
   });
+  console.log("typeof ");
+  console.log(formData.tankeFallor.length);
 
   return (
     <>
@@ -69,14 +65,13 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
             mb: 1,
           }}
         >
-          Innan övningen trodde du på din tanken till:{" "}
-        </Typography>{" "}
+          Innan övningen trodde du på din tanken till:
+        </Typography>
         <Typography
           sx={{
             pb: customPb,
           }}
         >
-          {" "}
           {formData.troPaTanke} %
         </Typography>
         <Typography
@@ -108,7 +103,6 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text={"Dina bevis emot din tanke:"} />
           <ul>
-            {" "}
             {formData.bevisMotTanke?.map((item, index) => (
               <li>
                 <Typography sx={{ pb: 1 }}> {item}</Typography>
@@ -116,18 +110,20 @@ function UtamanaNatResults({ setFormData, setIsDone, formData }) {
             ))}
           </ul>
         </Box>{" "}
-        {formData.tankeFallor.lenght > 0 ? (
+        {formData.tankeFallor.length > 0 ? (
           <Box sx={{ pb: customPb }}>
             <BlackBoxWithText text={"Du använde följande tankefällor"} />
             <ul>
-              {formData.tankeFallor.map((item, index) => (
+              {formData.tankeFallor?.map((item, index) => (
                 <li>
                   <Typography>{item.name}</Typography>
                 </li>
               ))}
             </ul>
           </Box>
-        ) : null}
+        ) : (
+          <p>lala</p>
+        )}
         <Box sx={{ pb: customPb }}>
           <BlackBoxWithText text="Din mer balanseradetanke:" />
           <Typography>{formData.balanseradTanke}</Typography>

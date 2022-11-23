@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 
 import { Typography } from "@mui/material";
 
-import Feelings from "../Saker/Feelings";
+import Feelings from "../Verktyg/Feelings";
 
 function Step2({ formData, setFormData, setIsDone }) {
   useEffect(() => {

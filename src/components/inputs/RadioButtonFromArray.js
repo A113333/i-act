@@ -52,7 +52,6 @@ function RadioButtonFromArray({
                 "& .MuiFormControlLabel-label": {
                   textAlign: "left",
                   width: "100%",
-                  minWidth: "50vw",
                 },
                 pt: 1,
                 pb: 1,

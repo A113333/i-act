@@ -4,7 +4,7 @@ import MobileStepper from "@mui/material/MobileStepper";
 import Button from "@mui/material/Button";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
-import { Box } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
@@ -13,7 +13,7 @@ function SocialProof() {
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const smallScreen = useMediaQuery("(min-width:332px)");
+  const smallScreen = useMediaQuery("(min-width:385px)");
 
   const steps = [
     {
@@ -54,8 +54,8 @@ function SocialProof() {
         width: "80%",
         margin: "auto",
         mt: 10,
-        backgroundColor: "#fff",
-        p: 3,
+        pt: 5,
+        pb: 10,
       }}
     >
       <Box
@@ -67,7 +67,7 @@ function SocialProof() {
           variant="body1"
           sx={{
             fontSize: "100px",
-            color: "secondary.main",
+            color: "primary.main",
             fontFamily: "Roboto Serif",
             lineHeight: "80px",
           }}
@@ -101,24 +101,20 @@ function SocialProof() {
             pl: 2,
             textAlign: "center",
             justifyContent: "center",
-
-            "&.MuiPaper-root-MuiMobileStepper-root": {
-              backgroundColor: "#fff",
-            },
+            mt: smallScreen ? 0 : 8,
           }}
         >
           <Typography
             sx={{
               textAlign: "center",
               opacity: "50%",
-
-              mt: smallScreen ? 0 : 8,
             }}
           >
             {steps[activeStep].label}
           </Typography>
         </Paper>
       </Box>
+
       <MobileStepper
         variant="dots"
         steps={6}
@@ -129,6 +125,7 @@ function SocialProof() {
           flexGrow: 1,
           margin: "auto",
           mt: smallScreen ? 0 : 3,
+          bgcolor: "transparent",
         }}
         nextButton={
           <Button size="small" onClick={handleNext} disabled={activeStep === 5}>

@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 import React from "react";
-import MindTraps from "../Saker/MindTraps";
+import MindTraps from "../Verktyg/MindTraps";
 
 function Step5({ formData, setFormData, setIsDone }) {
   setIsDone(true);

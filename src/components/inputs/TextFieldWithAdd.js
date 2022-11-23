@@ -121,6 +121,7 @@ function TextFieldWithAdd({
         name={inputName}
         onClick={() => addFormFields()}
         aria-label="add"
+        sx={{ mb: 3 }}
       >
         Lägg till
       </Button>

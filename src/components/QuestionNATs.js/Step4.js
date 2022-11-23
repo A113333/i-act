@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import TextFieldWithAdd from "../Saker/TextFieldWithAdd";
+import TextFieldWithAdd from "../inputs/TextFieldWithAdd";
 
 function Step4({ setFormData, setIsDone, formData }) {
   return (
@@ -18,6 +18,9 @@ function Step4({ setFormData, setIsDone, formData }) {
         questionText={"Vilka bevis har du för din tanke?"}
         label={"bevis"}
       />
+      <Box>
+        <Typography></Typography>
+      </Box>
     </>
   );
 }

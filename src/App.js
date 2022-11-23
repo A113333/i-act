@@ -7,12 +7,15 @@ import UtmanaNAT from "./components/Pages/UtmanaNat";
 import Verktyg from "./components/Pages/Verktyg";
 import ViewNatsResults from "./components/QuestionNATs.js/ViewNatsResults";
 import NotFound from "./components/Pages/NotFound";
-import Skattningar from "./components/Saker/Skattningar";
-import SkattningarResultat from "./components/SkattningarResultat";
-import MADRAS from "./components/SkattningarData/Madras-s";
-import GAD7 from "./components/SkattningarData/GAD7";
+import Skattningar from "./components/Skattningar/Skattningar";
+import SkattningarResultat from "./components/Skattningar/SkattningarResultat";
+import MADRAS from "./components//Skattningar/SkattningarData/Madras-s";
+import GAD7 from "./components/Skattningar/SkattningarData/GAD7";
+import LSASSR from "./components/Skattningar/SkattningarData/LSAS-SR";
 import UserPage from "./components/Pages/UserPage";
 import Sorkk from "./components/Övningar/SORKK/Sorkk";
+import VerktygTest from "./components/Pages/VerktygTest";
+import SorkkAllResults from "./components/Övningar/SORKK/SorkAllResults";
 
 const theme = createTheme({
   palette: {
@@ -111,6 +114,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/verktyg" element={<Verktyg />} />
+              <Route path="/verktygtest" element={<VerktygTest />} />
               <Route path="/anvandare" element={<UserPage />} />
 
               {/*  ROUTES FÖR NAT ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
@@ -130,7 +134,10 @@ function App() {
               {/*  ROUTES FÖR SORKK ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
               <Route path="/verktyg/sorkk/:sida" element={<Sorkk />} />
               <Route path="/verktyg/sork/lasmer" element={<Sorkk />} />
-              <Route path="/verktyg/sorkk/visa" element={<Sorkk />} />
+              <Route
+                path="/verktyg/sorkk/resultat"
+                element={<SorkkAllResults />}
+              />
 
               {/* GAD/ resultat och fylla i */}
               <Route
@@ -145,6 +152,23 @@ function App() {
                     name={"GAD7"}
                     max={21}
                     label={"Ångestsymptom"}
+                  />
+                }
+              />
+
+              {/* LSAS-SR  resultat och fylla i */}
+              <Route
+                path="/verktyg/skattning/LSAS-SR"
+                element={<Skattningar {...LSASSR} />}
+              />
+              <Route
+                path="/verktyg/skattning/LSAS-SR/resultat"
+                element={
+                  <SkattningarResultat
+                    titel={"Dina skattningar för social fobi"}
+                    name={"LSAS-SR"}
+                    max={144}
+                    label={"Symptom på social ångest"}
                   />
                 }
               />

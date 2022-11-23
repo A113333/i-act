@@ -1,14 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import BlackBoxWithText from "../../Saker/SmattOchGott/BlackBoxWithText";
+import IactAppBar from "../../Navigation/IactAppBar";
 
-function SorkkResults(formData) {
+function SorkkResults({ formData, questionArr }) {
   const customPb = 5;
-  console.log(formData);
+
   return (
     <>
-      <Typography variant="h6" sx={{ pb: 3 }}>
+      <IactAppBar />
+      <Typography variant="h6" sx={{ pb: 3, pt: 3 }}>
         Samanställning av övningen
       </Typography>
 
@@ -22,29 +23,25 @@ function SorkkResults(formData) {
           width: { xs: "100%", sm: "55%" },
         }}
       >
-        <BlackBoxWithText text={"Situation:"} />
-        <Typography
-          sx={{
-            pb: customPb,
-          }}
-        >
-          "{formData.situation}"
-        </Typography>
-        <Typography
-          sx={{
-            opacity: "50%",
-            mb: 1,
-          }}
-        >
-          Tankar, känslor och kroppsupplevelser
-        </Typography>
-        <Typography
-          sx={{
-            pb: customPb,
-          }}
-        >
-          {formData.organism}
-        </Typography>
+        {questionArr.map((item, index) => (
+          <>
+            <Typography
+              sx={{
+                opacity: "50%",
+                mb: 1,
+              }}
+            >
+              {item.question}
+            </Typography>
+            <Typography
+              sx={{
+                pb: customPb,
+              }}
+            >
+              {formData[item.name]}
+            </Typography>
+          </>
+        ))}
       </Box>
     </>
   );

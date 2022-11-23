@@ -3,6 +3,7 @@ const GAD7 = {
 
   instruktioner:
     "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
+  maxScore: 21,
   questionArr: [
     {
       question: "Känt dig nervös, ängslig eller väldigt stressad",

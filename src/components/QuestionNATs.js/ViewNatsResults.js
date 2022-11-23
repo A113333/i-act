@@ -5,15 +5,15 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import BlackBoxWithText from "../Saker/SmattOchGott/BlackBoxWithText";
-import AppBar from "../IactAppBar";
+import AppBar from "../Navigation/IactAppBar";
 
 import useLocalStorageState from "use-local-storage-state";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
-import VerktygContainer from "../Saker/SmattOchGott/VerktygContainer";
-import RemoveButton from "../Saker/SmattOchGott/RemoveButton";
+import VerktygContainer from "../Verktyg/VerktygContainer";
+import RemoveButton from "../Buttons/RemoveButton";
 import HeadlineWithDivider from "../Saker/HeadlineWithDivider";
-import BackToVerktygButton from "../Saker/SmattOchGott/BackToVerktygButton";
+import BackToVerktygButton from "../Buttons/BackToVerktygButton";
 
 function ViewNatsResults() {
   const [utmanaNat, setUtmanaNat] = useLocalStorageState("utmanaNat", {
@@ -35,13 +35,15 @@ function ViewNatsResults() {
     //console.log(item);
   };
 
+  const reversedArr = utmanaNat.reverse();
+
   return (
     <>
       <AppBar />
       <VerktygContainer>
         <HeadlineWithDivider>
           {" "}
-          {utmanaNat.lenght === 0
+          {utmanaNat.length > 0
             ? "Dina sparade tankeutmaningar"
             : "Du verkar inte ha genomfört några övningar"}
         </HeadlineWithDivider>
@@ -49,11 +51,19 @@ function ViewNatsResults() {
         {utmanaNat.lenght === 0 || utmanaNat === undefined ? (
           <Typography> Inga övningar sparade :( </Typography>
         ) : (
-          utmanaNat.map((item, index) => {
+          reversedArr.map((item, index) => {
             return (
               <>
-                {" "}
-                <Accordion sx={{ mx: 1, mb: 3 }} elevation={0}>
+                <Accordion
+                  sx={{
+                    mx: 1,
+                    mb: 2,
+                    "&:before": {
+                      display: "none",
+                    },
+                  }}
+                  elevation={0}
+                >
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"

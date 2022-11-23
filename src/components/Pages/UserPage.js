@@ -1,7 +1,7 @@
 import { Divider, IconButton, Typography } from "@mui/material";
 import React, { useState } from "react";
-import IactAppbar from "../IactAppBar.js";
-import VerktygContainer from "../Saker/SmattOchGott/VerktygContainer.js";
+import IactAppbar from "../Navigation/IactAppBar.js";
+import VerktygContainer from "../Verktyg/VerktygContainer.js";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import FlervalsDialog from "../Saker/SmattOchGott/FlervalsDialog.js";

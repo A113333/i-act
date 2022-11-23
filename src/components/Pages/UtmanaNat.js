@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Typography, Button } from "@mui/material";
-import Stack from "@mui/material/Stack";
 import Step1 from "../QuestionNATs.js/Step1";
 import Step2 from "../QuestionNATs.js/Step2";
 import Step3 from "../QuestionNATs.js/Step3";
@@ -11,16 +10,13 @@ import Step6 from "../QuestionNATs.js/Step6";
 import Step7 from "../QuestionNATs.js/Step7";
 import Step8 from "../QuestionNATs.js/Step8";
 import UtamanaNatResults from "../QuestionNATs.js/UtamanaNatResults";
-import Stepper from "../Saker/Stepper";
-// import useMediaQuery from "@mui/material/useMediaQuery";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import CloseIcon from "@mui/icons-material/Close";
-import IconButton from "@mui/material/IconButton";
+import VerktygAppbar from "../Navigation/VerktygAppBar";
 import { Link } from "react-router-dom";
 import Step4Part2 from "../QuestionNATs.js/Step4Part2";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useTheme from "@mui/material/styles/useTheme";
+import VerktygKnapp from "../Buttons/VerktygKnapp";
 
 function UtmanaNat() {
   //const smallscreen = useMediaQuery("(min-width:600px)");
@@ -37,7 +33,7 @@ function UtmanaNat() {
   console.log("page");
   console.log(page);
 
-  const Next = () => {
+  const next = () => {
     navigate(
       `/verktyg/UtmanaNegativaAutomatiskaTankar/${(page + 1).toString()}`
     );
@@ -297,101 +293,41 @@ function UtmanaNat() {
 
   return (
     <>
-      <Box>
-        <Stepper numberOfSteps={10} step={page + 1} isDone={false} />
-        <Box
-          sx={{
-            pt: 1,
-            position: "sticky",
-            top: 0,
-            zIndex: 100,
-            bgcolor: "white",
-          }}
-        >
-          {/*  <Typography variant="h6" sx={{ textAlign: "center", color: "#247ba0" }}>
-          {" "}
-          Utmana dina tankar{" "}
-        </Typography>
-    */}
-
-          <Stack alignItems="center" direction="row">
-            {page === 9 || page === 0 ? (
-              <IconButton
-                aria-label="tillbaka"
-                sx={{ opacity: "25%" }}
-                disabled
-              >
-                <ArrowBackIcon color="primary" fontSize="small" />
-              </IconButton>
-            ) : (
-              <IconButton aria-label="tillbaka" onClick={() => goBack()}>
-                <ArrowBackIcon color="primary" fontSize="small" />
-              </IconButton>
-            )}
-
-            <Typography
-              sx={{
-                minWidth: "30px",
-                flex: 1,
-                textAlign: "center",
-                fontSize: "0.7rem",
-              }}
-            >
-              {page === 9 ? "Bra jobbat!" : page + 1 + "/ 10"}
+      <VerktygAppbar
+        step={page + 1}
+        numberOfSteps={10}
+        isResultsPage={page + 1 === 10}
+      />
+      <Box
+        sx={{
+          backgroundColor: theme.palette.customGrey.main,
+          px: { xs: 2, sm: 5 },
+          pt: 7,
+          borderRadius: 3,
+          mt: 1,
+          position: "relative",
+          textAlign: "center",
+          maxWidth: "1200px",
+          m: "auto",
+          minHeight: `calc(100vh - 65px)`,
+        }}
+      >
+        <Box sx={{ pb: 3 }}>
+          {page > 0 && page !== 9 ? (
+            <Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
+              "{formData.tanke}"
             </Typography>
+          ) : null}
+          {conditionalComponent()}
 
-            <IconButton aria-label="tillbaka" onClick={() => close()}>
-              <Link to="/verktyg">
-                <CloseIcon color="primary" fontSize="small" />
-              </Link>
-            </IconButton>
-          </Stack>
-        </Box>
-
-        <Box
-          sx={{
-            backgroundColor: theme.palette.customGrey.main,
-            px: { xs: 2, sm: 5 },
-            pt: 7,
-            borderRadius: 3,
-            mt: 1,
-            position: "relative",
-            textAlign: "center",
-            maxWidth: "1200px",
-            m: "auto",
-            minHeight: `calc(100vh - 65px)`,
-          }}
-        >
-          <Box sx={{ pb: 3 }}>
-            {page > 0 && page !== 9 ? (
-              <Typography sx={{ fontSize: "0.8rem", fontStyle: "italic" }}>
-                "{formData.tanke}"
-              </Typography>
-            ) : null}
-            {conditionalComponent()}
-            {page === 9 ? (
-              <Button
-                variant="contained"
-                fullWidth
-                component={Link}
-                to="/verktyg"
-                sx={{ position: "absolute", right: "0", bottom: "0" }}
-              >
-                Avsluta
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                disabled={!isDone}
-                fullWidth
-                onClick={() => Next()}
-                sx={{ position: "absolute", right: "0", bottom: "0", mt: 5 }}
-              >
-                {" "}
-                {page === 9 ? "Visa resultat" : "Nästa"}
-              </Button>
-            )}
-          </Box>
+          <VerktygKnapp
+            page={page}
+            setPage={setPage}
+            lastPage={9}
+            isDone={isDone}
+            onClickForward={next}
+            isResultsPage={page + 1 === 10}
+          />
         </Box>
       </Box>
     </>

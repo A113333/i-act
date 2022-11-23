@@ -1,10 +1,8 @@
 import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import HeroSection from "../Landingpage/HeroSection";
-import AppBar from "../IactAppBar";
-import ThereBoxes from "../Landingpage/ThereBoxes";
-import { Container } from "@mui/material";
-import FreeTrial from "../Landingpage/FreeTrial";
+import ThereBoxes from "../Landingpage/TwoBoxes";
+import { Box, Container, Divider } from "@mui/material";
 import HowIactWorks from "../Landingpage/HowIactWorks";
 import Faq from "../Landingpage/Faq";
 import SocialProof from "../Landingpage/SocialProof";
@@ -16,7 +14,6 @@ function Home() {
       {" "}
       <CssBaseline />
       <AppBarLandingPage />
-      <HeroSection />
       <Container
         sx={{
           px: { xs: 0, sm: 5 },
@@ -25,13 +22,22 @@ function Home() {
           m: "auto",
         }}
       >
+        <HeroSection />
         <ThereBoxes />
 
         <HowIactWorks />
-
-        <SocialProof />
-
-        <Faq />
+        <Box
+          sx={{
+            backgroundColor: "#ffffff",
+            borderRadius: "18px",
+            pb: 1,
+            mb: 5,
+          }}
+        >
+          <SocialProof />
+          <Divider />
+          <Faq />
+        </Box>
       </Container>
     </>
   );
