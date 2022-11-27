@@ -115,7 +115,13 @@ export default function ButtonAppBar() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        <Toolbar variant="dense" />
+        <Toolbar
+          variant="dense"
+          sx={{
+            position: "absolute",
+            top: 0,
+          }}
+        />
       </Box>
     </>
   );

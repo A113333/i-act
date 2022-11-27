@@ -4,7 +4,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
-  ListItemSecondaryAction,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
@@ -15,34 +14,16 @@ import useLocalStorageState from "use-local-storage-state";
 import RemoveButton from "../../Buttons/RemoveButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import BackToVerktygButton from "../../Buttons/BackToVerktygButton";
+import { useParams } from "react-router-dom";
 
-function SorkkAllResults({ formData, questionArr }) {
-  const [resultsArr, setresultsArr] = useLocalStorageState("SORKK", {
-    defaultValue: [
-      {
-        title: "Jag var påväg till affären1",
-        date: new Date().toLocaleDateString(),
-        anwsers: [
-          { question: "Vad, när hur, med vem?", anwser: "response" },
-          { question: "Vad, när hur, med vem?1", anwser: "organism" },
-          { question: "Vad, när hur, med vem?12", anwser: "response" },
-          { question: "Vad, när hur, med vem?3", anwser: "k1" },
-          { question: "Vad, när hur, med vem?5", anwser: "k2" },
-        ],
-      },
+function TextOvningAllaResults() {
+  const params = useParams();
+  const ovningName = params.name;
 
-      {
-        title: "Jag var påväg till affären2",
-        date: new Date().toLocaleDateString(),
-        anwsers: [
-          { question: "Vad, när hur, med vem?", anwser: "response" },
-          { question: "Vad, när hur, med vem?1", anwser: "organism" },
-          { question: "Vad, när hur, med vem?12", anwser: "response" },
-          { question: "Vad, när hur, med vem?3", anwser: "k1" },
-          { question: "Vad, när hur, med vem?5", anwser: "k2" },
-        ],
-      },
-    ].reverse(),
+  console.log(ovningName);
+
+  const [resultsArr, setresultsArr] = useLocalStorageState(ovningName, {
+    defaultValue: [].reverse(),
   });
 
   const removeItem = (item) => {
@@ -54,7 +35,7 @@ function SorkkAllResults({ formData, questionArr }) {
     setresultsArr(resultArrHere);
     //console.log(item);
   };
-
+  console.log(resultsArr);
   return (
     <>
       <IactAppBar />
@@ -70,26 +51,32 @@ function SorkkAllResults({ formData, questionArr }) {
             width: "100%",
           }}
         >
-          {resultsArr.map((item, index) => (
+          {resultsArr.reverse().map((item, index) => (
             <>
               <Accordion
-                elevation={0}
+                key={item.id ? item.id : index}
                 sx={{
                   mx: 1,
                   mb: 2,
                   "&:before": {
                     display: "none",
                   },
-                  ":hover": {
-                    //transform: "scale(1.02)",
-                    boxShadow: 1,
+                  "&.MuiAccordionSummary-root:hover": {
+                    backgroundColor: "#356da5",
                   },
                 }}
+                elevation={0}
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
+                  sx={{
+                    ":hover": {
+                      //transform: "scale(1.02)",
+                      boxShadow: 1,
+                    },
+                  }}
                 >
                   <RemoveButton
                     onClick={() => removeItem(index)}
@@ -99,7 +86,7 @@ function SorkkAllResults({ formData, questionArr }) {
                     {item.date}
                   </Typography>
                   <Typography inline sx={{ pt: 0.7 }}>
-                    {item.title}
+                    {item.anwsers[0].anwser}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -145,4 +132,4 @@ function SorkkAllResults({ formData, questionArr }) {
   );
 }
 
-export default SorkkAllResults;
+export default TextOvningAllaResults;

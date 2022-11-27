@@ -51,7 +51,7 @@ export default function ButtonAppBar() {
               <PersonOutlineRoundedIcon />
             </IconButton> */}
 
-            <Box sx={{ margin: "auto" }}>
+            <Box sx={{ m: "auto", pl: "100px" }}>
               <Button
                 component={Link}
                 size="large"
@@ -59,7 +59,10 @@ export default function ButtonAppBar() {
                 sx={{
                   fontSize: "1.5rem",
                 }}
-              ></Button>
+                color="secondary"
+              >
+                i-act
+              </Button>
             </Box>
 
             <Button
@@ -80,7 +83,7 @@ export default function ButtonAppBar() {
               color="inherit"
               aria-label="användarsida"
               component={Link}
-              to="/anvandare"
+              to="/kontaktaoss"
               sx={{ fontWeight: "400" }}
             >
               kontakt

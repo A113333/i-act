@@ -14,6 +14,7 @@ function VerktygContainer(props) {
         textAlign: "left",
         maxWidth: "800px",
         m: "auto",
+        pt: "50px",
         mt: 3,
         minHeight: `calc(100vh - 65px)`,
       }}

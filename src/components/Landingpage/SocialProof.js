@@ -19,13 +19,12 @@ function SocialProof() {
     {
       label: "Alexander Frank, Kalmar",
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-      ad minim veniam. `,
+      eiusmod tempor incad minim veniam. `,
     },
     {
       label: "Alexander Nilsson, Kalmar",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
+        "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
     },
     {
       label: "Alexander Karl-Frank, Kalmar",

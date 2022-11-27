@@ -72,12 +72,10 @@ function Sorkk() {
         anwsers: [],
       };
       sorkArr.forEach((item, index) => {
-        if (item.name) {
-          svar.anwsers.push({
-            question: item.question,
-            anwser: sorkData[item.name],
-          });
-        }
+        svar.anwsers.push({
+          question: item.question,
+          anwser: sorkData[item.name],
+        });
       });
 
       localSave.push(svar);

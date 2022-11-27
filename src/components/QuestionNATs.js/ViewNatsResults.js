@@ -35,8 +35,6 @@ function ViewNatsResults() {
     //console.log(item);
   };
 
-  const reversedArr = utmanaNat.reverse();
-
   return (
     <>
       <AppBar />
@@ -51,10 +49,11 @@ function ViewNatsResults() {
         {utmanaNat.lenght === 0 || utmanaNat === undefined ? (
           <Typography> Inga övningar sparade :( </Typography>
         ) : (
-          reversedArr.map((item, index) => {
+          utmanaNat.reverse().map((item, index) => {
             return (
               <>
                 <Accordion
+                  key={item.id ? item.id : index}
                   sx={{
                     mx: 1,
                     mb: 2,

@@ -16,6 +16,7 @@ function TextFieldOvning({ question, value, label, onChange, isMultiLine }) {
         value={value ? value : ""}
         sx={{ width: { xs: "100%", sm: "75%" }, m: "auto" }}
         autoComplete="off"
+        autoFocus
         onChange={onChange}
       />
     </Box>

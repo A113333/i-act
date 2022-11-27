@@ -16,6 +16,9 @@ import UserPage from "./components/Pages/UserPage";
 import Sorkk from "./components/Övningar/SORKK/Sorkk";
 import VerktygTest from "./components/Pages/VerktygTest";
 import SorkkAllResults from "./components/Övningar/SORKK/SorkAllResults";
+import TextOvning from "./components/Övningar/TextOvningar/TextOvning";
+import TextOvningAllaResults from "./components/Övningar/TextOvningar/TextOvningAllaResults";
+import KontaktaOss from "./components/Pages/KontaktaOss";
 
 const theme = createTheme({
   palette: {
@@ -113,6 +116,7 @@ function App() {
           <CssBaseline>
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/kontaktaoss" element={<KontaktaOss />} />
               <Route path="/verktyg" element={<Verktyg />} />
               <Route path="/verktygtest" element={<VerktygTest />} />
               <Route path="/anvandare" element={<UserPage />} />
@@ -137,6 +141,16 @@ function App() {
               <Route
                 path="/verktyg/sorkk/resultat"
                 element={<SorkkAllResults />}
+              />
+
+              {/*  ROUTES FÖR text ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
+              <Route
+                path="/verktyg/ovning/:name/:page"
+                element={<TextOvning />}
+              />
+              <Route
+                path="/verktyg/ovning/resultat/:name"
+                element={<TextOvningAllaResults />}
               />
 
               {/* GAD/ resultat och fylla i */}

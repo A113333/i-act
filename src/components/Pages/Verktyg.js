@@ -64,6 +64,26 @@ function Verktyg() {
       readMoreText:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
+
+    {
+      title: "Test text",
+      desc: "Analyser siatuationer för att bättre förstå dina reaktioner",
+      startLink: "/verktyg/ovning/SORKK/0",
+      readMoreTitle: "Funktionell analys, SORKK",
+      resultsLink: "/verktyg/ovning/resultat/SORKK",
+      readMoreText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+
+    {
+      title: "Test text2",
+      desc: "Analyser siatuationer för att bättre förstå dina reaktioner",
+      startLink: "/verktyg/ovning/STORK/0",
+      readMoreTitle: "Funktionell analys, STORK",
+      resultsLink: "/verktyg/ovning/resultat/STORK",
+      readMoreText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
   ];
 
   return (
@@ -75,6 +95,7 @@ function Verktyg() {
           backgroundColor: theme.palette.customGrey.main,
           minHeight: "100vh",
           maxWidth: "1130px",
+          mt: "65px",
         }}
       >
         <Typography variant="h6" sx={{ opacity: "50%" }}>

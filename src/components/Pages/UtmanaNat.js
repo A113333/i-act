@@ -27,11 +27,6 @@ function UtmanaNat() {
 
   const [page, setPage] = useState(0);
   const [isDone, setIsDone] = useState(false);
-  console.log("pageParms");
-  console.log(sidaParams);
-
-  console.log("page");
-  console.log(page);
 
   const next = () => {
     navigate(
@@ -91,6 +86,7 @@ function UtmanaNat() {
     kanslorEfter: [],
     troPaTankeEfter: "",
     date: new Date().toLocaleDateString(),
+    id: crypto.randomUUID(),
   });
 
   /* 
