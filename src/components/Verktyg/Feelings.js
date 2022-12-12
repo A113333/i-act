@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Box, Tab, Tabs, Chip, Typography } from "@mui/material";
 import useTheme from "@mui/material/styles/useTheme";
 
+// set is done = function för att göra knapp vidare möjlig
+//set FormData: setter funktion där valda känslor
 function Feelings({ setIsDone, setFormData, formData, feelings }) {
   const mql = window.matchMedia("(max-width: 550px)");
   const smallScreen = mql.matches;
@@ -91,6 +93,7 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
     formData.selectedFeelings ? formData.selectedFeelings : new Set()
   );
   const userFeelings = [];
+
   function handleSelectionChanged(id) {
     // treat state as immutable
     // React only does a shallow comparison so we need a new Set
@@ -129,11 +132,7 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
       //  console.log("userFeelings");
       // console.log(userFeelings);
     });
-    setFormData({
-      ...formData,
-      kanslorUnder: userFeelings,
-      selectedFeelings: selected,
-    });
+    setFormData(userFeelings);
 
     if (selected.size > 0) {
       setIsDone(true);

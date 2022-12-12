@@ -18,6 +18,7 @@ function RadioButtonFromArray({
   page,
   startZero,
   anwserArr,
+  nextPage,
 }) {
   const handleChange = (e) => {
     let anwser = {
@@ -30,6 +31,7 @@ function RadioButtonFromArray({
     setselectedValue(e.target.value);
     setGotAnwser(true);
 
+    nextPage();
     console.log("hehe");
   };
 

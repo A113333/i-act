@@ -1,22 +1,29 @@
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import TextFieldOvning from "../../inputs/TextFieldOvning";
 import VerktygContainer from "../../Verktyg/VerktygContainer";
 import VerktygKnapp from "../../Buttons/VerktygKnapp";
 import VerktygAppbar from "../../Navigation/VerktygAppBar";
-import SorkkResults from "./TextOvningResultat";
+import OvningShowResults from "../OvningShowResult";
 import { useParams } from "react-router-dom";
-import TextOvningarData from "./TextOvningarData";
-import { useNavigate } from "react-router-dom";
+import TextOvningarData from "../../Data/TextOvningarData";
+import { useNavigate, useLocation } from "react-router-dom";
+import StartFeelingsButton from "../../Buttons/StartFeelingsButton";
 
-function TextOvning() {
+function TextOvning(props) {
   const params = useParams();
   const ovningName = params.name;
   const pageParam = Number(params.page);
 
+  const location = useLocation();
+  console.log(location);
+
+  const isTest = location.state ? location.state.isTest : false;
+  console.log(isTest, "istest");
+
   const [page, setpage] = useState(pageParam);
-  const [gotAwnser, setgotAwnser] = useState(false);
+  const [gotAwnser, setgotAwnser] = useState(isTest);
   const [isResultsPage, setisResultsPage] = useState(false);
   const [formData, setFormData] = useState(
     TextOvningarData[ovningName].anwserObject
@@ -34,7 +41,6 @@ function TextOvning() {
 
   // Arrayen från ovning data som innehåller alla frågor
   const ovningArr = TextOvningarData[ovningName].questions;
-  console.log(ovningArr);
 
   let localSave = localStorage.getItem(ovningName)
     ? JSON.parse(localStorage.getItem(ovningName))
@@ -46,6 +52,7 @@ function TextOvning() {
   let nrOfPages = ovningArr.length + 1;
 
   const onClickForward = () => {
+    setgotAwnser(isTest ? true : false);
     // om man clickar på knappen för "visa resultat", dvs på sista frågan +3 för att set är asyncron, nrSteps är + 1 och page börjar på 0?
     if (page + 2 === nrOfPages) {
       console.log("reultpage");
@@ -90,11 +97,14 @@ function TextOvning() {
       />
       <VerktygContainer>
         {isResultsPage ? (
-          <SorkkResults formData={formData} questionArr={ovningArr} />
+          <OvningShowResults formData={formData} questionArr={ovningArr} />
         ) : (
           ovningArr.map((item, index) => (
             <>
-              <Box sx={{ display: index === page ? "contents" : "none" }}>
+              <Box
+                key={index}
+                sx={{ display: index === page ? "contents" : "none" }}
+              >
                 <Typography variant="h6"> {item.question} </Typography>
                 <TextFieldOvning
                   key={index.toString()}
@@ -108,15 +118,13 @@ function TextOvning() {
                       ...formData,
                       [item.name]: e.target.value,
                     });
-                    setgotAwnser(true);
                   }}
                   setState={setFormData}
                   state={formData}
                   isMultiLine={true}
                 />
-                <Typography sx={{ fontSize: "0.8rem" }}>
-                  {item.longDesc}
-                </Typography>
+                {item.type === "feelings" ? <StartFeelingsButton /> : null}
+                <Typography sx={{ fontSize: "0.8rem" }}>{item.desc}</Typography>
               </Box>
             </>
           ))

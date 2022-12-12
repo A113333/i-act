@@ -14,7 +14,7 @@ function TextFieldOvning({ question, value, label, onChange, isMultiLine }) {
         id="MinTanke"
         label={label}
         value={value ? value : ""}
-        sx={{ width: { xs: "100%", sm: "75%" }, m: "auto" }}
+        sx={{ width: "100%", m: "auto" }}
         autoComplete="off"
         autoFocus
         onChange={onChange}

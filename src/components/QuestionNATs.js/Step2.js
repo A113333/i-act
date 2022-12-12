@@ -4,6 +4,8 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 
 import Feelings from "../Verktyg/Feelings";
+import MultiChoiceFromArray from "../inputs/MultiChoiceFromArray";
+import SlidersFromArray from "../inputs/SlidersFromArray";
 
 function Step2({ formData, setFormData, setIsDone }) {
   useEffect(() => {
@@ -11,6 +13,13 @@ function Step2({ formData, setFormData, setIsDone }) {
       setIsDone(true);
     }
   }, [formData, setIsDone]);
+
+  const formDataSetter = (data) => {
+    setFormData({
+      ...formData,
+      kanslorUnder: data,
+    });
+  };
 
   return (
     <>
@@ -23,10 +32,14 @@ function Step2({ formData, setFormData, setIsDone }) {
       </Box>
 
       <Feelings
-        setFormData={setFormData}
+        setFormData={formDataSetter}
         formData={formData}
         setIsDone={setIsDone}
       />
+
+      {formData.kanslorUnder.length > 0 && (
+        <SlidersFromArray sliderArr={formData.kanslorUnder} />
+      )}
     </>
   );
 }

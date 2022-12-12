@@ -17,7 +17,7 @@ function Verktyg() {
 
   const skattningar = [
     {
-      title: "Ångest",
+      title: "GAD7",
       desc: "Testa hur din generella ångestnivå är just nu",
       startLink: "/verktyg/skattning/gad7",
       resultsLink: "/verktyg/skattning/gad7/resultat",
@@ -26,7 +26,7 @@ function Verktyg() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
-      title: "Depression",
+      title: "MADRAS",
       desc: "Testa dina depressionsnivåer just nu",
       startLink: "/verktyg/skattning/madras-s",
       resultsLink: "/verktyg/skattning/madras-s/resultat",
@@ -35,7 +35,8 @@ function Verktyg() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
-      title: "Social fobi",
+      title: "LSAS-SR",
+
       desc: "Testa hur mycket symptom du har för social fobi",
       startLink: "/verktyg/skattning/LSAS-SR",
       resultsLink: "/verktyg/skattning/LSAS-SR/resultat",
@@ -76,9 +77,9 @@ function Verktyg() {
     },
 
     {
-      title: "Test text2",
-      desc: "Analyser siatuationer för att bättre förstå dina reaktioner",
-      startLink: "/verktyg/ovning/STORK/0",
+      title: "Test ",
+      desc: "För testning",
+      startLink: "/test",
       readMoreTitle: "Funktionell analys, STORK",
       resultsLink: "/verktyg/ovning/resultat/STORK",
       readMoreText:

@@ -71,10 +71,10 @@ export default function ButtonAppBar() {
               color="inherit"
               aria-label="användarsida"
               component={Link}
-              to="/anvandare"
+              to="/kontaktaoss"
               sx={{ fontWeight: "400" }}
             >
-              om oss
+              kontakt
             </Button>
 
             <Button
@@ -83,10 +83,10 @@ export default function ButtonAppBar() {
               color="inherit"
               aria-label="användarsida"
               component={Link}
-              to="/kontaktaoss"
+              to="/anvandare"
               sx={{ fontWeight: "400" }}
             >
-              kontakt
+              logga in
             </Button>
           </Toolbar>
         </AppBar>

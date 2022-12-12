@@ -19,6 +19,9 @@ import SorkkAllResults from "./components/Övningar/SORKK/SorkAllResults";
 import TextOvning from "./components/Övningar/TextOvningar/TextOvning";
 import TextOvningAllaResults from "./components/Övningar/TextOvningar/TextOvningAllaResults";
 import KontaktaOss from "./components/Pages/KontaktaOss";
+import MultiChoiceFromArray from "./components/inputs/MultiChoiceFromArray";
+import Tester from "./components/Pages/Tester";
+import PickValuesFromList from "./components/Övningar/Varderingar/PickValuesFromList";
 
 const theme = createTheme({
   palette: {
@@ -91,8 +94,9 @@ const theme = createTheme({
     },
     h6: {
       fontFamily: "Comfortaa",
-      fontSize: "1rem",
+      fontSize: "1.15rem",
       fontWeight: "700",
+      mt: 1,
     },
 
     body1: {
@@ -120,6 +124,8 @@ function App() {
               <Route path="/verktyg" element={<Verktyg />} />
               <Route path="/verktygtest" element={<VerktygTest />} />
               <Route path="/anvandare" element={<UserPage />} />
+
+              <Route path="/test" element={<PickValuesFromList />} />
 
               {/*  ROUTES FÖR NAT ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
               <Route

@@ -63,10 +63,12 @@ function ToolsCard({
             variant="text"
             component={Link}
             to={startLink}
-            sx={{
-              width: "50%",
-            }}
+            state={{ isTest: true }}
+            sx={{ ml: 10, mr: 10 }}
           >
+            visa övning
+          </Button>
+          <Button variant="text" component={Link} to={startLink} sx={{ mr: 3 }}>
             starta
           </Button>
         </DialogActions>
@@ -111,6 +113,7 @@ function ToolsCard({
             se sparade
           </Button>
           <Divider orientation="vertical" flexItem />
+
           <Button
             variant="text"
             component={Link}

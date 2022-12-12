@@ -10,9 +10,10 @@ function VerktygKnapp({
   isDone,
   onClickForward,
   isResultsPage,
+  onClickBack,
 }) {
   const navigate = useNavigate();
-  const onClickBack = () => {
+  const onClickBackDefault = () => {
     page === 0 ? navigate("/verktyg") : setPage(page - 1);
     window.scrollTo(0, 0);
   };
@@ -33,7 +34,7 @@ function VerktygKnapp({
           mt: 5,
           color: "primary.main",
         }}
-        onClick={() => onClickBack()}
+        onClick={onClickBack ? onClickBack() : onClickBackDefault()}
       >
         <ArrowBackIosIcon />
       </IconButton>
