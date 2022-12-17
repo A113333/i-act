@@ -109,22 +109,6 @@ function MultiChoiceFromArray({
                       {data.name}
                     </Typography>
 
-                    {nrReq && (
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontSize: "0.7rem",
-                          position: "absolute",
-                          top: 5,
-                          right: 9,
-                          visibility: selected.has(data.id)
-                            ? "visible"
-                            : "hidden",
-                        }}
-                      >
-                        {selected.size}/{nrReq} valda
-                      </Typography>
-                    )}
                     <Typography variant="body2" sx={{ fontSize: "0.7rem" }}>
                       {data.desc}
                     </Typography>

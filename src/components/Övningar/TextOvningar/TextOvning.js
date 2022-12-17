@@ -72,7 +72,7 @@ function TextOvning(props) {
       });
 
       localSave.push(svar);
-      console.log("svar");
+      console.log("svasr");
       console.log(svar);
       localStorage.setItem(ovningName, JSON.stringify(localSave));
     }

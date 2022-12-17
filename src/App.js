@@ -3,15 +3,19 @@ import "./App.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Route, Routes, HashRouter } from "react-router-dom";
 import Home from "./components/Pages/Home";
-import UtmanaNAT from "./components/Pages/UtmanaNat";
+import UtmanaNAT from "./components/Övningar/QuestionNATs.js/UtmanaNatMainPage";
 import Verktyg from "./components/Pages/Verktyg";
-import ViewNatsResults from "./components/QuestionNATs.js/ViewNatsResults";
+import ViewNatsResults from "./components/Övningar/QuestionNATs.js/UtamanaNatResults";
 import NotFound from "./components/Pages/NotFound";
 import Skattningar from "./components/Skattningar/Skattningar";
 import SkattningarResultat from "./components/Skattningar/SkattningarResultat";
-import MADRAS from "./components//Skattningar/SkattningarData/Madras-s";
-import GAD7 from "./components/Skattningar/SkattningarData/GAD7";
-import LSASSR from "./components/Skattningar/SkattningarData/LSAS-SR";
+import {
+  GAD7,
+  MADRAS,
+  LSASSR,
+  PHQ9,
+} from "./components//Skattningar/SkattningarData";
+
 import UserPage from "./components/Pages/UserPage";
 import Sorkk from "./components/Övningar/SORKK/Sorkk";
 import VerktygTest from "./components/Pages/VerktygTest";
@@ -22,6 +26,8 @@ import KontaktaOss from "./components/Pages/KontaktaOss";
 import MultiChoiceFromArray from "./components/inputs/MultiChoiceFromArray";
 import Tester from "./components/Pages/Tester";
 import PickValuesFromList from "./components/Övningar/Varderingar/PickValuesFromList";
+import SkapaOvning from "./components/Övningar/SkapaEgen/SkapaOvning";
+import TankeObservation from "./components/Övningar/TankeObservation";
 
 const theme = createTheme({
   palette: {
@@ -125,7 +131,10 @@ function App() {
               <Route path="/verktygtest" element={<VerktygTest />} />
               <Route path="/anvandare" element={<UserPage />} />
 
-              <Route path="/test" element={<PickValuesFromList />} />
+              <Route
+                path="/verktyg/ovning/skapaegen"
+                element={<SkapaOvning />}
+              />
 
               {/*  ROUTES FÖR NAT ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
               <Route
@@ -159,6 +168,25 @@ function App() {
                 element={<TextOvningAllaResults />}
               />
 
+              {/*  ROUTES FÖR tankeobservation, LASMER OCH RESULTAT SAMANSTÄLLNING */}
+              <Route
+                path="/verktyg/ovning/tankeobservation"
+                element={<TankeObservation />}
+              />
+              <Route
+                path="/verktyg/ovning/resultat/:name"
+                element={<TextOvningAllaResults />}
+              />
+
+              <Route
+                path="/ListaVardingersOrd"
+                element={<PickValuesFromList />}
+              />
+              <Route
+                path="/verktyg/ovning/resultat/:name"
+                element={<TextOvningAllaResults />}
+              />
+
               {/* GAD/ resultat och fylla i */}
               <Route
                 path="/verktyg/skattning/gad7"
@@ -172,6 +200,23 @@ function App() {
                     name={"GAD7"}
                     max={21}
                     label={"Ångestsymptom"}
+                  />
+                }
+              />
+
+              {/* phq9/ resultat och fylla i */}
+              <Route
+                path="/verktyg/skattning/PHQ9"
+                element={<Skattningar {...PHQ9} />}
+              />
+              <Route
+                path="/verktyg/skattning/PHQ9/resultat"
+                element={
+                  <SkattningarResultat
+                    titel={"Dina skattningar för depressionsymptom"}
+                    name={"PHQ-9"}
+                    max={27}
+                    label={"Depressionsymptom"}
                   />
                 }
               />

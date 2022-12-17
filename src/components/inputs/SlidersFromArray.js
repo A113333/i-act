@@ -3,61 +3,48 @@ import Box from "@mui/material/Box";
 import { Slider, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 
-function SlidersFromArray({ formData, setFormData, sliderArr }) {
-  const feelingsArr = [
-    { lable: "Chock", id: 24, type: "rädsla" },
-    { lable: "Hotad", id: 25, type: "rädsla" },
-    { lable: "Skräckslagen", id: 26, type: "rädsla" },
-    { lable: "Undergiven", id: 27, type: "rädsla" },
-  ];
-
-  console.log(sliderArr, "sliderArr");
-
-  const [kansloIntensitet, setkansloIntensitet] = useState([...sliderArr]);
-
+function SlidersFromArray({
+  sliderArr,
+  setSliderArr,
+  question,
+  placeholderText,
+  labelMax,
+  labelMin,
+}) {
   const getIndex = (id) => {
-    const i = kansloIntensitet.findIndex((e) => e.id === id);
+    const i = sliderArr.findIndex((e) => e.id === id);
     return i;
   };
 
-  const addKansloIntensite = ({ id, value, lable }) => {
-    const updatedkansloIntensitet = [...kansloIntensitet];
-    console.log(lable);
+  const addNrValue = ({ id, value }) => {
+    console.log(value, "value");
+    console.log(id, "id");
+    const updatedAnwserArr = [...sliderArr];
     const i = getIndex(id);
-    console.log(i);
 
     if (i === -1) {
-      console.log("körs");
-      updatedkansloIntensitet.push({
-        id: id,
-        value: value,
-        name: lable,
-      });
+      console.log("något blev tokigt");
     } else {
-      updatedkansloIntensitet[i].value = value;
+      updatedAnwserArr[i].value = value;
     }
-
-    setkansloIntensitet(updatedkansloIntensitet);
-    console.log(updatedkansloIntensitet);
-    // console.log(kansloIntensitet);
+    setSliderArr(updatedAnwserArr);
   };
 
   return (
-    <Box sx={{ mb: 10, textAlign: "center" }}>
-      <Typography variant="h6" sx={{ mb: 2, mt: 2 }}>
-        Hur intensiva var dina känslor?
-      </Typography>
-
-      {feelingsArr.length > 0 ? (
-        feelingsArr.map((item, index) => (
+    <Box sx={{ mb: 10, mt: 3, textAlign: "center" }}>
+      {sliderArr.length > 0 ? (
+        <Typography variant="h6"> {question} </Typography>
+      ) : null}
+      {sliderArr.length > 0 ? (
+        sliderArr.map((item, index) => (
           <Box key={`custom-box-${item.id}`} id={`custom-box-${item.id}`}>
-            {" "}
-            <Typography> {item.lable} </Typography>{" "}
+            <Typography> {item.lable} </Typography>
             <Typography sx={{ opacity: "50%" }}>
-              {kansloIntensitet[index].value
-                ? kansloIntensitet[index].value + "/100"
+              {sliderArr[index].value
+                ? sliderArr[index].value +
+                  "/100" /* sliderArr[index].value + "/100" */
                 : "-/100"}
-            </Typography>{" "}
+            </Typography>
             <Stack
               spacing={2}
               direction="row"
@@ -66,8 +53,7 @@ function SlidersFromArray({ formData, setFormData, sliderArr }) {
               justifyContent={"center"}
             >
               <Typography sx={{ fontSize: "0.7rem" }}>
-                {" "}
-                Knappt märkbar{" "}
+                {labelMin ? labelMin : "0"}
               </Typography>
               <Slider
                 defaultValue={50}
@@ -76,24 +62,23 @@ function SlidersFromArray({ formData, setFormData, sliderArr }) {
                 min={0}
                 max={100}
                 key={item.id}
+                id={item.id.toString()}
                 sx={{ width: { xs: "100%", sm: "50%" }, margin: "auto" }}
                 onChange={(e) =>
-                  addKansloIntensite({
+                  addNrValue({
                     value: e.target.value,
                     id: item.id,
-                    lable: item.lable,
                   })
                 }
               />
               <Typography sx={{ fontSize: "0.7rem" }}>
-                {" "}
-                Väldigt stark{" "}
+                {labelMax ? labelMax : "100"}
               </Typography>
             </Stack>
           </Box>
         ))
       ) : (
-        <Typography> Välj en känsla </Typography>
+        <Typography> {placeholderText ? placeholderText : null}</Typography>
       )}
     </Box>
   );

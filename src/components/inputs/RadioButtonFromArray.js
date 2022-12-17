@@ -1,12 +1,10 @@
 import React from "react";
 import {
-  Button,
   Divider,
   FormControl,
   FormControlLabel,
   Radio,
   RadioGroup,
-  Typography,
 } from "@mui/material";
 
 function RadioButtonFromArray({
@@ -18,28 +16,26 @@ function RadioButtonFromArray({
   page,
   startZero,
   anwserArr,
-  nextPage,
 }) {
   const handleChange = (e) => {
     let anwser = {
       question: Number(page),
-      anwser: Number(e.target.value),
+      anwser: Number(e.target.name === "noScore" ? 0 : e.target.value),
     };
+    console.log(e.target);
     const updatedanwserArr = [...anwserArr];
+
     updatedanwserArr[page] = anwser;
     setanwserArr(updatedanwserArr);
     setselectedValue(e.target.value);
     setGotAnwser(true);
-
-    nextPage();
-    console.log("hehe");
   };
 
   return (
     <FormControl>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
-        name="radio-buttons-group"
+        name={questionArr[page].noScore ? "noScore" : "score"}
         onChange={handleChange}
       >
         {questionArr[page].svarsalternativ.map((item, index) => (

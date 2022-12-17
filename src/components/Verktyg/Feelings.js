@@ -6,6 +6,8 @@ import useTheme from "@mui/material/styles/useTheme";
 //set FormData: setter funktion där valda känslor
 function Feelings({ setIsDone, setFormData, formData, feelings }) {
   const mql = window.matchMedia("(max-width: 550px)");
+  const toSmall = window.matchMedia("(max-width: 335px)");
+  const toSmallForThree = toSmall.matches;
   const smallScreen = mql.matches;
   const theme = useTheme();
 
@@ -158,7 +160,7 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
       >
         {value === index && (
           <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
+            <Typography>{children} </Typography>
           </Box>
         )}
       </div>
@@ -177,12 +179,7 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
       <Box
         sx={{
           width: "100%",
-
-          position: "fixed",
-          top: "30vh",
-          left: 0,
           zIndex: 1000,
-          width: "100%",
         }}
       >
         <Box
@@ -210,6 +207,10 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
               },
               "& .MuiTabs-flexContainer": {
                 flexWrap: "wrap",
+                justifyContent: "center",
+              },
+              "& .MuiTab-root": {
+                minWidth: "70px",
               },
             }}
           >
@@ -222,130 +223,129 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
           </Tabs>
         </Box>
 
-        <TabPanel value={value} index={0}>
-          {allFeelings.map((data) => {
-            if (data.type === "sorg") {
-              return (
-                <Chip
-                  color="primary"
-                  variant={selected.has(data.id) ? "contained" : "outlined"}
-                  label={data.lable}
-                  id={`custom-chip-${data.id}`}
-                  onClick={() => {
-                    handleSelectionChanged(data.id);
-                  }}
-                  sx={{ mr: 1, mt: 1 }}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          {allFeelings.map((data) => {
-            if (data.type === "rädsla") {
-              return (
-                <Chip
-                  color="primary"
-                  variant={selected.has(data.id) ? "contained" : "outlined"}
-                  label={data.lable}
-                  id={`custom-chip-${data.id}`}
-                  onClick={() => {
-                    handleSelectionChanged(data.id);
-                  }}
-                  sx={{ mr: 1, mt: 1 }}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </TabPanel>
-
-        <TabPanel value={value} index={2}>
-          {allFeelings.map((data) => {
-            if (data.type === "skam") {
-              return (
-                <Chip
-                  color="primary"
-                  variant={selected.has(data.id) ? "contained" : "outlined"}
-                  label={data.lable}
-                  id={`custom-chip-${data.id}`}
-                  onClick={() => {
-                    handleSelectionChanged(data.id);
-                  }}
-                  sx={{ mr: 1, mt: 1 }}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </TabPanel>
-
-        <TabPanel value={value} index={3}>
-          {allFeelings.map((data) => {
-            if (data.type === "glädje") {
-              return (
-                <Chip
-                  color="primary"
-                  variant={selected.has(data.id) ? "contained" : "outlined"}
-                  label={data.lable}
-                  id={`custom-chip-${data.id}`}
-                  onClick={() => {
-                    handleSelectionChanged(data.id);
-                  }}
-                  sx={{ mr: 1, mt: 1 }}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </TabPanel>
-
-        <TabPanel value={value} index={4}>
-          {allFeelings.map((data) => {
-            if (data.type === "avsky") {
-              return (
-                <Chip
-                  color="primary"
-                  variant={selected.has(data.id) ? "contained" : "outlined"}
-                  label={data.lable}
-                  id={`custom-chip-${data.id}`}
-                  onClick={() => {
-                    handleSelectionChanged(data.id);
-                  }}
-                  sx={{ mr: 1, mt: 1 }}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </TabPanel>
-
-        <TabPanel value={value} index={5}>
-          {allFeelings.map((data) => {
-            if (data.type === "ilska") {
-              return (
-                <Chip
-                  color="primary"
-                  variant={selected.has(data.id) ? "contained" : "outlined"}
-                  label={data.lable}
-                  id={`custom-chip-${data.id}`}
-                  onClick={() => {
-                    handleSelectionChanged(data.id);
-                  }}
-                  sx={{ mr: 1, mt: 1 }}
-                />
-              );
-            } else {
-              return null;
-            }
-          })}
-        </TabPanel>
+        <Box sx={{ textAlign: "center" }}>
+          {" "}
+          <TabPanel value={value} index={0}>
+            {allFeelings.map((data) => {
+              if (data.type === "sorg") {
+                return (
+                  <Chip
+                    color="primary"
+                    variant={selected.has(data.id) ? "contained" : "outlined"}
+                    label={data.lable}
+                    id={`custom-chip-${data.id}`}
+                    onClick={() => {
+                      handleSelectionChanged(data.id);
+                    }}
+                    sx={{ mr: 1, mt: 1 }}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            {allFeelings.map((data) => {
+              if (data.type === "rädsla") {
+                return (
+                  <Chip
+                    color="primary"
+                    variant={selected.has(data.id) ? "contained" : "outlined"}
+                    label={data.lable}
+                    id={`custom-chip-${data.id}`}
+                    onClick={() => {
+                      handleSelectionChanged(data.id);
+                    }}
+                    sx={{ mr: 1, mt: 1 }}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={2}>
+            {allFeelings.map((data) => {
+              if (data.type === "skam") {
+                return (
+                  <Chip
+                    color="primary"
+                    variant={selected.has(data.id) ? "contained" : "outlined"}
+                    label={data.lable}
+                    id={`custom-chip-${data.id}`}
+                    onClick={() => {
+                      handleSelectionChanged(data.id);
+                    }}
+                    sx={{ mr: 1, mt: 1 }}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={3}>
+            {allFeelings.map((data) => {
+              if (data.type === "glädje") {
+                return (
+                  <Chip
+                    color="primary"
+                    variant={selected.has(data.id) ? "contained" : "outlined"}
+                    label={data.lable}
+                    id={`custom-chip-${data.id}`}
+                    onClick={() => {
+                      handleSelectionChanged(data.id);
+                    }}
+                    sx={{ mr: 1, mt: 1 }}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={4}>
+            {allFeelings.map((data) => {
+              if (data.type === "avsky") {
+                return (
+                  <Chip
+                    color="primary"
+                    variant={selected.has(data.id) ? "contained" : "outlined"}
+                    label={data.lable}
+                    id={`custom-chip-${data.id}`}
+                    onClick={() => {
+                      handleSelectionChanged(data.id);
+                    }}
+                    sx={{ mr: 1, mt: 1 }}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </TabPanel>
+          <TabPanel value={value} index={5}>
+            {allFeelings.map((data) => {
+              if (data.type === "ilska") {
+                return (
+                  <Chip
+                    color="primary"
+                    variant={selected.has(data.id) ? "contained" : "outlined"}
+                    label={data.lable}
+                    id={`custom-chip-${data.id}`}
+                    onClick={() => {
+                      handleSelectionChanged(data.id);
+                    }}
+                    sx={{ mr: 1, mt: 1 }}
+                  />
+                );
+              } else {
+                return null;
+              }
+            })}
+          </TabPanel>
+        </Box>
       </Box>
     </>
   );

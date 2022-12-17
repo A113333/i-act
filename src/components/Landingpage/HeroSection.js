@@ -12,7 +12,6 @@ import { AnimatedOnScroll } from "react-animated-css-onscroll";
 
 function HeroSection() {
   const buttonFits = useMediaQuery("(min-width:380px)");
-  const [slide, setslide] = useState(true);
   return (
     <div>
       <Grid

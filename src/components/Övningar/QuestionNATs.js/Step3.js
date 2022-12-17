@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Slider, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import MySlider from "../inputs/MySlider";
 
 function Step3({ setFormData, setIsDone, formData }) {
   const [kansloIntensitet, setkansloIntensitet] = useState([]);

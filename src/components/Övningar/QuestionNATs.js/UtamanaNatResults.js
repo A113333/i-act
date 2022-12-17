@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import BlackBoxWithText from "../Saker/SmattOchGott/BlackBoxWithText";
+import BlackBoxWithText from "../../Saker/SmattOchGott/BlackBoxWithText";
 
 function UtamanaNatResults({ setFormData, setIsDone, formData }) {
   const arr = {

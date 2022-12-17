@@ -8,9 +8,10 @@ function VerktygKnapp({
   setPage,
   lastPage,
   isDone,
+  setIsDone,
   onClickForward,
-  isResultsPage,
   onClickBack,
+  isResultsPage,
 }) {
   const navigate = useNavigate();
   const onClickBackDefault = () => {
@@ -20,6 +21,7 @@ function VerktygKnapp({
 
   const onClickForwardDefault = () => {
     setPage(page + 1);
+    setIsDone(false);
     window.scrollTo(0, 0);
     console.log("default");
   };
@@ -34,7 +36,7 @@ function VerktygKnapp({
           mt: 5,
           color: "primary.main",
         }}
-        onClick={onClickBack ? onClickBack() : onClickBackDefault()}
+        onClick={onClickBack ? onClickBack : onClickBackDefault}
       >
         <ArrowBackIosIcon />
       </IconButton>
@@ -51,9 +53,7 @@ function VerktygKnapp({
       ) : (
         <Button
           variant="contained"
-          onClick={() =>
-            onClickForward ? onClickForward() : onClickForwardDefault()
-          }
+          onClick={onClickForward ? onClickForward : onClickForwardDefault}
           sx={{ position: "absolute", right: 25, bottom: 10, mt: 5 }}
           disabled={!isDone}
         >

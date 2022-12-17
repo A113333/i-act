@@ -10,13 +10,13 @@ import Step6 from "../QuestionNATs.js/Step6";
 import Step7 from "../QuestionNATs.js/Step7";
 import Step8 from "../QuestionNATs.js/Step8";
 import UtamanaNatResults from "../QuestionNATs.js/UtamanaNatResults";
-import VerktygAppbar from "../Navigation/VerktygAppBar";
+import VerktygAppbar from "../../Navigation/VerktygAppBar";
 import { Link } from "react-router-dom";
 import Step4Part2 from "../QuestionNATs.js/Step4Part2";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useTheme from "@mui/material/styles/useTheme";
-import VerktygKnapp from "../Buttons/VerktygKnapp";
+import VerktygKnapp from "../../Buttons/VerktygKnapp";
 
 function UtmanaNat() {
   //const smallscreen = useMediaQuery("(min-width:600px)");

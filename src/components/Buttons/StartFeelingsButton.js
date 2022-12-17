@@ -13,7 +13,6 @@ function StartFeelingsButton() {
       <Button variant="contained" onClick={() => onClick()}>
         Använd känslofinnaren
       </Button>
-      <Typography> lalal </Typography>
       {showFeelingsFinder ? <Feelings /> : null}
     </>
   );

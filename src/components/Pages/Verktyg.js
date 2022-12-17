@@ -26,6 +26,16 @@ function Verktyg() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
     {
+      title: "PHQ9",
+      desc: "Testa dina depressionsnivåer just nu",
+      startLink: "/verktyg/skattning/PHQ9",
+      resultsLink: "/verktyg/skattning/PHQ9/resultat",
+      readMoreTitle: "Depression",
+      readMoreText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+
+    {
       title: "MADRAS",
       desc: "Testa dina depressionsnivåer just nu",
       startLink: "/verktyg/skattning/madras-s",
@@ -56,18 +66,9 @@ function Verktyg() {
       readMoreText:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
-    {
-      title: "Funktionell analys, SORKK",
-      desc: "Analyser siatuationer för att bättre förstå dina reaktioner",
-      startLink: "/verktyg/sorkk/0",
-      readMoreTitle: "Funktionell analys, SORKK",
-      resultsLink: "/verktyg/sorkk/resultat",
-      readMoreText:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
 
     {
-      title: "Test text",
+      title: "SORKK",
       desc: "Analyser siatuationer för att bättre förstå dina reaktioner",
       startLink: "/verktyg/ovning/SORKK/0",
       readMoreTitle: "Funktionell analys, SORKK",
@@ -75,13 +76,32 @@ function Verktyg() {
       readMoreText:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
+    {
+      title: "Skapa en egen övning",
+      desc: "Gör en egen övning",
+      startLink: "/verktyg/ovning/skapaegen",
+      readMoreTitle: "Gör din egna övning",
+      resultsLink: "/verktyg/ovning/resultat/SORKK",
+      readMoreText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
 
     {
-      title: "Test ",
-      desc: "För testning",
-      startLink: "/test",
-      readMoreTitle: "Funktionell analys, STORK",
-      resultsLink: "/verktyg/ovning/resultat/STORK",
+      title: "Tankeobservation",
+      desc: "Skriv ner dina tankar och känslor för en situation",
+      startLink: "/verktyg/ovning/tankeobservation",
+      readMoreTitle: "Tankeobservation",
+      resultsLink: "/verktyg/ovning/resultat/tankeobservation",
+      readMoreText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    },
+
+    {
+      title: "Kort värderingsövning",
+      desc: "Hitta dina tre viktigaste värderingsord",
+      startLink: "/ListaVardingersOrd",
+      readMoreTitle: "Värderingar",
+      resultsLink: "/verktyg/ovning/resultat/ListaVardingersOrd",
       readMoreText:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },

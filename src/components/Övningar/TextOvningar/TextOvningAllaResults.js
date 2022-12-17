@@ -25,7 +25,7 @@ function TextOvningAllaResults() {
   const [resultsArr, setresultsArr] = useLocalStorageState(ovningName, {
     defaultValue: [].reverse(),
   });
-
+  console.log(resultsArr);
   const removeItem = (item) => {
     let resultArrHere = [...resultsArr];
     console.log("resultArr");
@@ -86,7 +86,9 @@ function TextOvningAllaResults() {
                     {item.date}
                   </Typography>
                   <Typography inline sx={{ pt: 0.7 }}>
-                    {item.anwsers[0].anwser}
+                    {Array.isArray(item.anwsers[0].anwser)
+                      ? item.anwsers[0].anwser[0]
+                      : item.anwser}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -108,7 +110,11 @@ function TextOvningAllaResults() {
                         >
                           {item.question}
                         </Typography>
-                        <Typography sx={{}}>{item.anwser}</Typography>
+                        <Typography sx={{}}>
+                          {Array.isArray(item.anwser)
+                            ? item.anwser.map((item, index) => <li> {item}</li>)
+                            : item.anwser}
+                        </Typography>
                       </>
                     ))}
                   </Box>

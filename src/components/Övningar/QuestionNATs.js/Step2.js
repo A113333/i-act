@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-
 import { Typography } from "@mui/material";
-
-import Feelings from "../Verktyg/Feelings";
-import MultiChoiceFromArray from "../inputs/MultiChoiceFromArray";
-import SlidersFromArray from "../inputs/SlidersFromArray";
+import Feelings from "../../Verktyg/Feelings";
+import MultiChoiceFromArray from "../../inputs/MultiChoiceFromArray";
+import SlidersFromArray from "../../inputs/SlidersFromArray";
 
 function Step2({ formData, setFormData, setIsDone }) {
   useEffect(() => {

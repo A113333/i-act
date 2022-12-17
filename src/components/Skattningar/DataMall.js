@@ -13,8 +13,7 @@ const NAMEOFEXPORT = {
     "Under de senaste 14 dagarna, hur ofta har du besvärats av följande problem",
   // börjar skalan på 0 eller 1? 1=false 0=true
   startZero: true,
-  // länk till graf för resultat
-  linkToResults: "/lalal",
+
   questionArr: [
     {
       question: "Sinnesstämning: Här ber vi dig beskriva din sinnesstämning,",
@@ -27,10 +26,9 @@ const NAMEOFEXPORT = {
   ],
   subscale: false,
   scoring: [
-    { name: "milda ångestproblem", score: 5 },
-    { name: "medel ångestproblem", score: 10 },
-    { name: "allvarliga ångestproblem", score: 15 },
+    // ska fundera med inledningen: DEt verkar som att GLÖM INTE . och ett alternativ för "Frisk"
+    { name: "milda ångestproblem.", score: 5 },
+    { name: "medel ångestproblem.", score: 10 },
+    { name: "allvarliga ångestproblem.", score: 15 },
   ],
 };
-
-export default NAMEOFEXPORT;
