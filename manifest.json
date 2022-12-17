@@ -10,5 +10,6 @@
   ],
   "start_url": "/i-act/#/verktyg",
   "display": "standalone",
-  "theme_color": "#247ba0"
+  "theme_color": "#247ba0",
+  "background_color": "#247ba0"
 }
