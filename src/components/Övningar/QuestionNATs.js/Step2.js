@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import Feelings from "../../Verktyg/Feelings";
+import Feelings from "../../inputs/Feelings";
 import MultiChoiceFromArray from "../../inputs/MultiChoiceFromArray";
 import SlidersFromArray from "../../inputs/SlidersFromArray";
 
 function Step2({ formData, setFormData, setIsDone }) {
+  const [feelings, setfeelings] = useState([]);
+
   useEffect(() => {
     if (formData.kanslorUnder.length !== 0) {
       setIsDone(true);
@@ -29,15 +31,16 @@ function Step2({ formData, setFormData, setIsDone }) {
         <Typography variant="body1"> Välj en eller flera känslor </Typography>
       </Box>
 
-      <Feelings
-        setFormData={formDataSetter}
-        formData={formData}
-        setIsDone={setIsDone}
-      />
+      <Feelings setFormData={setfeelings} formData={feelings} />
 
-      {formData.kanslorUnder.length > 0 && (
-        <SlidersFromArray sliderArr={formData.kanslorUnder} />
-      )}
+      <SlidersFromArray
+        setgotAwnser={setIsDone}
+        sliderArr={feelings}
+        setSliderArr={formDataSetter}
+        question={"Hur intensiva var känslorna?"}
+        labelMax={"Väldigt stark"}
+        labelMin={"Knappt märkbar"}
+      />
     </>
   );
 }

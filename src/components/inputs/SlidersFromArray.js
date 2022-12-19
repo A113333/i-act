@@ -4,6 +4,7 @@ import { Slider, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 
 function SlidersFromArray({
+  // sliderArr är den ARR som ska visa silders och den arrn där svaret sparas som .value
   sliderArr,
   setSliderArr,
   question,
@@ -21,9 +22,11 @@ function SlidersFromArray({
     const updatedAnwserArr = [...sliderArr];
     const i = getIndex(id);
 
+    /* Kollar så att det finns ett value för alla svarsobjekt */
     let gotAllAwnsers = updatedAnwserArr.every((obj) =>
       obj.hasOwnProperty("value")
     );
+    console.log(gotAllAwnsers);
 
     if (gotAllAwnsers) setgotAwnser(true);
 
@@ -33,6 +36,7 @@ function SlidersFromArray({
       updatedAnwserArr[i].value = value;
     }
     setSliderArr(updatedAnwserArr);
+    console.log(updatedAnwserArr);
   };
 
   return (
@@ -43,7 +47,7 @@ function SlidersFromArray({
       {sliderArr.length > 0 ? (
         sliderArr.map((item, index) => (
           <Box key={`custom-box-${item.id}`} id={`custom-box-${item.id}`}>
-            <Typography> {item.lable} </Typography>
+            <Typography> {item.name} </Typography>
             <Typography sx={{ opacity: "50%" }}>
               {sliderArr[index].value
                 ? sliderArr[index].value +

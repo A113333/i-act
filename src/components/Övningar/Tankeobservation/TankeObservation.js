@@ -1,11 +1,11 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState, useEffect } from "react";
 import VerktygKnapp from "../../Buttons/VerktygKnapp";
 import SlidersFromArray from "../../inputs/SlidersFromArray";
 import VerktygAppbar from "../../Navigation/VerktygAppBar";
 import saveSomething from "../../Saker/SmattOchGott/SaveSomething";
-import Feelings from "../../Verktyg/Feelings";
+import Feelings from "../../inputs/Feelings";
 import VerktygContainer from "../../Verktyg/VerktygContainer";
 import UpdateShowOvningsResultat from "../UpdatedShowOvningResults";
 
@@ -38,6 +38,8 @@ function TankeObservation() {
     }
     if (page === 2) {
       console.log("page2");
+      // så att man kan gå framåt om man backar
+      setisResultsPage(false);
     }
     if (page === 3) {
       setisResultsPage(true);
@@ -143,9 +145,7 @@ function TankeObservation() {
         { question: question2, anwser: situation },
         {
           question: question3,
-          anwser: feelings.map((item) =>
-            item.lable + ": " + item.value ? +"%" : " "
-          ),
+          anwser: feelings.map((item) => item.lable + ": " + item.value + "%"),
         },
       ],
 

@@ -7,7 +7,7 @@ import VerktygKnapp from "../../Buttons/VerktygKnapp";
 import ToolsContaioner from "../../Verktyg/VerktygContainer";
 import values from "../../Data/values";
 import MultiChoiceFromArray from "../../inputs/MultiChoiceFromArray";
-import OvningResultat from "../OvningShowResult";
+import OvningResultat from "../OvningShowResultPage";
 import saveSomething from "../../Saker/SmattOchGott/SaveSomething";
 
 function PickValuesFromList() {
@@ -250,7 +250,7 @@ function PickValuesFromList() {
             title={"Din tre valda värderingsord"}
             formData={formData}
             questionArr={[
-              { question: formData.title, anwser: formData.values.slice() },
+              { question: "Jag vill vara", anwser: formData.values.slice() },
             ]}
           />
         )}

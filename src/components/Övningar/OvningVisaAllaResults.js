@@ -4,47 +4,29 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
-  ListItemSecondaryAction,
+  Divider,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import IactAppBar from "../../Navigation/IactAppBar";
-import HeadlineWithDivider from "../../Saker/HeadlineWithDivider";
-import VerktygContainer from "../../Verktyg/VerktygContainer";
+import IactAppBar from "../Navigation/IactAppBar";
+import HeadlineWithDivider from "../Saker/SmattOchGott/HeadlineWithDivider";
+import VerktygContainer from "../Verktyg/VerktygContainer";
 import useLocalStorageState from "use-local-storage-state";
-import RemoveButton from "../../Buttons/RemoveButton";
+import RemoveButton from "../Buttons/RemoveButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import BackToVerktygButton from "../../Buttons/BackToVerktygButton";
+import BackToVerktygButton from "../Buttons/BackToVerktygButton";
+import { useParams } from "react-router-dom";
 
-function SorkkAllResults({ formData, questionArr }) {
-  const [resultsArr, setresultsArr] = useLocalStorageState("SORKK", {
-    defaultValue: [
-      {
-        title: "Jag var påväg till affären1",
-        date: new Date().toLocaleDateString(),
-        anwsers: [
-          { question: "Vad, när hur, med vem?", anwser: "response" },
-          { question: "Vad, när hur, med vem?1", anwser: "organism" },
-          { question: "Vad, när hur, med vem?12", anwser: "response" },
-          { question: "Vad, när hur, med vem?3", anwser: "k1" },
-          { question: "Vad, när hur, med vem?5", anwser: "k2" },
-        ],
-      },
+function OvningVisaAllaResults() {
+  const params = useParams();
+  const ovningName = params.name;
 
-      {
-        title: "Jag var påväg till affären2",
-        date: new Date().toLocaleDateString(),
-        anwsers: [
-          { question: "Vad, när hur, med vem?", anwser: "response" },
-          { question: "Vad, när hur, med vem?1", anwser: "organism" },
-          { question: "Vad, när hur, med vem?12", anwser: "response" },
-          { question: "Vad, när hur, med vem?3", anwser: "k1" },
-          { question: "Vad, när hur, med vem?5", anwser: "k2" },
-        ],
-      },
-    ].reverse(),
+  console.log(ovningName);
+
+  const [resultsArr, setresultsArr] = useLocalStorageState(ovningName, {
+    defaultValue: [].reverse(),
   });
-
+  console.log(resultsArr);
   const removeItem = (item) => {
     let resultArrHere = [...resultsArr];
     console.log("resultArr");
@@ -54,14 +36,14 @@ function SorkkAllResults({ formData, questionArr }) {
     setresultsArr(resultArrHere);
     //console.log(item);
   };
-
+  console.log(resultsArr);
   return (
     <>
       <IactAppBar />
       <VerktygContainer>
         <HeadlineWithDivider>
           {resultsArr.length > 0
-            ? " Samanställning av övningen"
+            ? "Dina sparade övningar"
             : "Du verkar inte ha genomfört några övningar"}
         </HeadlineWithDivider>
         <Box
@@ -70,36 +52,46 @@ function SorkkAllResults({ formData, questionArr }) {
             width: "100%",
           }}
         >
-          {resultsArr.map((item, index) => (
+          {resultsArr.reverse().map((sparadOvning, index) => (
             <>
               <Accordion
-                elevation={0}
+                key={sparadOvning.id ? sparadOvning.id : index}
                 sx={{
-                  mx: 1,
                   mb: 2,
                   "&:before": {
                     display: "none",
                   },
-                  ":hover": {
-                    //transform: "scale(1.02)",
-                    boxShadow: 1,
+                  "&.MuiAccordionSummary-root:hover": {
+                    backgroundColor: "#356da5",
                   },
                 }}
+                elevation={0}
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
+                  sx={{
+                    ":hover": {
+                      //transform: "scale(1.02)",
+                      boxShadow: 1,
+                    },
+                  }}
                 >
                   <RemoveButton
                     onClick={() => removeItem(index)}
                     sx={{ zIndex: 999 }}
                   />
                   <Typography sx={{ pt: 0.7, opacity: "50%", mr: 3 }} inline>
-                    {item.date}
+                    {sparadOvning.date}:
                   </Typography>
                   <Typography inline sx={{ pt: 0.7 }}>
-                    {item.title}
+                    {/* Om första svaret är en array, visar första itemet i den arrayen annars bara svaret */}
+                    {sparadOvning.showOnResultAccordion
+                      ? sparadOvning.showOnResultAccordion
+                      : Array.isArray(sparadOvning.anwsers[0].anwser)
+                      ? sparadOvning.anwsers[0].anwser[0]
+                      : sparadOvning.anwsers[0].anwser}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -107,21 +99,30 @@ function SorkkAllResults({ formData, questionArr }) {
                     sx={{
                       textAlign: "left",
                       width: "100%",
-                      m: "auto",
-                      pt: 2,
                     }}
                   >
-                    {item.anwsers?.map((item, index) => (
+                    {sparadOvning.anwsers?.map((item, index) => (
                       <>
                         <Typography
                           sx={{
                             opacity: "50%",
-                            mb: 1,
+                            mx: 4,
                           }}
                         >
                           {item.question}
                         </Typography>
-                        <Typography sx={{}}>{item.anwser}</Typography>
+                        <Box sx={{ mb: 2, mx: 4 }}>
+                          <Typography sx={{}}>
+                            {Array.isArray(item.anwser)
+                              ? item.anwser.map((item, index) => (
+                                  <li> {item}</li>
+                                ))
+                              : item.anwser}
+                          </Typography>
+                        </Box>
+                        {index !== sparadOvning.anwsers.length - 1 && (
+                          <Divider sx={{ mb: 2 }}></Divider>
+                        )}
                       </>
                     ))}
                   </Box>
@@ -129,7 +130,7 @@ function SorkkAllResults({ formData, questionArr }) {
                     variant="outlined"
                     sx={{ float: "right", mb: 2 }}
                     onClick={() => {
-                      console.log(item);
+                      console.log(sparadOvning);
                     }}
                   >
                     Skicka till din behandlare
@@ -145,4 +146,4 @@ function SorkkAllResults({ formData, questionArr }) {
   );
 }
 
-export default SorkkAllResults;
+export default OvningVisaAllaResults;

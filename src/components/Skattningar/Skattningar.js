@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToolsAppBar from "../Navigation/VerktygAppBar";
 import VerktygKnapp from "../Buttons/VerktygKnapp";
 import VerktygContainer from "../Verktyg/VerktygContainer";
@@ -52,6 +52,10 @@ function Skattningar({
     window.scrollTo(0, 0);
     setgotAnwser(false);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   let sumResults = anwserArr.reduce(function (prev, current) {
     return prev + +Number(current.anwser);

@@ -1,28 +1,22 @@
 import React from "react";
-import { Divider, IconButton, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import EditRoundedIcon from "@mui/icons-material/EditRounded";
 
-function UpdatedShowOvningResults({ formData, questionArr }) {
-  const customPb = 5;
-  console.log(formData, "formdata");
+function UpdatedShowOvningResults({ title, questionArr }) {
   console.log(questionArr, "questionArrr");
 
-  const changeData = () => {
-    console.log("click");
-  };
   return (
     <>
-      <Typography variant="h6" sx={{ pb: 3 }}>
-        Samanställning av övningen
-      </Typography>{" "}
+      <Typography variant="h6" sx={{ pb: 2 }}>
+        {title ? title : "Samanställning av övningen"}
+      </Typography>
       <Divider></Divider>
       <Box
         sx={{
           textAlign: "left",
           m: "auto",
-          pt: customPb,
-          width: { xs: "100%", sm: "55%" },
+          pt: 5,
+          width: { xs: "100%", sm: "100%" },
         }}
       >
         {questionArr.map((item, index) => (
@@ -32,7 +26,6 @@ function UpdatedShowOvningResults({ formData, questionArr }) {
               key={index}
               sx={{
                 opacity: "50%",
-                mb: 1,
               }}
             >
               {item.question}
@@ -40,23 +33,24 @@ function UpdatedShowOvningResults({ formData, questionArr }) {
             {/*    <IconButton>
               <EditRoundedIcon onClick={changeData} />
             </IconButton> */}
-
-            {Array.isArray(item.anwser) ? (
-              item.anwser.map((item, index) => (
-                <Typography key={index}>
-                  <li> {item}</li>
+            <Box sx={{ my: 1 }}>
+              {Array.isArray(item.anwser) ? (
+                item.anwser.map((item, index) => (
+                  <Typography key={index}>
+                    <li> {item}</li>
+                  </Typography>
+                ))
+              ) : (
+                <Typography
+                  key={index + 10}
+                  sx={{
+                    pb: 2,
+                  }}
+                >
+                  {item.anwser}
                 </Typography>
-              ))
-            ) : (
-              <Typography
-                key={index + 10}
-                sx={{
-                  pb: customPb,
-                }}
-              >
-                {item.anwser}
-              </Typography>
-            )}
+              )}
+            </Box>
           </>
         ))}
       </Box>

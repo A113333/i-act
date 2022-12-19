@@ -77,7 +77,7 @@ export default function ButtonAppBar() {
                 to="/"
                 sx={{
                   color: theme.palette.customWhite.main,
-                  fontSize: !smallscreen2 ? "0.8rem" : "1.5rem",
+                  fontSize: "1.5rem",
                   m: 0,
                   p: 0,
                 }}

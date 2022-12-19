@@ -5,7 +5,7 @@ import TextFieldOvning from "../../inputs/TextFieldOvning";
 import VerktygContainer from "../../Verktyg/VerktygContainer";
 import VerktygKnapp from "../../Buttons/VerktygKnapp";
 import VerktygAppbar from "../../Navigation/VerktygAppBar";
-import OvningShowResults from "../OvningShowResult";
+import OvningShowResults from "../OvningShowResultPage";
 import { useParams } from "react-router-dom";
 import TextOvningarData from "../../Data/TextOvningarData";
 import { useNavigate, useLocation } from "react-router-dom";

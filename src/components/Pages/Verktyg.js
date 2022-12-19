@@ -36,7 +36,7 @@ function Verktyg() {
     },
 
     {
-      title: "MADRAS",
+      title: "MADRA-S",
       desc: "Testa dina depressionsnivåer just nu",
       startLink: "/verktyg/skattning/madras-s",
       resultsLink: "/verktyg/skattning/madras-s/resultat",

@@ -28,7 +28,7 @@ function TextOvningResultat({ formData, questionArr, title }) {
               key={index}
               sx={{
                 opacity: "50%",
-                mb: 1,
+                mb: 3,
               }}
             >
               {item.question}
@@ -42,7 +42,9 @@ function TextOvningResultat({ formData, questionArr, title }) {
                     pb: customPb,
                   }}
                 >
-                  <li> {item.name}</li>
+                  <li>
+                    {item.name} {item.desc ? ": " + item.desc : ""}
+                  </li>
                 </Typography>
               ))
             ) : (

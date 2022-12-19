@@ -1,24 +1,17 @@
-import React, { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
-import TextFieldWithAdd from "../../inputs/TextFieldWithAdd";
+import React from "react";
+import MindTraps from "../../inputs/MindTraps";
 
-function Step4({ setFormData, setIsDone, formData }) {
+function Step5({ formData, setFormData, setIsDone }) {
+  setIsDone(true);
   return (
     <>
-      <TextFieldWithAdd
-        inputName={"bevisForTanke"}
-        setFormData={setFormData}
-        setIsDone={setIsDone}
-        formData={formData}
-        questionText={"Vilka bevis har du för din tanke?"}
-        label={"bevis"}
-      />
-      <Box>
-        <Typography></Typography>
-      </Box>
+      <Typography variant="h6" sx={{ mb: 2 }}>
+        Innehåller din automatiska negativa tanke någon eller några tankefällor?
+      </Typography>
+      <MindTraps setFormData={setFormData} formData={formData} />
     </>
   );
 }
 
-export default Step4;
+export default Step5;

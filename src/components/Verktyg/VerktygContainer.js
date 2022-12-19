@@ -15,8 +15,9 @@ function VerktygContainer(props) {
         textAlign: "left",
         maxWidth: "800px",
         m: "auto",
-        mt: 4,
-        minHeight: `calc(100vh - 65px)`,
+        // är 10 för att headline ska synas väl under appbar
+        mt: 10,
+        minHeight: `calc(100vh - 150px)`,
       }}
     >
       {props.children}

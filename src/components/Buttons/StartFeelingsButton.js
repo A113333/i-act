@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import React, { useState } from "react";
-import Feelings from "../Verktyg/Feelings";
+import Feelings from "../inputs/Feelings";
 
 function StartFeelingsButton() {
   const [showFeelingsFinder, setshowFeelingsFinder] = useState(false);

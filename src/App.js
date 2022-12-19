@@ -18,7 +18,7 @@ import {
 import UserPage from "./components/Pages/UserPage";
 import VerktygTest from "./components/Pages/VerktygTest";
 import TextOvning from "./components/Övningar/TextOvningar/TextOvning";
-import TextOvningAllaResults from "./components/Övningar/TextOvningar/TextOvningAllaResults";
+import OvningVisaAllaResults from "./components/Övningar/OvningVisaAllaResults";
 import KontaktaOss from "./components/Pages/KontaktaOss";
 import Tester from "./components/Pages/Tester";
 import PickValuesFromList from "./components/Övningar/Varderingar/PickValuesFromList";
@@ -153,7 +153,7 @@ function App() {
               />
               <Route
                 path="/verktyg/ovning/resultat/:name"
-                element={<TextOvningAllaResults />}
+                element={<OvningVisaAllaResults />}
               />
 
               {/*  ROUTES FÖR tankeobservation, LASMER OCH RESULTAT SAMANSTÄLLNING */}
@@ -163,7 +163,7 @@ function App() {
               />
               <Route
                 path="/verktyg/ovning/resultat/:name"
-                element={<TextOvningAllaResults />}
+                element={<OvningVisaAllaResults />}
               />
 
               <Route
@@ -172,7 +172,7 @@ function App() {
               />
               <Route
                 path="/verktyg/ovning/resultat/:name"
-                element={<TextOvningAllaResults />}
+                element={<OvningVisaAllaResults />}
               />
 
               {/* GAD/ resultat och fylla i */}

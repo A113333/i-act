@@ -1,17 +1,47 @@
-import { Typography } from "@mui/material";
-import React from "react";
-import MindTraps from "../../Verktyg/MindTraps";
+import { TextField, Typography } from "@mui/material";
+import React, { useEffect } from "react";
+import Box from "@mui/material/Box";
 
-function Step5({ formData, setFormData, setIsDone }) {
-  setIsDone(true);
+function Step6({ setFormData, setIsDone, formData }) {
+  useEffect(() => {
+    if (formData.balanseradTanke !== "") {
+      setIsDone(true);
+    }
+  }, [formData, setIsDone]);
+
   return (
     <>
-      <Typography variant="h6" sx={{ mb: 2 }}>
-        Innehåller din automatiska negativa tanke någon eller några tankefällor?
+      <Box sx={{ mb: 5 }}>
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Vad skulle kunna vara en alternativ mer balanserad/realistisk tanke?
+        </Typography>
+
+        <TextField
+          variant="outlined"
+          id="AlternativTanke"
+          label="Min alternativa tanke"
+          sx={{ width: { xs: "100%", sm: "75%" } }}
+          autoComplete="off"
+          autoFocus
+          value={formData.balanseradTanke ? formData.balanseradTanke : null}
+          onChange={(e) => {
+            setFormData({
+              ...formData,
+              balanseradTanke: e.target.value,
+            });
+          }}
+        />
+      </Box>
+
+      <Typography variant="h6">
+        {formData.tankeFallor
+          ? ""
+          : "Då din tanke innehöll tankefällan" +
+            formData.tankeFallor[0].name +
+            "kanske du hade varit hjälpt av tankestrategien heeh"}
       </Typography>
-      <MindTraps setFormData={setFormData} formData={formData} />
     </>
   );
 }
 
-export default Step5;
+export default Step6;

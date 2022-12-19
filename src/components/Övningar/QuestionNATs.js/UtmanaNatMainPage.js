@@ -4,15 +4,13 @@ import { Typography, Button } from "@mui/material";
 import Step1 from "../QuestionNATs.js/Step1";
 import Step2 from "../QuestionNATs.js/Step2";
 import Step3 from "../QuestionNATs.js/Step3";
-import Step4 from "../QuestionNATs.js/Step4";
-import Step5 from "../QuestionNATs.js/Step5";
-import Step6 from "../QuestionNATs.js/Step6";
-import Step7 from "../QuestionNATs.js/Step7";
-import Step8 from "../QuestionNATs.js/Step8";
+import Step4 from "./Step4";
+import Step5 from "./Step5";
+import Step6 from "./Step6";
+import Step7 from "./Step7";
 import UtamanaNatResults from "../QuestionNATs.js/UtamanaNatResults";
 import VerktygAppbar from "../../Navigation/VerktygAppBar";
-import { Link } from "react-router-dom";
-import Step4Part2 from "../QuestionNATs.js/Step4Part2";
+import Step4Part2 from "./Step3Part2";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import useTheme from "@mui/material/styles/useTheme";
@@ -77,7 +75,6 @@ function UtmanaNat() {
     tanke: "",
     troPaTanke: "",
     kanslorUnder: [],
-    kanslorUnderIntensitet: [],
     selectedFeelings: new Set(),
     bevisForTanke: [],
     bevisMotTanke: [],
@@ -258,16 +255,8 @@ function UtmanaNat() {
             setIsDone={setIsDone}
           />
         );
-      case 8:
-        return (
-          <Step8
-            formData={formData}
-            setFormData={setFormData}
-            setIsDone={setIsDone}
-          />
-        );
 
-      case 9:
+      case 8:
         return (
           <UtamanaNatResults
             formData={formData}
@@ -291,8 +280,8 @@ function UtmanaNat() {
     <>
       <VerktygAppbar
         step={page + 1}
-        numberOfSteps={10}
-        isResultsPage={page + 1 === 10}
+        numberOfSteps={9}
+        isResultsPage={page + 1 === 9}
       />
       <Box
         sx={{
@@ -319,10 +308,10 @@ function UtmanaNat() {
           <VerktygKnapp
             page={page}
             setPage={setPage}
-            lastPage={9}
+            lastPage={8}
             isDone={isDone}
             onClickForward={next}
-            isResultsPage={page + 1 === 10}
+            isResultsPage={page + 1 === 9}
           />
         </Box>
       </Box>
