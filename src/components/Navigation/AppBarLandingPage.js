@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import Drawer from "../Navigation/Drawer";
+import Drawer from "./Drawer";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useTheme from "@mui/material/styles/useTheme";
 import { Button } from "@mui/material";
@@ -13,6 +13,8 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 
 export default function ButtonAppBar() {
   const smallscreen = useMediaQuery("(min-width:600px)");
+  const smallscreen2 = useMediaQuery("(min-width:425px)");
+
   const theme = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -41,23 +43,13 @@ export default function ButtonAppBar() {
               <MenuIcon />
             </IconButton>
 
-            {/*       <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="login"
-              sx={{ mr: 2 }}
-            >
-              <PersonOutlineRoundedIcon />
-            </IconButton> */}
-
-            <Box sx={{ m: "auto", pl: "100px" }}>
+            <Box sx={{ m: "auto" }}>
               <Button
                 component={Link}
                 size="large"
                 to="/"
                 sx={{
-                  fontSize: "1.5rem",
+                  fontSize: !smallscreen2 ? "1.2rem" : "1.5rem",
                 }}
                 color="secondary"
               >
@@ -86,7 +78,7 @@ export default function ButtonAppBar() {
               to="/anvandare"
               sx={{ fontWeight: "400" }}
             >
-              logga in
+              <PersonOutlineRoundedIcon />{" "}
             </Button>
           </Toolbar>
         </AppBar>

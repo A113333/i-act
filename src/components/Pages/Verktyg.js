@@ -76,7 +76,7 @@ function Verktyg() {
       readMoreText:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     },
-    {
+    /*  { 
       title: "Skapa en egen övning",
       desc: "Gör en egen övning",
       startLink: "/verktyg/ovning/skapaegen",
@@ -84,7 +84,7 @@ function Verktyg() {
       resultsLink: "/verktyg/ovning/resultat/SORKK",
       readMoreText:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    },
+    }, */
 
     {
       title: "Tankeobservation",
@@ -112,7 +112,8 @@ function Verktyg() {
       <AppBar />
       <Container
         sx={{
-          pt: 3,
+          pt: 2,
+          pb: 3,
           backgroundColor: theme.palette.customGrey.main,
           minHeight: "100vh",
           maxWidth: "1130px",

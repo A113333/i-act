@@ -8,13 +8,14 @@ function VerktygContainer(props) {
       sx={{
         backgroundColor: theme.palette.customGrey.main,
         px: { xs: 2, sm: 5 },
-        paddingBottom: 8,
+        // är sju för att kanpparna inte ska hamna över innehållet
+        paddingBottom: 7,
         borderRadius: 3,
         position: "relative",
         textAlign: "left",
         maxWidth: "800px",
         m: "auto",
-        mt: 8,
+        mt: 4,
         minHeight: `calc(100vh - 65px)`,
       }}
     >

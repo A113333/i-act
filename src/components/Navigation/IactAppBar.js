@@ -14,6 +14,7 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 
 export default function ButtonAppBar() {
   const smallscreen = useMediaQuery("(min-width:600px)");
+  const smallscreen2 = useMediaQuery("(min-width:425px)");
   const theme = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -73,11 +74,10 @@ export default function ButtonAppBar() {
             <Box sx={{ margin: "auto" }}>
               <Button
                 component={Link}
-                size="large"
                 to="/"
                 sx={{
                   color: theme.palette.customWhite.main,
-                  fontSize: "1.5rem",
+                  fontSize: !smallscreen2 ? "0.8rem" : "1.5rem",
                   m: 0,
                   p: 0,
                 }}

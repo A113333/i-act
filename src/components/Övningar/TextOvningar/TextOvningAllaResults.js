@@ -42,7 +42,7 @@ function TextOvningAllaResults() {
       <VerktygContainer>
         <HeadlineWithDivider>
           {resultsArr.length > 0
-            ? " Samanställning av övningen"
+            ? "Dina sparade övningar"
             : "Du verkar inte ha genomfört några övningar"}
         </HeadlineWithDivider>
         <Box
@@ -83,12 +83,15 @@ function TextOvningAllaResults() {
                     sx={{ zIndex: 999 }}
                   />
                   <Typography sx={{ pt: 0.7, opacity: "50%", mr: 3 }} inline>
-                    {item.date}
+                    {item.date}:
                   </Typography>
                   <Typography inline sx={{ pt: 0.7 }}>
-                    {Array.isArray(item.anwsers[0].anwser)
+                    {/* Om första svaret är en array, visar första itemet i den arrayen annars bara svaret */}
+                    {item.showOnResultAccordion
+                      ? item.showOnResultAccordion
+                      : Array.isArray(item.anwsers[0].anwser)
                       ? item.anwsers[0].anwser[0]
-                      : item.anwser}
+                      : item.anwsers[0].anwser}
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>

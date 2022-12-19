@@ -6,10 +6,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import BlackBoxWithText from "../Saker/SmattOchGott/BlackBoxWithText";
 import AppBar from "../Navigation/IactAppBar";
-
 import useLocalStorageState from "use-local-storage-state";
-import { Box } from "@mui/system";
-import { Button } from "@mui/material";
 import VerktygContainer from "../Verktyg/VerktygContainer";
 import RemoveButton from "../Buttons/RemoveButton";
 import HeadlineWithDivider from "../Saker/HeadlineWithDivider";
@@ -71,7 +68,7 @@ function OvningarResults({ ovningName, questionArr }) {
 
                     <Typography sx={{ pt: 0.7 }}>
                       Datum:{" "}
-                      {item.date ? item.date : new Date().toLocaleDateString()}{" "}
+                      {item.date ? item.date : new Date().toLocaleDateString()}
                     </Typography>
                   </AccordionSummary>
                   <AccordionDetails>

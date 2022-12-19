@@ -3,26 +3,17 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import VerktygAppbar from "../../Navigation/VerktygAppBar";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import useTheme from "@mui/material/styles/useTheme";
 import VerktygKnapp from "../../Buttons/VerktygKnapp";
 import ToolsContaioner from "../../Verktyg/VerktygContainer";
 import values from "../../Data/values";
 import MultiChoiceFromArray from "../../inputs/MultiChoiceFromArray";
 import OvningResultat from "../OvningShowResult";
-import useLocalStorageState from "use-local-storage-state";
 import saveSomething from "../../Saker/SmattOchGott/SaveSomething";
-import { AnimatedOnScroll } from "react-animated-css-onscroll";
-import { Palette } from "@mui/icons-material";
 
 function PickValuesFromList() {
   // const valuesArr = values;
   //const smallscreen = useMediaQuery("(min-width:600px)");
-  const params = useParams();
-  const { sida } = params;
   const navigate = useNavigate();
-  const sidaParams = Number(sida);
-  const theme = useTheme();
   const [page, setPage] = useState(0);
   const [isDone, setIsDone] = useState(false);
   const [valuesArr, setvaluesArr] = useState([...values]);
@@ -39,15 +30,15 @@ function PickValuesFromList() {
   useEffect(() => {
     // för att kunna se om användaren får gå vidare
     if (page === 0) {
-      formData.values.length >= 3 ? setIsDone(true) : setIsDone(false);
+      formData.values.length >= 7 ? setIsDone(true) : setIsDone(false);
     } else if (page === 1)
       formData.values.length === 3 ? setIsDone(true) : setIsDone(false);
-  }, [formData]);
+  }, [formData, page]);
 
   useEffect(() => {
     // för att kunna se om användaren får gå vidare
     window.scroll(0, 0);
-  }, []);
+  }, [page]);
 
   // console.log(formData);
 
@@ -90,7 +81,7 @@ function PickValuesFromList() {
 
   const onClickBack = () => {
     console.log(page, "page");
-    if (page == 1) {
+    if (page === 1) {
       setvaluesArr([...values]);
     }
     page === 0 ? navigate("/verktyg") : setPage(page - 1);
@@ -160,8 +151,7 @@ function PickValuesFromList() {
                     textAlign: "center",
                   }}
                 >
-                  {" "}
-                  välj minst 7{" "}
+                  välj minst 7
                 </Typography>
               </Typography>
             </Box>
@@ -173,9 +163,15 @@ function PickValuesFromList() {
             <Typography variant="h6">
               Välj nu dom tre viktigaste värderingsorden{" "}
             </Typography>
-            <Typography>
-              {" "}
-              tänk på att välja utifrån hur du önskat att du agerade i världen.{" "}
+            <Typography display="inline">
+              tänk på att välja utifrån hur du{" "}
+              <Typography
+                display="inline"
+                sx={{ fontWeight: 700, textDecoration: "underline" }}
+              >
+                önskat
+              </Typography>{" "}
+              att du agerade i världen.
             </Typography>
             <Box
               sx={{
@@ -199,12 +195,8 @@ function PickValuesFromList() {
         );
       case 2:
         return (
-          <>
-            <Typography variant="h6">
-              Nedan ser du dina tre viktigaste värderingar
-            </Typography>
-            <Typography> Jag vet inte vad jag ska skriva här</Typography>
-          </>
+          /* rubrik för resultat delen, är tom då rubriken finns i resultat compentnt */
+          <></>
         );
 
       default:
@@ -255,6 +247,7 @@ function PickValuesFromList() {
           />
         ) : (
           <OvningResultat
+            title={"Din tre valda värderingsord"}
             formData={formData}
             questionArr={[
               { question: formData.title, anwser: formData.values.slice() },

@@ -1,17 +1,16 @@
 import React from "react";
-import { Divider, ListItemAvatar, Typography } from "@mui/material";
+import { Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import IactAppBar from "../Navigation/IactAppBar";
 
-function TextOvningResultat({ formData, questionArr }) {
+function TextOvningResultat({ formData, questionArr, title }) {
   const customPb = 5;
   console.log(formData, "formdata");
   console.log(questionArr, "questionArr");
 
   return (
     <>
-      <Typography variant="h6" sx={{ pb: 3, pt: 3 }}>
-        Samanställning av övningen
+      <Typography variant="h6" sx={{ pb: 3 }}>
+        {title ? title : "Samanställning av övningen"}
       </Typography>
       <Divider></Divider>
       <Box
@@ -34,6 +33,7 @@ function TextOvningResultat({ formData, questionArr }) {
             >
               {item.question}
             </Typography>
+
             {Array.isArray(item.anwser) ? (
               item.anwser.map((item, index) => (
                 <Typography

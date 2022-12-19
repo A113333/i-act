@@ -15,19 +15,15 @@ import {
   LSASSR,
   PHQ9,
 } from "./components//Skattningar/SkattningarData";
-
 import UserPage from "./components/Pages/UserPage";
-import Sorkk from "./components/Övningar/SORKK/Sorkk";
 import VerktygTest from "./components/Pages/VerktygTest";
-import SorkkAllResults from "./components/Övningar/SORKK/SorkAllResults";
 import TextOvning from "./components/Övningar/TextOvningar/TextOvning";
 import TextOvningAllaResults from "./components/Övningar/TextOvningar/TextOvningAllaResults";
 import KontaktaOss from "./components/Pages/KontaktaOss";
-import MultiChoiceFromArray from "./components/inputs/MultiChoiceFromArray";
 import Tester from "./components/Pages/Tester";
 import PickValuesFromList from "./components/Övningar/Varderingar/PickValuesFromList";
 import SkapaOvning from "./components/Övningar/SkapaEgen/SkapaOvning";
-import TankeObservation from "./components/Övningar/TankeObservation";
+import TankeObservation from "./components/Övningar/Tankeobservation/TankeObservation";
 
 const theme = createTheme({
   palette: {
@@ -148,14 +144,6 @@ function App() {
               <Route
                 path="/verktyg/UtmanaNegativaAutomatiskaTankar/visa"
                 element={<ViewNatsResults />}
-              />
-
-              {/*  ROUTES FÖR SORKK ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}
-              <Route path="/verktyg/sorkk/:sida" element={<Sorkk />} />
-              <Route path="/verktyg/sork/lasmer" element={<Sorkk />} />
-              <Route
-                path="/verktyg/sorkk/resultat"
-                element={<SorkkAllResults />}
               />
 
               {/*  ROUTES FÖR text ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}

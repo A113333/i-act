@@ -6,7 +6,7 @@ import { Box, Container, Divider } from "@mui/material";
 import HowIactWorks from "../Landingpage/HowIactWorks";
 import Faq from "../Landingpage/Faq";
 import SocialProof from "../Landingpage/SocialProof";
-import AppBarLandingPage from "../Landingpage/AppBarLandingPage";
+import AppBarLandingPage from "../Navigation/AppBarLandingPage";
 
 function Home() {
   return (

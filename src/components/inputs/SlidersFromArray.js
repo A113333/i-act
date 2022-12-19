@@ -10,17 +10,22 @@ function SlidersFromArray({
   placeholderText,
   labelMax,
   labelMin,
+  setgotAwnser,
 }) {
   const getIndex = (id) => {
     const i = sliderArr.findIndex((e) => e.id === id);
     return i;
   };
 
-  const addNrValue = ({ id, value }) => {
-    console.log(value, "value");
-    console.log(id, "id");
+  const onChange = ({ id, value }) => {
     const updatedAnwserArr = [...sliderArr];
     const i = getIndex(id);
+
+    let gotAllAwnsers = updatedAnwserArr.every((obj) =>
+      obj.hasOwnProperty("value")
+    );
+
+    if (gotAllAwnsers) setgotAwnser(true);
 
     if (i === -1) {
       console.log("något blev tokigt");
@@ -65,7 +70,7 @@ function SlidersFromArray({
                 id={item.id.toString()}
                 sx={{ width: { xs: "100%", sm: "50%" }, margin: "auto" }}
                 onChange={(e) =>
-                  addNrValue({
+                  onChange({
                     value: e.target.value,
                     id: item.id,
                   })

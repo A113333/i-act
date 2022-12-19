@@ -1,7 +1,7 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import React, { useRef, useState } from "react";
-import AppBarLandingPage from "../Landingpage/AppBarLandingPage";
+import AppBarLandingPage from "../Navigation/AppBarLandingPage";
 import emailjs from "@emailjs/browser";
 import { Link } from "react-router-dom";
 

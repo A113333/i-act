@@ -137,7 +137,7 @@ function Feelings({ setIsDone, setFormData, formData, feelings }) {
     setFormData(userFeelings);
 
     if (selected.size > 0) {
-      setIsDone(true);
+      setIsDone ? setIsDone(true) : console.log("not done");
     }
   }, [selected]);
 

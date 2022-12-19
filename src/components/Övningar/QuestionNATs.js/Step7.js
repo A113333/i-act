@@ -61,7 +61,6 @@ function Step7({ setFormData, setIsDone, formData }) {
       {formData.kanslorUnder.map((data) => {
         return (
           <Box key={`custom-box-${data.id}`} id={`custom-box-${data.id}`}>
-            {" "}
             <Typography> {data.lable} </Typography>{" "}
             <Typography sx={{ opacity: "50%" }}>
               {" "}

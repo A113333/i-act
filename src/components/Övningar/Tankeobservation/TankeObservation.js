@@ -1,13 +1,13 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState, useEffect } from "react";
-import VerktygKnapp from "../Buttons/VerktygKnapp";
-import SlidersFromArray from "../inputs/SlidersFromArray";
-import VerktygAppbar from "../Navigation/VerktygAppBar";
-import saveSomething from "../Saker/SmattOchGott/SaveSomething";
-import Feelings from "../Verktyg/Feelings";
-import VerktygContainer from "../Verktyg/VerktygContainer";
-import UpdateShowOvningsResultat from "../Övningar/UpdatedShowOvningResults";
+import VerktygKnapp from "../../Buttons/VerktygKnapp";
+import SlidersFromArray from "../../inputs/SlidersFromArray";
+import VerktygAppbar from "../../Navigation/VerktygAppBar";
+import saveSomething from "../../Saker/SmattOchGott/SaveSomething";
+import Feelings from "../../Verktyg/Feelings";
+import VerktygContainer from "../../Verktyg/VerktygContainer";
+import UpdateShowOvningsResultat from "../UpdatedShowOvningResults";
 
 function TankeObservation() {
   const [page, setpage] = useState(0);
@@ -17,7 +17,7 @@ function TankeObservation() {
   const [tanke, settanke] = useState("");
   const [feelings, setfeelings] = useState([]);
 
-  const handelChange = (e) => {
+  const handelSetSituation = (e) => {
     setsituation(e.target.value);
     console.log(situation);
     setgotAwnser(true);
@@ -30,13 +30,26 @@ function TankeObservation() {
   };
 
   useEffect(() => {
-    if (page === 3) setisResultsPage(true);
+    if (page === 0) {
+      situation === "" ? setgotAwnser(false) : setgotAwnser(true);
+    }
+    if (page === 1) {
+      tanke === "" ? setgotAwnser(false) : setgotAwnser(true);
+    }
+    if (page === 2) {
+      console.log("page2");
+    }
+    if (page === 3) {
+      setisResultsPage(true);
+      saveSomething("tankeobservation", saveObj);
+    }
   }, [page]);
 
   const question1 = "Vad var din tanke?";
   const question2 = "Vad gjorde du när tanken kom?";
   const question3 = "Vilka känslor väckte tanken? ";
 
+  let saveObj;
   const Page1 = () => {
     return (
       <>
@@ -51,7 +64,7 @@ function TankeObservation() {
           fullWidth
           value={situation}
           label="Beskriv situationen"
-          onChange={(e) => handelChange(e)}
+          onChange={(e) => handelSetSituation(e)}
         ></TextField>
 
         <Box sx={{ mb: 2, mt: 2, opacity: "75%" }}>
@@ -105,13 +118,10 @@ function TankeObservation() {
         <Typography sx={{ textAlign: "center", mb: 1 }}>
           Välj en eller flera känslor.
         </Typography>
-        <Feelings
-          setIsDone={setgotAwnser}
-          setFormData={setfeelings}
-          formData={feelings}
-        />
+        <Feelings setFormData={setfeelings} formData={feelings} />
 
         <SlidersFromArray
+          setgotAwnser={setgotAwnser}
           sliderArr={feelings}
           setSliderArr={setfeelings}
           question={"Hur intensiva var känslorna?"}
@@ -123,15 +133,19 @@ function TankeObservation() {
   };
 
   const Page4 = () => {
-    let saveObj = {
+    saveObj = {
       titel: "Tankeobservation",
       id: crypto.randomUUID(),
+      date: new Date().toLocaleDateString(),
+      toShowOnSavedResults: tanke,
       anwsers: [
         { question: question1, anwser: tanke },
         { question: question2, anwser: situation },
         {
           question: question3,
-          anwser: feelings.map((item) => item.lable + ": " + item.value + "%"),
+          anwser: feelings.map((item) =>
+            item.lable + ": " + item.value ? +"%" : " "
+          ),
         },
       ],
 
@@ -140,7 +154,7 @@ function TankeObservation() {
       feelings: [...feelings],
     };
     console.log("saveObj", saveObj);
-    saveSomething(saveObj, "tankeobservation");
+
     return (
       <>
         <UpdateShowOvningsResultat

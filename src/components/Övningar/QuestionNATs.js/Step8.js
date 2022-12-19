@@ -13,13 +13,11 @@ function Step8({ setFormData, setIsDone, formData }) {
   return (
     <>
       <Box sx={{ mb: 5 }}>
-        <Typography sx={{ mb: 2 }}>
-          {" "}
-          Hur mycket tror du på din tanke nu?{" "}
+        <Typography variant="h6" sx={{ mb: 2 }}>
+          Hur mycket tror du på din tanke nu?
         </Typography>
 
         <Typography sx={{ opacity: "50%" }}>
-          {" "}
           {!formData.troPaTankeEfter
             ? "-/100"
             : formData.troPaTankeEfter + "/100"}
