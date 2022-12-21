@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import TextOvningarData from "../../Data/TextOvningarData";
 import { useNavigate, useLocation } from "react-router-dom";
 import StartFeelingsButton from "../../Buttons/StartFeelingsButton";
+import OvningarHelperText from "../OvningarHelperText";
+import { DatePicker } from "@mui/lab";
 
 function TextOvning(props) {
   const params = useParams();
@@ -99,32 +101,34 @@ function TextOvning(props) {
         {isResultsPage ? (
           <OvningShowResults formData={formData} questionArr={ovningArr} />
         ) : (
-          ovningArr.map((item, index) => (
+          ovningArr.map((ovning, index) => (
             <>
               <Box
                 key={index}
                 sx={{ display: index === page ? "contents" : "none" }}
               >
-                <Typography variant="h6"> {item.question} </Typography>
+                <Typography variant="h6"> {ovning.question} </Typography>
                 <TextFieldOvning
                   key={index.toString()}
-                  setValue={item.name}
-                  value={formData[item.name]}
-                  label={item.title}
+                  setValue={ovning.name}
+                  value={formData[ovning.name]}
+                  label={ovning.title}
                   autoFocus
                   onChange={(e) => {
                     setgotAwnser(true);
                     setFormData({
                       ...formData,
-                      [item.name]: e.target.value,
+                      [ovning.name]: e.target.value,
                     });
                   }}
                   setState={setFormData}
                   state={formData}
                   isMultiLine={true}
                 />
-                {item.type === "feelings" ? <StartFeelingsButton /> : null}
-                <Typography sx={{ fontSize: "0.8rem" }}>{item.desc}</Typography>
+                <OvningarHelperText
+                  desc={ovning.desc}
+                  exampel={ovning.exampel}
+                />
               </Box>
             </>
           ))

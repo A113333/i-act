@@ -8,6 +8,7 @@ import saveSomething from "../../Saker/SmattOchGott/SaveSomething";
 import Feelings from "../../inputs/Feelings";
 import VerktygContainer from "../../Verktyg/VerktygContainer";
 import UpdateShowOvningsResultat from "../UpdatedShowOvningResults";
+import OvningarHelperText from "../OvningarHelperText";
 
 function TankeObservation() {
   const [page, setpage] = useState(0);
@@ -69,14 +70,12 @@ function TankeObservation() {
           onChange={(e) => handelSetSituation(e)}
         ></TextField>
 
-        <Box sx={{ mb: 2, mt: 2, opacity: "75%" }}>
-          <Typography>
-            Var befann du dig? Vad skulle du göra? Med vem? När?
-          </Typography>
-          <Typography sx={{ mt: 1, opacity: "50%", fontSize: "0.9rem" }}>
-            t ex. på jobbet, skulle hålla föredrag med mitt team måndag morgon.
-          </Typography>
-        </Box>
+        <OvningarHelperText
+          desc={"Var befann du dig? Vad skulle du göra? Med vem? När?"}
+          exampel={
+            "t ex. på jobbet, skulle hålla föredrag med mitt team måndag morgon."
+          }
+        />
       </>
     );
   };
@@ -98,15 +97,11 @@ function TankeObservation() {
           onChange={(e) => handelSetTank(e)}
         ></TextField>
 
-        <Box sx={{ mb: 2, mt: 2, opacity: "75%" }}>
-          <Typography>
-            Fundera över vad du tänkte just i stunden, fick du någon bild i
-            huvudet? Vad var den starkaste tanken?
-          </Typography>
-          <Typography sx={{ mt: 1, opacity: "50%", fontSize: "0.9rem" }}>
-            t ex. tänk om jag gör bort mig och dom skrattar åt mig.
-          </Typography>
-        </Box>
+        <OvningarHelperText
+          desc="Fundera över vad du tänkte just i stunden, fick du någon bild i
+            huvudet? Vad var den starkaste tanken?"
+          exampel="t ex. tänk om jag gör bort mig och dom skrattar åt mig."
+        />
       </>
     );
   };
@@ -145,7 +140,7 @@ function TankeObservation() {
         { question: question2, anwser: situation },
         {
           question: question3,
-          anwser: feelings.map((item) => item.lable + ": " + item.value + "%"),
+          anwser: feelings.map((item) => item.name + ": " + item.value + "%"),
         },
       ],
 

@@ -9,7 +9,7 @@ import AppBar from "../Navigation/IactAppBar";
 import useLocalStorageState from "use-local-storage-state";
 import VerktygContainer from "../Verktyg/VerktygContainer";
 import RemoveButton from "../Buttons/RemoveButton";
-import HeadlineWithDivider from "../Saker/HeadlineWithDivider";
+import HeadlineWithDivider from "../Saker/SmattOchGott/HeadlineWithDivider";
 import BackToVerktygButton from "../Buttons/BackToVerktygButton";
 
 function OvningarResults({ ovningName, questionArr }) {

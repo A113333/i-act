@@ -5,7 +5,7 @@ import { Route, Routes, HashRouter } from "react-router-dom";
 import Home from "./components/Pages/Home";
 import UtmanaNAT from "./components/Övningar/QuestionNATs.js/UtmanaNatMainPage";
 import Verktyg from "./components/Pages/Verktyg";
-import ViewNatsResults from "./components/Övningar/QuestionNATs.js/UtamanaNatResults";
+import ShowAllNatResults from "./components/Övningar/QuestionNATs.js/ShowAllUtmanaNatResults";
 import NotFound from "./components/Pages/NotFound";
 import Skattningar from "./components/Skattningar/Skattningar";
 import SkattningarResultat from "./components/Skattningar/SkattningarResultat";
@@ -143,7 +143,7 @@ function App() {
               />
               <Route
                 path="/verktyg/UtmanaNegativaAutomatiskaTankar/visa"
-                element={<ViewNatsResults />}
+                element={<ShowAllNatResults />}
               />
 
               {/*  ROUTES FÖR text ÖVNING, LASMER OCH RESULTAT SAMANSTÄLLNING */}

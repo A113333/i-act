@@ -19,8 +19,8 @@ function MultiChoiceFromArray({
   setFormData,
   dataArr,
   nrReq,
-  restSelected,
-  setrestSelected,
+  resetSelected,
+  setresetSelected,
   setIsDone,
 }) {
   const [selected, setSelected] = React.useState(new Set());
@@ -31,6 +31,7 @@ function MultiChoiceFromArray({
   };
 
   useEffect(() => {
+    console.log("userArr");
     const userArr = [];
     selected.forEach((item, index) => {
       userArr.push(dataArr[getIndex(item)]);
@@ -45,9 +46,10 @@ function MultiChoiceFromArray({
   }, [selected]);
 
   useEffect(() => {
-    restSelected && setSelected(new Set());
-    setrestSelected(false);
-  }, [restSelected]);
+    console.log("reset");
+    if (resetSelected) setSelected(new Set());
+    setresetSelected(false);
+  }, [resetSelected]);
 
   function handleSelectionChanged(id) {
     // treat state as immutable
@@ -56,9 +58,7 @@ function MultiChoiceFromArray({
     if (newSet.has(id)) newSet.delete(id);
     else if (nrReq ? nrReq !== selected.size : true) {
       newSet.add(id);
-    }
-    // TODO fixa popup som visar att man valt alla och måste välja bort
-    else if (nrReq === selected.size) {
+    } else if (nrReq === selected.size) {
       console.log("för många valda");
     }
     setSelected(newSet);

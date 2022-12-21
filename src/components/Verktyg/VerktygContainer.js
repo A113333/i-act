@@ -9,8 +9,7 @@ function VerktygContainer(props) {
         backgroundColor: theme.palette.customGrey.main,
         px: { xs: 2, sm: 5 },
         // är sju för att kanpparna inte ska hamna över innehållet
-        paddingBottom: 7,
-        borderRadius: 3,
+        paddingBottom: 10,
         position: "relative",
         textAlign: "left",
         maxWidth: "800px",

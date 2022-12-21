@@ -4,23 +4,37 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import BlackBoxWithText from "../Saker/SmattOchGott/BlackBoxWithText";
-import AppBar from "../Navigation/IactAppBar";
+import AppBar from "../../Navigation/IactAppBar";
 
 import useLocalStorageState from "use-local-storage-state";
 import { Box } from "@mui/system";
 import { Button } from "@mui/material";
-import VerktygContainer from "../Verktyg/VerktygContainer";
-import RemoveButton from "../Buttons/RemoveButton";
-import HeadlineWithDivider from "../Saker/HeadlineWithDivider";
-import BackToVerktygButton from "../Buttons/BackToVerktygButton";
+import VerktygContainer from "../../Verktyg/VerktygContainer";
+import RemoveButton from "../../Buttons/RemoveButton";
+import HeadlineWithDivider from "../../Saker/SmattOchGott/HeadlineWithDivider";
+import BackToVerktygButton from "../../Buttons/BackToVerktygButton";
 
 function ViewNatsResults() {
   const [utmanaNat, setUtmanaNat] = useLocalStorageState("utmanaNat", {
     defaultValue: [],
   });
+  console.log(utmanaNat, "utmanaNat");
 
   useEffect(() => {}, []);
+
+  const HeadlineText = ({ text }) => {
+    return (
+      <Box
+        sx={{
+          opacity: "60%",
+        }}
+      >
+        <Typography sx={{ mb: 1 }} variant="body1">
+          {text}
+        </Typography>
+      </Box>
+    );
+  };
 
   const customPb = 5;
 
@@ -85,7 +99,7 @@ function ViewNatsResults() {
                         width: { xs: "100%", sm: "75%" },
                       }}
                     >
-                      <BlackBoxWithText text={"Din ursprungliga tanke:"} />
+                      <HeadlineText text="Din ursprungliga tanke:" />
                       <Typography
                         sx={{
                           pb: customPb,
@@ -93,28 +107,15 @@ function ViewNatsResults() {
                       >
                         "{item.tanke}"
                       </Typography>
-                      <Typography
-                        sx={{
-                          opacity: "50%",
-                        }}
-                      >
-                        Innan övningen trodde du på din tanken till:{" "}
-                      </Typography>{" "}
+                      <HeadlineText text="Innan övningen trodde du på din tanken till:" />
                       <Typography
                         sx={{
                           pb: customPb,
                         }}
                       >
-                        {" "}
                         {item.troPaTanke} %
                       </Typography>
-                      <Typography
-                        sx={{
-                          opacity: "50%",
-                        }}
-                      >
-                        Efter övningen trodde du på din tanken till
-                      </Typography>{" "}
+                      <HeadlineText text="Efter övningen trodde du på din tanken till" />
                       <Typography
                         sx={{
                           pb: customPb,
@@ -123,74 +124,72 @@ function ViewNatsResults() {
                         {item.troPaTankeEfter} %
                       </Typography>
                       <Box sx={{ pb: customPb }}>
-                        <BlackBoxWithText text={"Dina bevis för din tanke:"} />
-                        <ul>
-                          {" "}
-                          {item.bevisForTanke.map((item, index) => (
-                            <li>
-                              <Typography display="inline">{item}</Typography>
-                            </li>
-                          ))}
-                        </ul>
+                        <HeadlineText text={"Dina bevis för din tanke:"} />
+
+                        {item.bevisForTanke.map((item, index) => (
+                          <li key={index}>
+                            <Typography display="inline">{item}</Typography>
+                          </li>
+                        ))}
                       </Box>
                       <Box sx={{ pb: customPb }}>
-                        <BlackBoxWithText text={"Dina bevis emot din tanke:"} />
-                        <ul>
-                          {" "}
-                          {item.bevisMotTanke.map((item, index) => (
-                            <li>
-                              <Typography sx={{ pb: 1 }}> {item}</Typography>
-                            </li>
-                          ))}
-                        </ul>
-                      </Box>{" "}
+                        <HeadlineText text={"Dina bevis emot din tanke:"} />
+
+                        {item.bevisMotTanke.map((item, index) => (
+                          <li key={index}>
+                            <Typography display="inline" sx={{ pb: 1 }}>
+                              {" "}
+                              {item}
+                            </Typography>
+                          </li>
+                        ))}
+                      </Box>
                       {item.tankeFallor ? (
                         <Box sx={{ pb: customPb }}>
-                          <BlackBoxWithText
+                          <HeadlineText
                             text={"Du använde följande tankefällor"}
                           />
-                          <ul>
-                            {item.tankeFallor.map((item, index) => (
-                              <li>
-                                <Typography>{item.name}</Typography>
-                              </li>
-                            ))}
-                          </ul>
+
+                          {item.tankeFallor.map((item, index) => (
+                            <li>
+                              <Typography display="inline" key={index}>
+                                {item.name}
+                              </Typography>
+                            </li>
+                          ))}
                         </Box>
                       ) : null}
                       <Box sx={{ pb: customPb }}>
-                        <BlackBoxWithText text="Din mer balanseradetanke:" />
+                        <HeadlineText text="Din mer balanseradetanke:" />
                         <Typography>{item.balanseradTanke}</Typography>
                       </Box>
                       <Box sx={{ pb: customPb }}>
-                        <BlackBoxWithText text="Dina känslor i situationen:" />
-                        <ul>
-                          {item.kanslorUnderIntensitet.map((data) => {
-                            return (
-                              <li>
-                                {" "}
-                                <Typography>
-                                  {data.lable} : {data.value}%
-                                </Typography>{" "}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                        <HeadlineText text="Dina känslor i situationen:" />
+
+                        {item.kanslorUnder.map((data) => {
+                          return (
+                            <li key={index}>
+                              {" "}
+                              <Typography display="inline">
+                                {data.name} : {data.value}%
+                              </Typography>{" "}
+                            </li>
+                          );
+                        })}
                       </Box>
                       <Box sx={{ pb: customPb }}>
-                        <BlackBoxWithText text="Dina känslor efter övningen:" />
-                        <ul>
-                          {item.kanslorEfter.map((data, index) => {
-                            return (
-                              <li>
-                                {" "}
-                                <Typography>
-                                  {data.label}: {data.value}%
-                                </Typography>
-                              </li>
-                            );
-                          })}
-                        </ul>
+                        <HeadlineText text="Dina känslor efter övningen:" />
+
+                        {item.kanslorEfter.map((data, index) => {
+                          return (
+                            <li key={index}>
+                              {" "}
+                              <Typography display="inline">
+                                {data.name}: {data.value}%
+                              </Typography>
+                            </li>
+                          );
+                        })}
                       </Box>
                     </Box>
                     <Button
