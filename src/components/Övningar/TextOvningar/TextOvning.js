@@ -1,6 +1,6 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TextFieldOvning from "../../inputs/TextFieldOvning";
 import VerktygContainer from "../../Verktyg/VerktygContainer";
 import VerktygKnapp from "../../Buttons/VerktygKnapp";
@@ -9,14 +9,11 @@ import OvningShowResults from "../OvningShowResultPage";
 import { useParams } from "react-router-dom";
 import TextOvningarData from "../../Data/TextOvningarData";
 import { useNavigate, useLocation } from "react-router-dom";
-import StartFeelingsButton from "../../Buttons/StartFeelingsButton";
 import OvningarHelperText from "../OvningarHelperText";
-import { DatePicker } from "@mui/lab";
 
 function TextOvning(props) {
   const params = useParams();
   const ovningName = params.name;
-  const pageParam = Number(params.page);
 
   const location = useLocation();
   console.log(location);
@@ -24,7 +21,7 @@ function TextOvning(props) {
   const isTest = location.state ? location.state.isTest : false;
   console.log(isTest, "istest");
 
-  const [page, setpage] = useState(pageParam);
+  const [page, setpage] = useState(0);
   const [gotAwnser, setgotAwnser] = useState(isTest);
   const [isResultsPage, setisResultsPage] = useState(false);
   const [formData, setFormData] = useState(
@@ -62,8 +59,8 @@ function TextOvning(props) {
       // skapar ett svarsobject och sprarar det till localstorage
       let svar = {
         // titlen behöver kunna sättas dynamiskt
-        date: formData.date,
-        id: formData.id,
+        date: new Date().toLocaleDateString(),
+        id: crypto.randomUUID(),
         anwsers: [],
       };
       ovningArr.forEach((item, index) => {
@@ -84,11 +81,6 @@ function TextOvning(props) {
     setpage(page + 1);
     window.scrollTo(0, 0);
   };
-
-  useEffect(() => {
-    setpage(pageParam);
-  }, [page]);
-  console.log(ovningArr);
 
   return (
     <>

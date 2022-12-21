@@ -3,12 +3,12 @@ const Ovningar = {
     anwserObject: {
       // det key-value pair som är först är det som kommer visas i "resultat" summary
       situation: "",
-      date: new Date().toLocaleDateString(),
+      date: "",
       organism: "",
       response: "",
       k1: "",
       k2: "",
-      id: crypto.randomUUID(),
+      id: "",
     },
     questions: [
       {
@@ -60,8 +60,8 @@ const Ovningar = {
       situation: "",
       organism: "",
       response: "",
-      date: new Date().toLocaleDateString(),
-      id: crypto.randomUUID(),
+      date: "",
+      id: "",
     },
     questions: [
       {

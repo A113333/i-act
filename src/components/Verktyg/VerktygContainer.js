@@ -15,7 +15,7 @@ function VerktygContainer(props) {
         maxWidth: "800px",
         m: "auto",
         // är 10 för att headline ska synas väl under appbar
-        mt: 10,
+        mt: 5,
         minHeight: `calc(100vh - 150px)`,
       }}
     >

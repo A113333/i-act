@@ -1,4 +1,5 @@
 import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React from "react";
 
 function ShowNrsPicked({ nrsPicked, nrsToPick }) {
@@ -16,18 +17,20 @@ function ShowNrsPicked({ nrsPicked, nrsToPick }) {
   };
 
   return (
-    <Typography display="span" sx={howManyPickedStyle}>
-      valda: {nrsPicked}
-      <Typography
-        sx={{
-          fontSize: "0.8rem",
-          opacity: "50%",
-          textAlign: "center",
-        }}
-      >
-        välj minst {nrsToPick}
-      </Typography>
-    </Typography>
+    <>
+      <Box sx={howManyPickedStyle}>
+        <Typography display="span">valda: {nrsPicked}</Typography>
+        <Typography
+          sx={{
+            fontSize: "0.8rem",
+            opacity: "50%",
+            textAlign: "center",
+          }}
+        >
+          välj minst {nrsToPick}
+        </Typography>
+      </Box>
+    </>
   );
 }
 

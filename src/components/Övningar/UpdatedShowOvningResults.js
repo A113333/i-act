@@ -2,6 +2,12 @@ import React from "react";
 import { Divider, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
+/* Vill ha ett svarsobject:
+{
+  title: Rubriken som ska visas
+  questionArr: [{question: "Frågan som besvarades", anwser: "Svaret som gavs" }]
+}
+*/
 function UpdatedShowOvningResults({ title, questionArr }) {
   console.log(questionArr, "questionArrr");
 

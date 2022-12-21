@@ -1,67 +1,66 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import React, { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Box } from "@mui/system";
 import useTheme from "@mui/material/styles/useTheme";
 import Grid from "@mui/material/Grid";
 
-/* setFormData exampel: 
-  const formDataSetter = (data) => {
-    setFormData({
-      ...formData,
-      values: data,
-    });
-  };
+/* setFormData ska refferea till en den TOMMA ARR som valda värden skall återfinnas
+dataArr är den Array användaren ska välja ifrån
+maxNrToSelect är det antal val använder FÅR göra
+minNrToSelect är det minsta antal val användaren får göra
+selected ska vara en state  arr const [selected, setselected] = useState(new Set());
+setISDone ska vara en boolean som är TRUE när användaren är klar på sidan (dvs har valt min eller max)
    */
 function MultiChoiceFromArray({
   setFormData,
   dataArr,
-  nrReq,
-  resetSelected,
-  setresetSelected,
+  maxNrToSelect,
+  minNrToSelect,
+  selected,
+  setselected,
   setIsDone,
 }) {
-  const [selected, setSelected] = React.useState(new Set());
-
   const getIndex = (id) => {
     const i = dataArr.findIndex((e) => e.id === id);
     return i;
   };
 
-  useEffect(() => {
-    console.log("userArr");
+  function handleSelectionChanged(id) {
+    console.log(selected);
+    const newSet = new Set(selected);
+    // om värdet redan är valt så väljs det bort
+    if (newSet.has(id)) newSet.delete(id);
+    // Lägger till id till set om maxNr to select inte finns eller inte är uppnått
+    else if (maxNrToSelect ? maxNrToSelect !== selected.size : true) {
+      console.log("köres");
+      newSet.add(id);
+    }
+    // sätter Selected, sätts i parent component för att den ska kunna resetas
+    setselected(newSet);
+
+    // om det finns ett maxAntal som användaren får använda och det är uppnått så läggs id inte till
+    if (minNrToSelect) {
+      if (minNrToSelect ? newSet.size >= minNrToSelect : false) {
+        setIsDone(true);
+      } else setIsDone(false);
+    }
+    // ssätter övningen som färdig om man valt maxAntal
+    else if (maxNrToSelect) {
+      if (newSet.size === maxNrToSelect) {
+        setIsDone(true);
+      } else setIsDone(false);
+    } else if (newSet.size > 0) setIsDone(true);
+    else setIsDone(false);
+
     const userArr = [];
-    selected.forEach((item, index) => {
+    newSet.forEach((item, index) => {
       userArr.push(dataArr[getIndex(item)]);
     });
-    // console.log("userArr");
-    //console.log(userArr);
+
+    // sätter SVARS arrayn till alla svar
     setFormData(userArr);
-    if (selected.size === nrReq) {
-      console.log("körs");
-      setIsDone(true);
-    }
-  }, [selected]);
-
-  useEffect(() => {
-    console.log("reset");
-    if (resetSelected) setSelected(new Set());
-    setresetSelected(false);
-  }, [resetSelected]);
-
-  function handleSelectionChanged(id) {
-    // treat state as immutable
-    // React only does a shallow comparison so we need a new Set
-    const newSet = new Set(selected);
-    if (newSet.has(id)) newSet.delete(id);
-    else if (nrReq ? nrReq !== selected.size : true) {
-      newSet.add(id);
-    } else if (nrReq === selected.size) {
-      console.log("för många valda");
-    }
-    setSelected(newSet);
   }
   const theme = useTheme();
 
@@ -77,6 +76,7 @@ function MultiChoiceFromArray({
           {dataArr.map((data, index) => {
             return (
               <Card
+                key={index}
                 raised={false}
                 // class={selected.has(data.id) ? "contained" : "outlined"}
                 sx={{

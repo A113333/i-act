@@ -7,98 +7,73 @@ import VerktygKnapp from "../../Buttons/VerktygKnapp";
 import ToolsContaioner from "../../Verktyg/VerktygContainer";
 import values from "../../Data/values";
 import MultiChoiceFromArray from "../../inputs/MultiChoiceFromArray";
-import OvningResultat from "../OvningShowResultPage";
+import OvningResultat from "../UpdatedShowOvningResults";
 import saveSomething from "../../Saker/SmattOchGott/SaveSomething";
 import ShowNrsPicked from "../../Saker/SmattOchGott/DataDisplay/ShowNrsPicked";
 
 function PickValuesFromList() {
-  // const valuesArr = values;
-  //const smallscreen = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [isDone, setIsDone] = useState(false);
-  const [valuesArr, setvaluesArr] = useState([...values]);
+  // sevenPicked är de sju som använderen väljer i steg ett och som ska visas i steg 2
   const [sevenPicked, setsevenPicked] = useState();
-  const [resetSelected, setresetSelected] = useState(false);
-
-  /*   let LocalUtmanaNatArray = localStorage.getItem("utmanaNat")
-    ? JSON.parse(localStorage.getItem("utmanaNat"))
-    : { utmanaNat: [] }; */
-
-  const [formData, setFormData] = useState({
-    values: [],
-  });
+  // selected är ett Set som används av multichoice arr för att visa vilka som är valda
+  const [selectedFirstPage, setselectedFirstPage] = useState(new Set());
+  const [selectedSecondPage, setselectedSecondPage] = useState(new Set());
+  const [userValues, setuserValues] = useState([]);
+  const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    // för att kunna se om användaren får gå vidare
-    if (page === 0) {
-      formData.values.length >= 7 ? setIsDone(true) : setIsDone(false);
-    } else if (page === 1)
-      formData.values.length === 3 ? setIsDone(true) : setIsDone(false);
-  }, [formData, page]);
-
-  useEffect(() => {
-    // för att kunna se om användaren får gå vidare
     window.scroll(0, 0);
   }, [page]);
 
-  // console.log(formData);
-
-  const formDataSetter = (data) => {
-    setFormData({
-      ...formData,
-      values: data,
-    });
-  };
-
+  //
+  let valuesForSave = [];
   const onClickForward = () => {
     if (page === 0) {
-      setsevenPicked(formData.values.slice());
+      setsevenPicked(userValues.slice());
+      // sätter new Set() till tomat så att valda inte ballar ur när man backat
+      setselectedSecondPage(new Set());
+      setPage(page + 1);
     }
-    console.log(valuesArr);
-    console.log(page);
-    {
-      /* Spara ett object som kan användas i "textövningar resultat accordion*/
-    }
+    /* Spara ett object som kan användas i "textövningar resultat accordion*/
     if (page === 1) {
-      let valuesForSave = [];
-      formData.values.forEach((item, index) => {
-        valuesForSave[index] = item.name + ": " + item.desc;
+      console.log(userValues, "userValues");
+      userValues.forEach((item, index) => {
+        userValues[index] = item.name + ": " + item.desc;
       });
       let svar = {
         title: "Mina värderingsord",
         date: new Date().toLocaleDateString(),
         id: crypto.randomUUID(),
-        anwsers: [{ question: "Dina värderingsord", anwser: valuesForSave }],
+        anwsers: [{ question: "Dina värderingsord", anwser: userValues }],
       };
-      console.log(svar);
 
       saveSomething("ListaVardingersOrd", svar);
-      console.log(svar);
-      console.log("körst");
+      console.log(valuesForSave, "valuesForSave");
+      setPage(page + 1);
     }
-    setPage(page + 1);
+
     setIsDone(false);
     window.scrollTo(0, 0);
   };
 
   const onClickBack = () => {
-    console.log(page, "page");
-    if (page === 1) {
-      setvaluesArr([...values]);
+    if (page === 0) navigate("/verktyg");
+    else {
+      setIsDone(true);
+      setPage(page - 1);
     }
-    page === 0 ? navigate("/verktyg") : setPage(page - 1);
     window.scrollTo(0, 0);
   };
-  const [offset, setOffset] = useState(0);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     const onScroll = () => setOffset(window.pageYOffset);
     // clean up code
     window.removeEventListener("scroll", onScroll);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []); */
+  }, [offset]);
 
   const ConditionalComponent = () => {
     switch (page) {
@@ -106,18 +81,19 @@ function PickValuesFromList() {
         return (
           <>
             <Box sx={{ mb: 3 }}>
-              {" "}
               <Typography variant="h6">
                 Välj dina viktigast värderingsord
               </Typography>
-              <Typography>
+              <Typography display="inline">
                 Börja med att läsa igenom listan och välj sedan{" "}
-                <Typography
-                  display="inline"
-                  sx={{ fontWeight: 700, textDecoration: "underline" }}
-                >
-                  minst sju{" "}
-                </Typography>
+              </Typography>
+              <Typography
+                display="inline"
+                sx={{ fontWeight: 700, textDecoration: "underline" }}
+              >
+                minst sju{" "}
+              </Typography>
+              <Typography display="inline">
                 värderingsord som bäst beskriver hur du hade önskat att du
                 agerade i världen.
               </Typography>
@@ -137,17 +113,18 @@ function PickValuesFromList() {
               }}
             >
               <ShowNrsPicked
-                nrsPicked={formData.values.length}
+                nrsPicked={selectedFirstPage.size}
                 nrsToPick={"7"}
               />
             </Box>
 
             <MultiChoiceFromArray
-              dataArr={valuesArr}
-              formData={formData}
-              setFormData={formDataSetter}
-              resetSelected={false}
+              dataArr={values}
+              setFormData={setuserValues}
+              selected={selectedFirstPage}
+              setselected={setselectedFirstPage}
               setIsDone={setIsDone}
+              minNrToSelect={4}
             />
           </>
         );
@@ -160,12 +137,14 @@ function PickValuesFromList() {
               </Typography>
               <Typography display="inline">
                 Tänk på att välja utifrån hur du{" "}
-                <Typography
-                  display="inline"
-                  sx={{ fontWeight: 700, textDecoration: "underline" }}
-                >
-                  önskat
-                </Typography>{" "}
+              </Typography>
+              <Typography
+                display="inline"
+                sx={{ fontWeight: 700, textDecoration: "underline" }}
+              >
+                önskat
+              </Typography>
+              <Typography display="inline">
                 att du agerade i världen.
               </Typography>
             </Box>
@@ -175,18 +154,17 @@ function PickValuesFromList() {
               }}
             >
               <ShowNrsPicked
-                nrsPicked={formData.values.length}
+                nrsPicked={selectedSecondPage.size}
                 nrsToPick={"3"}
               />
             </Box>
 
             <MultiChoiceFromArray
               dataArr={sevenPicked}
-              formData={formData}
-              setFormData={formDataSetter}
-              resetSelected={resetSelected}
-              setresetSelected={setresetSelected}
-              nrReq={3}
+              setFormData={setuserValues}
+              selected={selectedSecondPage}
+              setselected={setselectedSecondPage}
+              maxNrToSelect={3}
               setIsDone={setIsDone}
             />
           </>
@@ -196,9 +174,11 @@ function PickValuesFromList() {
           <>
             <OvningResultat
               title={"Din tre valda värderingsord"}
-              formData={formData}
               questionArr={[
-                { question: "Jag vill vara", anwser: formData.values.slice() },
+                {
+                  question: "Jag vill vara...",
+                  anwser: userValues,
+                },
               ]}
             />
           </>
@@ -222,9 +202,7 @@ function PickValuesFromList() {
               önskat hen använde för att beskriva dig. Alltså hur hade du VELAT
               bli ihågkommen?
             </Typography>
-            <Box sx={{ backgroundColor: "#000", width: "100%" }}>
-              <Typography> Ord valda: {formData.values.length}</Typography>
-            </Box>
+            <Box sx={{ backgroundColor: "#000", width: "100%" }}></Box>
           </>
         );
     }
