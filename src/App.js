@@ -24,6 +24,7 @@ import Tester from "./components/Pages/Tester";
 import PickValuesFromList from "./components/Övningar/Varderingar/PickValuesFromList";
 import SkapaOvning from "./components/Övningar/SkapaEgen/SkapaOvning";
 import TankeObservation from "./components/Övningar/Tankeobservation/TankeObservation";
+import Breathing from "./components/Övningar/MeditationAndBreathing/Breathing";
 
 const theme = createTheme({
   palette: {
@@ -167,7 +168,7 @@ function App() {
               />
 
               <Route
-                path="/ListaVardingersOrd"
+                path="/verktyg/ListaVardingersOrd"
                 element={<PickValuesFromList />}
               />
               <Route
@@ -175,7 +176,10 @@ function App() {
                 element={<OvningVisaAllaResults />}
               />
 
-              {/* GAD/ resultat och fylla i */}
+              <Route path="/verktyg/andas" element={<Breathing />} />
+
+              {/*------------------------ SKATTNINGAR------------------------------------------------- 
+               GAD/ resultat och fylla i */}
               <Route
                 path="/verktyg/skattning/gad7"
                 element={<Skattningar {...GAD7} />}
