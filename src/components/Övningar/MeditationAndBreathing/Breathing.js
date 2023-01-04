@@ -1,21 +1,43 @@
-import { Button, Typography } from "@mui/material";
+import { Button, IconButton, TextField, Typography } from "@mui/material";
 import React from "react";
 import VerktygContainer from "../../Verktyg/VerktygContainer";
 import VerktygAppbar from "../../Navigation/VerktygAppBar";
 import { useState, useRef } from "react";
 import { useEffect } from "react";
 import { Box, width } from "@mui/system";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
 import { AnimatedOnScroll } from "react-animated-css-onscroll";
 
 import { useSpring, animated, useTransition } from "@react-spring/web";
 
 function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
-  const TIME_IN_MILISECONDS_TO_COUNTDOWN = 67 * 1000;
   const INTERVAL_IN_MILISECONDS = 100;
 
-  const [time, setTime] = useState(TIME_IN_MILISECONDS_TO_COUNTDOWN);
   const [referenceTime, setReferenceTime] = useState();
   const [ispaused, setispaused] = useState(true);
+
+  const [page, setpage] = useState(0);
+  const [nrOfBreaths, setnrOfBreaths] = useState(2);
+  const [grow, setGrow] = useState(true);
+  const [shrink, setshrink] = useState(false);
+
+  const [timeIns, settimeIns] = useState(4000);
+  const [timeInHolds, settimeInHolds] = useState(2000);
+  const [timeOuts, settimeOuts] = useState(4000);
+  const [timeOutHolds, settimeOutHolds] = useState(2000);
+  const [totalBreaths, settotalBreaths] = useState(10);
+
+  let TIME_IN_MILISECONDS_TO_COUNTDOWN =
+    (timeIns + timeInHolds + timeOuts + timeOutHolds) * totalBreaths;
+
+  const updateTimer = () => {
+    TIME_IN_MILISECONDS_TO_COUNTDOWN =
+      (timeIns + timeInHolds + timeOuts + timeOutHolds) * totalBreaths;
+    console.log(TIME_IN_MILISECONDS_TO_COUNTDOWN, "time");
+  };
+
+  const [time, setTime] = useState(TIME_IN_MILISECONDS_TO_COUNTDOWN);
 
   useEffect(() => {
     const countDownUntilZero = () => {
@@ -32,16 +54,6 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
     };
     setTimeout(countDownUntilZero, INTERVAL_IN_MILISECONDS);
   }, [time, ispaused]);
-
-  const [page, setpage] = useState(0);
-  const [nrOfBreaths, setnrOfBreaths] = useState(2);
-  const [grow, setGrow] = useState(true);
-  const [shrink, setshrink] = useState(false);
-
-  let timeIns = 1000;
-  let timeInHolds = 1000;
-  let timeOuts = 2000;
-  let timeOutHolds = 2000;
 
   const setTimeOutId1 = useRef(null);
   const setTimeOutId2 = useRef(null);
@@ -125,48 +137,107 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
     <>
       <VerktygAppbar
         step={page + 1}
-        numberOfSteps={nrOfBreaths.length}
+        numberOfSteps={totalBreaths}
         isResultsPage={page === nrOfBreaths}
       />
       <VerktygContainer>
-        <Box
-          sx={{
-            width: "calc(15vw*3.5)",
-            height: "calc(15vw*3.5)",
-            position: "relative",
-          }}
-        >
-          <animated.div
-            style={{
-              width: "10vw",
-              height: "10vw",
-              position: "absolute",
-              top: "calc(10vw*3.5/2)",
-              // magrin på halva bredden för att få centerad
-              ml: "5vw",
-              left: "50%",
-              transform: "translate(-50%, 0)",
-              msTransform: "translate(-50%, -50%)",
+        <Box>
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: "800px",
 
-              background: "#17191c",
-              borderRadius: "50%",
-              ...styleOut,
+              maxHeight: "80vh",
+              mt: "40vw",
             }}
-          ></animated.div>
-        </Box>
-        <Box sx={{}}>
-          <Typography display="inline">
-            {" "}
-            {Math.floor(time / 1000 / 60)} min{" "}
-          </Typography>
-          <Typography display="inline">
-            {((time / 1000) % 60).toFixed()} sek{" "}
-          </Typography>
+          >
+            <animated.div
+              style={{
+                width: "20vw",
+                height: "20vw",
+                margin: "auto",
+                // magrin på halva bredden för att få centerad
+                //ml: "17.5vw",
+
+                background: "#17191c",
+                borderRadius: "50%",
+                ...styleOut,
+              }}
+            ></animated.div>
+          </Box>
+          <Box sx={{ textAlign: "center", mt: 12 }}>
+            <Typography display="inline" sx={{ fontSize: "2rem" }}>
+              {Math.floor(time / 1000 / 60)} :{" "}
+            </Typography>
+            <Typography display="inline" sx={{ fontSize: "2rem" }}>
+              {((time / 1000) % 60).toFixed()}
+            </Typography>
+          </Box>
+
+          <Box sx={{ textAlign: "center" }}>
+            <IconButton onClick={ispaused ? handelStart : handelPause}>
+              {ispaused ? (
+                <PlayArrowIcon
+                  sx={{ fontSize: "5rem", color: "primary.light" }}
+                />
+              ) : (
+                <PauseIcon sx={{ fontSize: "5rem", color: "primary.light" }} />
+              )}
+            </IconButton>
+          </Box>
         </Box>
 
-        <Box sx={{ position: "absolute", bottom: 14 }}>
-          <Button onClick={handelStart}>{"start"}</Button>
-          <Button onClick={handelPause}>{"paus timer"}</Button>
+        <Box sx={{ mt: 3 }}>
+          <TextField
+            type="number"
+            id="outlined-basic"
+            label="Tid för inadning"
+            variant="outlined"
+            onChange={(e) => settimeIns(Number(e.target.value) * 1000)}
+            value={timeIns / 1000 === 0 ? "" : timeIns / 1000}
+          />
+
+          <TextField
+            sx={{ mt: 2 }}
+            type="number"
+            id="outlined-basic"
+            label="Tid att hålla inadning"
+            variant="outlined"
+            onChange={(e) => settimeInHolds(Number(e.target.value) * 1000)}
+            value={timeInHolds / 1000 === 0 ? "" : timeInHolds / 1000}
+          />
+
+          <TextField
+            sx={{ mt: 2 }}
+            type="number"
+            id="outlined-basic"
+            label="Tid för utadning"
+            variant="outlined"
+            onChange={(e) => settimeOuts(Number(e.target.value) * 1000)}
+            value={timeOuts / 1000 === 0 ? "" : timeOuts / 1000}
+          />
+
+          <TextField
+            sx={{ mt: 2 }}
+            type="number"
+            id="outlined-basic"
+            label="Tid för utadning"
+            variant="outlined"
+            onChange={(e) => settimeOutHolds(Number(e.target.value) * 1000)}
+            value={timeOutHolds / 1000 === 0 ? "" : timeOutHolds / 1000}
+          />
+
+          <TextField
+            sx={{ mt: 2 }}
+            type="number"
+            id="outlined-basic"
+            label="Antal andetag"
+            variant="outlined"
+            onChange={(e) =>
+              settotalBreaths(Number(e.target.value), updateTimer())
+            }
+            value={totalBreaths === 0 ? "" : totalBreaths}
+          />
         </Box>
       </VerktygContainer>
     </>
