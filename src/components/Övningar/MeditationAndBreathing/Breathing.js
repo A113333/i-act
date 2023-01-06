@@ -1,4 +1,13 @@
-import { Button, IconButton, TextField, Typography } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  IconButton,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import VerktygContainer from "../../Verktyg/VerktygContainer";
 import VerktygAppbar from "../../Navigation/VerktygAppBar";
@@ -57,6 +66,17 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
 
   const setTimeOutId1 = useRef(null);
   const setTimeOutId2 = useRef(null);
+  const intervalId = useRef(null);
+
+  // tar bort interval när man lämna sidan
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalId.current);
+      clearTimeout(setTimeOutId1.current);
+      clearTimeout(setTimeOutId2.current);
+    };
+  }, []);
+
   const setTimeOuts = () => {
     breathOutAnimation.start({
       from: { transform: "scale(1)" },
@@ -90,7 +110,6 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
     }, timeIns + timeInHolds + timeOuts + timeOutHolds);
   };
 
-  const intervalId = useRef(null);
   const handelStart = () => {
     if (ispaused) {
       setReferenceTime(Date.now());
@@ -100,6 +119,8 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
       intervalId.current = setInterval(() => {
         console.log("intervall körs");
         setTimeOuts();
+        setpage(page + 1);
+        console.log(page);
       }, timeIns + timeInHolds + timeOuts + timeOutHolds);
     }
   };
@@ -123,6 +144,33 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
     });
   };
 
+  const handelSelect = (event) => {
+    setselectedBreath(event.target.value);
+    if (event.target.value === "kvadrat") {
+      console.log("kvadrat");
+      settimeIns(4000);
+      settimeInHolds(2000);
+      settimeOuts(4000);
+      settimeOutHolds(2000);
+    } else if (event.target.value === "4-7-8") {
+      console.log("lala478");
+      settimeIns(4000);
+      settimeInHolds(7000);
+      settimeOuts(8000);
+      settimeOutHolds(0);
+    }
+  };
+
+  const [selectedBreath, setselectedBreath] = useState("");
+
+  const getSeconds = (time) => {
+    if (((time / 1000) % 60).toFixed() === "60") return 59;
+    else
+      return ((time / 1000) % 60).toFixed() <= 9
+        ? "0" + ((time / 1000) % 60).toFixed()
+        : ((time / 1000) % 60).toFixed();
+  };
+
   /*  useEffect(() => {
     //  breathOutAnimation.pause();
     //  setTimeOuts();
@@ -141,96 +189,108 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
         isResultsPage={page === nrOfBreaths}
       />
       <VerktygContainer>
-        <Box>
-          <Box
-            sx={{
-              width: "100%",
-              maxWidth: "800px",
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: "800px",
+            mt: "40vw",
+            mb: "40vw",
+          }}
+        >
+          <animated.div
+            style={{
+              width: "25vw",
+              height: "25vw",
+              margin: "auto",
+              // magrin på halva bredden för att få centerad
+              //ml: "17.5vw",
 
-              maxHeight: "80vh",
-              mt: "40vw",
+              background: "#17191c",
+              borderRadius: "50%",
+              ...styleOut,
             }}
-          >
-            <animated.div
-              style={{
-                width: "20vw",
-                height: "20vw",
-                margin: "auto",
-                // magrin på halva bredden för att få centerad
-                //ml: "17.5vw",
+          />
+        </Box>
 
-                background: "#17191c",
-                borderRadius: "50%",
-                ...styleOut,
-              }}
-            ></animated.div>
-          </Box>
-          <Box sx={{ textAlign: "center", mt: 12 }}>
-            <Typography display="inline" sx={{ fontSize: "2rem" }}>
-              {Math.floor(time / 1000 / 60)} :{" "}
-            </Typography>
-            <Typography display="inline" sx={{ fontSize: "2rem" }}>
-              {((time / 1000) % 60).toFixed()}
-            </Typography>
-          </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <IconButton onClick={ispaused ? handelStart : handelPause}>
+            {ispaused ? (
+              <PlayArrowIcon
+                sx={{ fontSize: "3.5rem", color: "primary.light" }}
+              />
+            ) : (
+              <PauseIcon sx={{ fontSize: "3.5rem", color: "primary.light" }} />
+            )}
+          </IconButton>
 
-          <Box sx={{ textAlign: "center" }}>
-            <IconButton onClick={ispaused ? handelStart : handelPause}>
-              {ispaused ? (
-                <PlayArrowIcon
-                  sx={{ fontSize: "5rem", color: "primary.light" }}
-                />
-              ) : (
-                <PauseIcon sx={{ fontSize: "5rem", color: "primary.light" }} />
-              )}
-            </IconButton>
-          </Box>
+          <Typography display="inline" sx={{ fontSize: "2rem" }}>
+            {Math.floor(time / 1000 / 60) <= 9
+              ? "0" + Math.floor(time / 1000 / 60)
+              : Math.floor(time / 1000 / 60)}
+            :
+          </Typography>
+          <Typography display="inline" sx={{ fontSize: "2rem" }}>
+            {getSeconds(time)}
+          </Typography>
         </Box>
 
         <Box sx={{ mt: 3 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">
+              Andningsmönster
+            </InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={selectedBreath}
+              label="Andningsmönster"
+              onChange={handelSelect}
+            >
+              <MenuItem value={"kvadrat"}>Andas i kvadrat</MenuItem>
+              <MenuItem value={"4-7-8"}>4-7-8 metoden</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
+            sx={{ mt: 2 }}
             type="number"
-            id="outlined-basic"
-            label="Tid för inadning"
+            label="Tid för inandning"
             variant="outlined"
             onChange={(e) => settimeIns(Number(e.target.value) * 1000)}
             value={timeIns / 1000 === 0 ? "" : timeIns / 1000}
           />
-
           <TextField
             sx={{ mt: 2 }}
             type="number"
-            id="outlined-basic"
-            label="Tid att hålla inadning"
+            label="Tid att hålla inandning"
             variant="outlined"
             onChange={(e) => settimeInHolds(Number(e.target.value) * 1000)}
             value={timeInHolds / 1000 === 0 ? "" : timeInHolds / 1000}
           />
-
           <TextField
             sx={{ mt: 2 }}
             type="number"
-            id="outlined-basic"
-            label="Tid för utadning"
+            label="Tid för utandning"
             variant="outlined"
             onChange={(e) => settimeOuts(Number(e.target.value) * 1000)}
             value={timeOuts / 1000 === 0 ? "" : timeOuts / 1000}
           />
-
           <TextField
             sx={{ mt: 2 }}
             type="number"
-            id="outlined-basic"
-            label="Tid för utadning"
+            label="Tid för utandning"
             variant="outlined"
             onChange={(e) => settimeOutHolds(Number(e.target.value) * 1000)}
-            value={timeOutHolds / 1000 === 0 ? "" : timeOutHolds / 1000}
+            value={timeOutHolds / 1000 === 0 ? "0" : timeOutHolds / 1000}
           />
-
           <TextField
             sx={{ mt: 2 }}
             type="number"
-            id="outlined-basic"
             label="Antal andetag"
             variant="outlined"
             onChange={(e) =>
@@ -238,6 +298,23 @@ function Breathing({ timeIn, timeInHold, timeOut, timeOutHold }) {
             }
             value={totalBreaths === 0 ? "" : totalBreaths}
           />
+
+          <Box sx={{ width: "100%", mt: 2 }}>
+            <Typography display="inline" sx={{ opacity: "70%" }}>
+              total tid:{" "}
+            </Typography>{" "}
+            <Typography display="inline">
+              {" "}
+              {Math.floor(time / 1000 / 60) <= 9
+                ? "0" + Math.floor(TIME_IN_MILISECONDS_TO_COUNTDOWN / 1000 / 60)
+                : Math.floor(TIME_IN_MILISECONDS_TO_COUNTDOWN / 1000 / 60)}
+              :
+              {((TIME_IN_MILISECONDS_TO_COUNTDOWN / 1000) % 60).toFixed() <= 9
+                ? "0" +
+                  ((TIME_IN_MILISECONDS_TO_COUNTDOWN / 1000) % 60).toFixed()
+                : ((TIME_IN_MILISECONDS_TO_COUNTDOWN / 1000) % 60).toFixed()}
+            </Typography>
+          </Box>
         </Box>
       </VerktygContainer>
     </>
